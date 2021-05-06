@@ -45,7 +45,7 @@ public class Actor implements Cloneable {
             }
             return actor;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this);
+            throw new RuntimeException("Can't make clone of " + this, e);
         }
     }
 
