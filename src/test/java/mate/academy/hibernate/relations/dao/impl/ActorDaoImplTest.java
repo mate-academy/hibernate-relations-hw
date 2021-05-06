@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import java.util.Optional;
 import mate.academy.hibernate.relations.dao.AbstractTest;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
@@ -27,16 +28,27 @@ public class ActorDaoImplTest extends AbstractTest {
     public void getById_Ok() {
         ActorDao actorDao = new ActorDaoImpl(getSessionFactory());
         verifyCreateActorWorks(actorDao, christianBale.clone(), 1L);
-        Actor actualChristianBale = actorDao.get(1L);
+        Optional<Actor> christianBaleOptional = actorDao.get(1L);
+        Assert.assertTrue(christianBaleOptional.isPresent());
+        Actor actualChristianBale = christianBaleOptional.get();
         Assert.assertNotNull(actualChristianBale);
         Assert.assertEquals(1L, actualChristianBale.getId().longValue());
         Assert.assertEquals(christianBale.getName(), actualChristianBale.getName());
 
         verifyCreateActorWorks(actorDao, bradPitt.clone(), 2L);
-        Actor actualBradPitt = actorDao.get(2L);
+        Optional<Actor> bradPittOptional = actorDao.get(2L);
+        Assert.assertTrue(bradPittOptional.isPresent());
+        Actor actualBradPitt = bradPittOptional.get();
         Assert.assertNotNull(actualBradPitt);
         Assert.assertEquals(2L, actualBradPitt.getId().longValue());
         Assert.assertEquals(bradPitt.getName(), actualBradPitt.getName());
+    }
+
+    @Test
+    public void getByNotExistingId_Ok() {
+        ActorDao actorDao = new ActorDaoImpl(getSessionFactory());
+        Optional<Actor> actual = actorDao.get(100L);
+        Assert.assertFalse(actual.isPresent());
     }
 
     static void verifyCreateActorWorks(ActorDao actorDao, Actor actor, Long expectedId) {

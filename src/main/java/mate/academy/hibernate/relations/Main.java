@@ -7,12 +7,11 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
-import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl();
+        CountryService countryService = null;
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");

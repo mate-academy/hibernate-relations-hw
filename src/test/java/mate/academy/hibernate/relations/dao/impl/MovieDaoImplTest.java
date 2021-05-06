@@ -1,6 +1,7 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 import mate.academy.hibernate.relations.dao.AbstractTest;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.CountryDao;
@@ -31,7 +32,9 @@ public class MovieDaoImplTest extends AbstractTest {
     public void getById_Ok() {
         MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
         insertMovies(movieDao, shawshankRedemption);
-        Movie actual = movieDao.get(1L);
+        Optional<Movie> actualOptional = movieDao.get(1L);
+        Assert.assertTrue(actualOptional.isPresent());
+        Movie actual = actualOptional.get();
         Assert.assertNotNull(actual);
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(shawshankRedemption.getTitle(), actual.getTitle());
@@ -48,7 +51,9 @@ public class MovieDaoImplTest extends AbstractTest {
         shawshankRedemptionWithActor.setActors(List.of(morganFreemanClone));
         insertMovies(movieDao, shawshankRedemptionWithActor);
 
-        Movie actual = movieDao.get(1L);
+        Optional<Movie> actualOptional = movieDao.get(1L);
+        Assert.assertTrue(actualOptional.isPresent());
+        Movie actual = actualOptional.get();
         Assert.assertNotNull(actual);
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(shawshankRedemption.getTitle(), actual.getTitle());
@@ -73,7 +78,9 @@ public class MovieDaoImplTest extends AbstractTest {
         shawshankRedemptionWithActor.setActors(List.of(morganFreemanClone));
         insertMovies(movieDao, shawshankRedemptionWithActor);
 
-        Movie actual = movieDao.get(1L);
+        Optional<Movie> actualOptional = movieDao.get(1L);
+        Assert.assertTrue(actualOptional.isPresent());
+        Movie actual = actualOptional.get();
         Assert.assertNotNull(actual);
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(shawshankRedemption.getTitle(), actual.getTitle());
@@ -83,6 +90,13 @@ public class MovieDaoImplTest extends AbstractTest {
         Assert.assertNotNull(actual.getActors().get(0).getCountry());
         Assert.assertEquals(1, actual.getActors().get(0).getCountry().getId().longValue());
         Assert.assertEquals(usa.getName(), actual.getActors().get(0).getCountry().getName());
+    }
+
+    @Test
+    public void getByNotExistingId_Ok() {
+        MovieDao movieDao = new MovieDaoImpl(getSessionFactory());
+        Optional<Movie> actual = movieDao.get(100L);
+        Assert.assertFalse(actual.isPresent());
     }
 
     private void insertMovies(MovieDao movieDao, Movie movie) {

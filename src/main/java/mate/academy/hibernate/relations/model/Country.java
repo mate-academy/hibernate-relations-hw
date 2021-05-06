@@ -32,8 +32,15 @@ public class Country implements Cloneable {
         try {
             return (Country) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this);
+            throw new RuntimeException("Can't make clone of " + this, e);
         }
     }
 
+    @Override
+    public String toString() {
+        return "Country{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
+    }
 }
