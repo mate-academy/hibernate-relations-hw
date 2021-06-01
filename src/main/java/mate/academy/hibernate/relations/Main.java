@@ -37,5 +37,7 @@ public class Main {
                 new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
+        System.out.println(actorService.get(vinDiesel.getId()));
+        System.out.println(countryService.get(usa.getId()));
     }
 }
