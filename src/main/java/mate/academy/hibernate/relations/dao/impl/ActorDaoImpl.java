@@ -28,7 +28,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("An error occurred while "
-                    + "processing query to add new actor = " + actor, e);
+                    + "processing query to add new actor: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
