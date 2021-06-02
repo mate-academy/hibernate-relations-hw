@@ -22,6 +22,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
+            return actor;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -32,7 +33,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-        return actor;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("No such element with id " + id, e);
+            throw new DataProcessingException("No such actor with id " + id, e);
         }
     }
 }
