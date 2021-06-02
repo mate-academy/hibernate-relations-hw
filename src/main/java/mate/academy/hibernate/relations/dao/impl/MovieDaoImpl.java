@@ -22,6 +22,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -32,7 +33,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 session.close();
             }
         }
-        return movie;
     }
 
     @Override
