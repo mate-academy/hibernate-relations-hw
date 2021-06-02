@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "actors")
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

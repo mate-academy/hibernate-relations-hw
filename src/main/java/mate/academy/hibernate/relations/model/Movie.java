@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@Entity
+@Entity(name = "movies")
 public class Movie implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

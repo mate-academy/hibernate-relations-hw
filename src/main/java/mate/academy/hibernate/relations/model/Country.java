@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "countries")
 public class Country implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
