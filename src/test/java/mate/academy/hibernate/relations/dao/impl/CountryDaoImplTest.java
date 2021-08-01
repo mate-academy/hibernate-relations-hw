@@ -13,7 +13,7 @@ public class CountryDaoImplTest extends AbstractTest {
 
     @Override
     protected Class<?>[] entities() {
-        return new Class[] {Country.class};
+        return new Class[]{Country.class};
     }
 
     @Test
