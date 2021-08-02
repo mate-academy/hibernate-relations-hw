@@ -23,6 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
+            return actor;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -33,7 +34,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-        return actor;
     }
 
     @Override
