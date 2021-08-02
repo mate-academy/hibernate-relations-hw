@@ -21,9 +21,8 @@ public class Main {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Country usa = new Country("USA");
-        CountryDaoImpl countryDao = new CountryDaoImpl(
-                sessionFactory);
-        CountryService countryService = new CountryServiceImpl(countryDao);
+        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(
+                sessionFactory));
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
