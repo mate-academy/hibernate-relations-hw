@@ -19,10 +19,11 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            return movie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -34,13 +35,11 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 session.close();
             }
         }
-
-        return null;
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Movie with id = " + id + " does not exist", e);
