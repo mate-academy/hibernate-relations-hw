@@ -28,6 +28,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 transaction.rollback();
             }
             throw new DataProccesingException("Can't create country : " + country, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -38,6 +42,5 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         } catch (Exception e) {
             throw new DataProccesingException("Can't get country with id : " + id, e);
         }
-
     }
 }
