@@ -77,6 +77,7 @@ public class Movie implements Cloneable {
         return "Movie{"
                 + "id=" + id
                 + ", title='" + title + '\''
+                + ", actors=" + actors
                 + '}';
     }
 }
