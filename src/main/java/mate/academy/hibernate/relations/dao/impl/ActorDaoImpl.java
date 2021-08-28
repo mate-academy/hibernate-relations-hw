@@ -1,11 +1,11 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import java.util.Optional;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -18,11 +18,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     }
 
     @Override
-    public Actor get(Long id) {
+    public Optional<Actor> get(Long id) {
         try (Session session = super.factory.openSession()){
-            return session.get(Actor.class, id);
+            Actor actor = session.get(Actor.class, id);
+            return Optional.ofNullable(actor);
         } catch (Exception e) {
-            throw new NoSuchElementException("Actor not found with id: " + id);
+            throw new DataProcessingException("Exception in get Actor by id: " + id);
         }
     }
 }

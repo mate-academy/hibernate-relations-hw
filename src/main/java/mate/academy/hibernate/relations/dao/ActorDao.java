@@ -2,8 +2,10 @@ package mate.academy.hibernate.relations.dao;
 
 import mate.academy.hibernate.relations.model.Actor;
 
+import java.util.Optional;
+
 public interface ActorDao {
     Actor add(Actor actor);
 
-    Actor get(Long id);
+    Optional<Actor> get(Long id);
 }

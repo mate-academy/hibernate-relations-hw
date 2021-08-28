@@ -1,11 +1,11 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -18,11 +18,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     }
 
     @Override
-    public Country get(Long id) {
+    public Optional<Country> get(Long id) {
         try (Session session = super.factory.openSession()){
-            return session.get(Country.class, id);
+            Country country = session.get(Country.class, id);
+            return Optional.ofNullable(country);
         } catch (Exception e) {
-            throw new NoSuchElementException("Country not found with id: " + id);
+            throw new DataProcessingException("Exception in get Country by ID: " + id);
         }
     }
 }
