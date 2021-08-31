@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
@@ -18,7 +17,8 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Optional<Movie> get(Long id) {
-        return movieDao.get(id);
+    public Movie get(Long id) throws Exception {
+        return movieDao.get(id).orElseThrow(() ->
+                new Exception("Can't get movie from DB by id - " + id));
     }
 }

@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
@@ -18,7 +17,8 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public Optional<Country> get(Long id) {
-        return countryDao.get(id);
+    public Country get(Long id) throws Exception {
+        return countryDao.get(id).orElseThrow(() ->
+                new Exception("Can't get country from DB by id - " + id));
     }
 }
