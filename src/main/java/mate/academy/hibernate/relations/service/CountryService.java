@@ -5,5 +5,5 @@ import mate.academy.hibernate.relations.model.Country;
 public interface CountryService {
     Country add(Country country);
 
-    Country get(Long id) throws Exception;
+    Country get(Long id);
 }
