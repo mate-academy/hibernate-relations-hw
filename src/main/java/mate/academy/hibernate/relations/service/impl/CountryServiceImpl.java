@@ -19,6 +19,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).orElseThrow(() -> new NoSuchElementException("No such Country with id: " + id));
+        return countryDao.get(id)
+            .orElseThrow(() -> new NoSuchElementException("No such Country with id: " + id));
     }
 }
