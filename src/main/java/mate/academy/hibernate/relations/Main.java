@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-import org.hibernate.SessionFactory;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -15,6 +14,7 @@ import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
 import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
 import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
+import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
