@@ -27,7 +27,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of adding country - " + country + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,8 +41,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get country by id from DB", e);
         }
     }
 
@@ -58,7 +57,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of updating country - " + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -71,8 +71,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public List<Country> getAll() {
         try (Session session = factory.openSession()) {
             return session.createQuery("from Country").list();
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get all countries from DB", e);
         }
     }
 
@@ -89,7 +87,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of deleting country - " + country + " from DB", e);
         } finally {
             if (session != null) {
                 session.close();

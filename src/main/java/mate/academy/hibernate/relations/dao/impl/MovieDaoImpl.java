@@ -27,7 +27,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of adding movie - " + movie + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,8 +41,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get movie by id from DB", e);
         }
     }
 
@@ -58,7 +57,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of updating movie - " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -71,8 +71,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public List<Movie> getAll() {
         try (Session session = factory.openSession()) {
             return session.createQuery("from Movie").list();
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get all movies from DB", e);
         }
     }
 
@@ -89,7 +87,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of deleting movie - " + movie + " from DB", e);
         } finally {
             if (session != null) {
                 session.close();

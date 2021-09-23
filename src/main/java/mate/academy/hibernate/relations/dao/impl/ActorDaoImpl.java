@@ -27,7 +27,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of adding actor - " + actor + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,8 +41,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get actor by id from DB", e);
         }
     }
 
@@ -58,7 +57,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of updating actor - " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -71,8 +71,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public List<Actor> getAll() {
         try (Session session = factory.openSession()) {
             return session.createQuery("from Actor").list();
-        } catch (RuntimeException e) {
-            throw new DataProcessingException("Can't get all actors from DB", e);
         }
     }
 
@@ -89,7 +87,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("The problem appeared during transaction work", e);
+            throw new DataProcessingException("The problem appeared during "
+                    + "transaction of deleting actor - " + actor + " from DB", e);
         } finally {
             if (session != null) {
                 session.close();
