@@ -23,7 +23,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -53,7 +53,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.update(movie);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -83,7 +83,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.delete(movie);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }

@@ -23,7 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -53,7 +53,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.update(actor);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -83,7 +83,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.delete(actor);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
             }

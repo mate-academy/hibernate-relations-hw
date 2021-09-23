@@ -13,8 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Actor> actors;
 
     public Movie() {
@@ -24,8 +27,6 @@ public class Movie implements Cloneable {
         this.title = title;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -42,7 +43,6 @@ public class Movie implements Cloneable {
         this.title = title;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
     public List<Actor> getActors() {
         return actors;
     }

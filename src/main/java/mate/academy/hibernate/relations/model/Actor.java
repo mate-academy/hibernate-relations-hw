@@ -10,8 +10,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
     private Country country;
 
     public Actor() {
@@ -21,8 +24,6 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -39,7 +40,6 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
-    @ManyToOne
     public Country getCountry() {
         return country;
     }

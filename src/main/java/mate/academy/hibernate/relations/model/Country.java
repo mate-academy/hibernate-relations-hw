@@ -9,6 +9,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "countries")
 public class Country implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -19,8 +21,6 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
