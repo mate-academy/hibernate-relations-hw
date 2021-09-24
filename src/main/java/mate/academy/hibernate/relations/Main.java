@@ -16,7 +16,7 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
+        CountryService countryService = null; // TODO: initialize this instance...
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
