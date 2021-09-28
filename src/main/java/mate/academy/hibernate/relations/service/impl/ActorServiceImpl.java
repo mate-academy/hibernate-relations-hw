@@ -1,17 +1,15 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
-import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
     protected final ActorDao actorDao;
 
-    public ActorServiceImpl(SessionFactory factory) {
-        this.actorDao = new ActorDaoImpl(factory);
+    public ActorServiceImpl(ActorDao actorDao) {
+        this.actorDao = actorDao;
     }
 
     @Override
