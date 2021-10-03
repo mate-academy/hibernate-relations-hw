@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Country implements Cloneable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_seq")
     private Long id;
     private String name;
 
