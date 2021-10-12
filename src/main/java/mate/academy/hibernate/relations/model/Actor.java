@@ -45,9 +45,9 @@ public class Actor implements Cloneable {
     @Override
     public String toString() {
         return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+            + "id=" + id
+            + ", name='" + name + '\''
+            + ", country='" + country + '\''
+            + '}';
     }
 }

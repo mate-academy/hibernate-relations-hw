@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,8 +52,8 @@ public class Movie implements Cloneable {
     @Override
     public String toString() {
         return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + '}';
+            + "id=" + id
+            + ", title='" + title + '\''
+            + '}';
     }
 }

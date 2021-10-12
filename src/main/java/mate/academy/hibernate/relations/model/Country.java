@@ -38,8 +38,8 @@ public class Country implements Cloneable {
     @Override
     public String toString() {
         return "Country{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + '}';
+            + "id=" + id
+            + ", name='" + name + '\''
+            + '}';
     }
 }
