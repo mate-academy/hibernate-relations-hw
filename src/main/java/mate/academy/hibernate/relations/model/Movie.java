@@ -23,7 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Movie implements Cloneable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
