@@ -33,6 +33,5 @@ public class Main {
         movieService.add(fastAndFurious);
         Movie movieFromDB = movieService.get(fastAndFurious.getId());
         System.out.println(movieFromDB);
-        System.out.println(movieFromDB.getActors());
     }
 }

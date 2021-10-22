@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
@@ -21,10 +20,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> optionalMovie = movieDao.get(id);
-        if (optionalMovie.isPresent()) {
-            return optionalMovie.get();
-        }
-        throw new RuntimeException("Don't exist Movie with id " + id + " in DB");
+        return movieDao.get(id).orElseThrow(() ->
+                new RuntimeException("Don't exist Movie with id " + id + " in DB"));
     }
 }

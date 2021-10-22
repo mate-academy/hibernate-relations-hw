@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
@@ -21,11 +20,8 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        Optional<Actor> optionalActor = actorDao.get(id);
-        if (optionalActor.isPresent()) {
-            return optionalActor.get();
-        }
-        throw new RuntimeException("Don't exist Actor with id " + id + " in DB");
+        return actorDao.get(id).orElseThrow(() ->
+                new RuntimeException("Don't exist Actor with id " + id + " in DB"));
     }
 }
 
