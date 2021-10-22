@@ -24,4 +24,3 @@ public class ActorServiceImpl implements ActorService {
                 new RuntimeException("Don't exist Actor with id " + id + " in DB"));
     }
 }
-
