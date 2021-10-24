@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.model.Country;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CountryDaoImplTest extends AbstractTest {
+public class    CountryDaoImplTest extends AbstractTest {
     public static final Country usa = new Country("USA");
     public static final Country ukraine = new Country("Ukraine");
 
