@@ -41,7 +41,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Couldn't correctly close session"
-                    + " for getting movie from DB.");
+                    + " for getting movie from DB.", e);
         }
     }
 }

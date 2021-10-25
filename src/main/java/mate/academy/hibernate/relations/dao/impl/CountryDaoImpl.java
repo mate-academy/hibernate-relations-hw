@@ -41,7 +41,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Couldn't correctly close session"
-                    + " for getting country from DB.");
+                    + " for getting country from DB.", e);
         }
     }
 }
