@@ -18,6 +18,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).orElseThrow(() -> new RuntimeException("Country doesn't exit in DB, id = " + id));
+        return countryDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Country doesn't exit in DB, id = " + id));
     }
 }
