@@ -5,7 +5,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
-    private ActorDao actorDao;
+    private final ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
         this.actorDao = actorDao;
@@ -18,6 +18,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).get();
+        return actorDao.get(id).orElseThrow(() -> new RuntimeException("Actor doesn't exit in DB, id = " + id));
     }
 }
