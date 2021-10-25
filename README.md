@@ -15,7 +15,7 @@ Such structure is a good example of Dependency Injection implementation. Please,
 ### Requirements
 
 Your task is to implement the following steps:
-- add required hibernate dependencies
+- add required hibernate dependencies 
 - complete implementation of all classes in the `mate/academy/hibernate/relations/model` package
 - complete implementation of all classes in the `mate/academy/hibernate/relations/dao/impl` package
 - create your custom unchecked DataProcessingException and throw it in the catch block on dao layer
