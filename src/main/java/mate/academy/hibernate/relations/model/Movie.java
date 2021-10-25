@@ -29,8 +29,8 @@ public class Movie implements Cloneable {
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movie_actor",
-        joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "id")
     )
     private List<Actor> actors;
 
