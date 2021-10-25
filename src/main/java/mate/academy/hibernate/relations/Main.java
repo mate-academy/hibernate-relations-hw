@@ -26,7 +26,7 @@ public class Main {
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory)); //
+        ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
