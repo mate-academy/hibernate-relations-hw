@@ -22,6 +22,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Can't get actor from DB! ID: " + id));
+                new DataProcessingException("Actor doesn't exist with id: " + id));
     }
 }
