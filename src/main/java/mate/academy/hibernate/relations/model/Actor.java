@@ -16,7 +16,6 @@ public class Actor implements Cloneable {
     private String name;
 
     @ManyToOne
-
     private Country country;
 
     public Actor() {
