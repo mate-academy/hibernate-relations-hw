@@ -26,7 +26,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save country to DB", e);
+            throw new DataProcessingException("Can't save country to DB " + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -38,8 +38,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
-            Optional<Country> country = Optional.ofNullable(session.get(Country.class, id));
-            return country;
+            return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get country by id: " + id, e);
         }
