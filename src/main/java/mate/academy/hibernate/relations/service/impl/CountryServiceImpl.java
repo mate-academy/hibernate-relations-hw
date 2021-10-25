@@ -23,6 +23,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         return countryDao.get(id)
                 .orElseThrow(() ->
-                        new DataProcessingException("Can't get country from countryDao."));
+                        new DataProcessingException("Can't get country by id: " + id + "from countryDao."));
     }
 }
