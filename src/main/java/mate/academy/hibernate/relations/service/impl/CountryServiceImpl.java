@@ -20,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Couldn't get country from DB!"));
+                new DataProcessingException("Couldn't get country from DB with id: " + id));
     }
 }
