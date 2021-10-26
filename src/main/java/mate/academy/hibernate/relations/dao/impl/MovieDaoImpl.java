@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
-import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,13 +23,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (Exception e) {
-            if(transaction != null) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't save movie to database: "
                     + movie.getTitle(), e);
         } finally {
-            if(session != null) {
+            if (session != null) {
                 session.close();
             }
         }

@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
-import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,13 +23,13 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.save(country);
             transaction.commit();
         } catch (Exception e) {
-            if(transaction != null) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't save country to database: "
                     + country.getName(), e);
         } finally {
-            if(session != null) {
+            if (session != null) {
                 session.close();
             }
         }
