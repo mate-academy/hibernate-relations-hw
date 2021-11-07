@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -19,7 +18,6 @@ import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
