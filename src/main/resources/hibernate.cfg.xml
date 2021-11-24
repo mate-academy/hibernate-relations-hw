@@ -9,5 +9,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping class="mate.academy.hibernate.relations.model.Country"/>
+        <mapping class="mate.academy.hibernate.relations.model.Actor"/>
     </session-factory>
 </hibernate-configuration>
