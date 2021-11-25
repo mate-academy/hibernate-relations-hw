@@ -9,6 +9,7 @@ import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
 import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
 import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -25,13 +26,11 @@ public class Main {
         vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(sessionFactory); // TODO: initialize this instance
         actorService.add(vinDiesel);
-/*
+
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
+        MovieService movieService = new MovieServiceImpl(sessionFactory); // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
-
- */
     }
 }
