@@ -27,7 +27,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't save the country: "
-                    + country.getName() + " in DB!", e);
+                    + country + " in DB!", e);
         } finally {
             if (session != null) {
                 session.close();
