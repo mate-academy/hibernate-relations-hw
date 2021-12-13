@@ -44,7 +44,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             country = Optional.ofNullable(session.get(Country.class, id));
         } catch (HibernateException e) {
             throw new DataProcessingException(
-                    "Can't get movie with id = " + id + "from DB", e);
+                    "Can't get country with id = " + id + "from DB", e);
         }
         return country;
     }
