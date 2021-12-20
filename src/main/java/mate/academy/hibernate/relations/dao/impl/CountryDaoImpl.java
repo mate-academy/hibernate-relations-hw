@@ -8,6 +8,7 @@ import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -16,10 +17,22 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        try (Session session = factory.openSession()) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.save(country);
-        } catch (HibernateException exception) {
-            throw new DataProcessingException("Can't add country" + country + "to DB", exception);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't save " + country + " to DB", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return country;
     }

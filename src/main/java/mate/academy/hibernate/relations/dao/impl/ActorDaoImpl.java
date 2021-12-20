@@ -8,6 +8,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -16,10 +17,22 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        try (Session session = factory.openSession()) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.save(actor);
-        } catch (HibernateException exception) {
-            throw new DataProcessingException("Can't add actor" + actor + "to DB", exception);
+            transaction.commit();
+        } catch (HibernateException exc) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't save " + actor + " to DB", exc);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return actor;
     }

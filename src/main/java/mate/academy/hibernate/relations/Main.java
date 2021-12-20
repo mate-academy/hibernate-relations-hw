@@ -31,5 +31,6 @@ public class Main {
         MovieService movieService = new MovieServiceImpl(sessionFactory);
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
+        System.out.println(movieService.get(fastAndFurious.getId()).getActors());
     }
 }
