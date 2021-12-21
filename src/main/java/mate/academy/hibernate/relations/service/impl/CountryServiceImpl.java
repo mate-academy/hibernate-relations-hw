@@ -1,16 +1,22 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import lombok.AllArgsConstructor;
+import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
+@AllArgsConstructor
 public class CountryServiceImpl implements CountryService {
+    private CountryDao countryDao;
+
     @Override
     public Country add(Country country) {
-        return null;
+        return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
-        return null;
+        return countryDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Can't get country from DB by id" + id));
     }
 }
