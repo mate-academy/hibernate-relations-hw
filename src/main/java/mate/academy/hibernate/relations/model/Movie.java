@@ -14,7 +14,9 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString(exclude = "actors")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,14 +35,6 @@ public class Movie implements Cloneable {
 
     public Movie(String title) {
         this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title
-                + '}';
     }
 
     @Override
