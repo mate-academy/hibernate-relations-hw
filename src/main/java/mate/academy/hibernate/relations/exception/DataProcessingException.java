@@ -4,8 +4,4 @@ public class DataProcessingException extends RuntimeException {
     public DataProcessingException(String message, Throwable throwable) {
         super(message);
     }
-
-    public DataProcessingException(String message) {
-        super(message);
-    }
 }
