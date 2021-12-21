@@ -4,8 +4,6 @@ import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
-import java.time.DateTimeException;
-
 public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao;
 

@@ -4,8 +4,6 @@ import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
-import java.time.DateTimeException;
-
 public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
