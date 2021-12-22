@@ -26,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add actor to DB. Actor: " + actor);
+            throw new DataProcessingException("Can't add actor to DB. Actor: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,8 +39,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't get actor from DB by id: " + id);
         }
     }
 }
