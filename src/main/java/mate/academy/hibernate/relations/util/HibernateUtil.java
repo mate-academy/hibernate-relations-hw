@@ -1,12 +1,13 @@
 package mate.academy.hibernate.relations.util;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-@NoArgsConstructor
 public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
+
+    private HibernateUtil() {
+    }
 
     private static SessionFactory initSessionFactory() {
         return new Configuration().configure().buildSessionFactory();

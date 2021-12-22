@@ -7,29 +7,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-@ToString
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @Entity
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "actors")
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NonNull
     private String name;
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-
-    public Actor(String name) {
-        this.name = name;
-    }
 
     @Override
     public Actor clone() {

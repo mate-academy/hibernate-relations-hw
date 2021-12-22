@@ -11,31 +11,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-@ToString(exclude = "actors")
-@Getter
-@Setter
 @NoArgsConstructor
+@Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "movies")
 public class Movie implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NonNull
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movies_actors",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
-
-    public Movie(String title) {
-        this.title = title;
-    }
 
     @Override
     public Movie clone() {
