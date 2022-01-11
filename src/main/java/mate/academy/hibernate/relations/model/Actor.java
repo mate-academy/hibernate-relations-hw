@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,8 +15,8 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
-        private Country country;
+    @ManyToOne
+    private Country country;
 
     public Actor() {
     }
@@ -63,10 +64,7 @@ public class Actor implements Cloneable {
 
     @Override
     public String toString() {
-        return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+        return "Actor{" + "id=" + id + ", name='" + name + '\'' + ", country='" + country + '\''
+                       + '}';
     }
 }
