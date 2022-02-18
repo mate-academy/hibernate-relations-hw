@@ -8,11 +8,13 @@ public class HibernateUtil {
 
     static {
         SESSION_FACTORY = new Configuration()
-                .configure().
-                buildSessionFactory();
+                .configure()
+                .buildSessionFactory();
     }
 
-    private HibernateUtil() { }
+    private HibernateUtil() {
+
+    }
 
     public static SessionFactory getSessionFactory() {
         return SESSION_FACTORY;

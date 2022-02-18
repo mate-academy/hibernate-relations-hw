@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import java.io.Serializable;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
