@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,12 +22,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Couldn't save actor: "
-                    + actor, hibernateException);
+                    + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,9 +41,9 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         Actor actor;
         try (Session session = factory.openSession()) {
             actor = session.get(Actor.class, id);
-        } catch (HibernateException hibernateException) {
+        } catch (Exception e) {
             throw new DataProcessingException("Couldn't get actor by id: "
-                    + id, hibernateException);
+                    + id, e);
         }
         return Optional.ofNullable(actor);
     }
