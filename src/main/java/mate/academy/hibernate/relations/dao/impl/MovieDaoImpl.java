@@ -40,7 +40,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try (Session session = factory.openSession()) {
             return Optional.of(session.get(Movie.class, id));
         } catch (RuntimeException e) {
-            return Optional.empty();
+            throw new DataProcessingException("Can't get movie with id " + id, e);
         }
     }
 }
