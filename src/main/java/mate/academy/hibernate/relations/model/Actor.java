@@ -21,7 +21,7 @@ import org.hibernate.Hibernate;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "actors")
+@Table(name = "actor")
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

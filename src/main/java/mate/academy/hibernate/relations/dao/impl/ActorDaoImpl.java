@@ -24,7 +24,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction.commit();
         } catch (Exception e) {
             throw new DataProcessingException(String.format(
-                    "Can't save Actor with name: '%s' to DB", actor.getName()), e);
+                    "Can't save Actor: '%s' to DB", actor), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -35,17 +35,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException(
                     String.format("Can't get actor with id: %d from DB", id), e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
