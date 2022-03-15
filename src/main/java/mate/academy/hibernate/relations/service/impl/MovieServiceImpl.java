@@ -1,16 +1,29 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.Optional;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
+    private MovieDao movieDao;
+
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
+
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return null;
+        Optional<Movie> optionalMovie = movieDao.get(id);
+        if (optionalMovie.isEmpty()) {
+            throw new DataProcessingException("There is no movie in DB by id: " + id);
+        }
+        return optionalMovie.get();
     }
 }
