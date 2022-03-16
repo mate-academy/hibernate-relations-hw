@@ -1,13 +1,12 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.CountryDao;
-import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
-    private CountryDao countryDao;
+    private final CountryDao countryDao;
 
     public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
@@ -20,10 +19,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> optionalCountry = countryDao.get(id);
-        if (optionalCountry.isEmpty()) {
-            throw new DataProcessingException("There is no country in DB by such id: " + id);
-        }
-        return optionalCountry.get();
+        return countryDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("There is no country in DB by such id: " + id));
     }
 }
