@@ -27,7 +27,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("cant add country: " + country, e);
+            throw new DataProcessingException("Can`t add country: " + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +41,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (HibernateException e) {
-            throw new DataProcessingException("cant get country by id = " + id, e);
+            throw new DataProcessingException("Can`t get country by id = " + id, e);
         }
     }
 }
