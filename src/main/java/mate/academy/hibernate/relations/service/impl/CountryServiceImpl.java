@@ -10,7 +10,7 @@ public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
     public CountryServiceImpl(SessionFactory sessionFactory) {
-        this.countryDao = new CountryDaoImpl(sessionFactory);
+        countryDao = new CountryDaoImpl(sessionFactory);
     }
 
     @Override

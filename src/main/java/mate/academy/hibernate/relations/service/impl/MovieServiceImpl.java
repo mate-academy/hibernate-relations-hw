@@ -10,7 +10,7 @@ public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
     public MovieServiceImpl(SessionFactory sessionFactory) {
-        this.movieDao = new MovieDaoImpl(sessionFactory);
+        movieDao = new MovieDaoImpl(sessionFactory);
     }
 
     @Override
