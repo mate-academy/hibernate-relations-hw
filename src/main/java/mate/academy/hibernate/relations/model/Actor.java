@@ -2,7 +2,7 @@ package mate.academy.hibernate.relations.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "actors")
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
