@@ -20,6 +20,8 @@
         </property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+        <mapping class="mate.academy.hibernate.relations.model.Actor"></mapping>
+        <mapping class="mate.academy.hibernate.relations.model.Country"></mapping>
         <mapping class="mate.academy.hibernate.relations.model.Movie"></mapping>
     </session-factory>
 </hibernate-configuration>
