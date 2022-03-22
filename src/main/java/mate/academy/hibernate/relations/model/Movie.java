@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity(name = "movies")
@@ -15,6 +17,17 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(
+                    name = "movie_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "actor_id",
+                    referencedColumnName = "id"
+            )
+    )
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Actor> actors;
 
