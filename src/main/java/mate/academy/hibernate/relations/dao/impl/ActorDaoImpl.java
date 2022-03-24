@@ -26,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Exception in method add(actor), actor:" + actor, e);
+            throw new DataProcessingException("Failed to save actor in db. Actor:" + actor, e);
         } finally {
             if (session != null) {
                 session.close();
