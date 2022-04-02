@@ -1,29 +1,28 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "countries")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Country implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public Country() {
-    }
-
     public Country(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -39,8 +38,8 @@ public class Country implements Cloneable {
     @Override
     public String toString() {
         return "Country{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + '}';
+            + "id=" + id
+            + ", name='" + name + '\''
+            + '}';
     }
 }
