@@ -58,7 +58,7 @@ public class MovieDaoImplTest extends AbstractTest {
         Assert.assertEquals(1L, actual.getId().longValue());
         Assert.assertEquals(shawshankRedemption.getTitle(), actual.getTitle());
         Assert.assertNotNull(actual.getActors());
-        Assert.assertEquals(1, actual.getActors().size());
+         Assert.assertEquals(1, actual.getActors().size());
         Assert.assertEquals(morganFreeman.getName(), actual.getActors().get(0).getName());
     }
 
