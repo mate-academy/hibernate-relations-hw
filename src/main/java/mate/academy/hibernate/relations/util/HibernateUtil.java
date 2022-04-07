@@ -1,4 +1,4 @@
-package mate.academy.hibernate.relations.model.util;
+package mate.academy.hibernate.relations.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

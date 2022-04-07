@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
-import mate.academy.hibernate.relations.model.util.HibernateUtil;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
