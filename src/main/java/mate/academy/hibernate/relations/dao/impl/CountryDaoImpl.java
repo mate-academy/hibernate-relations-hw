@@ -28,6 +28,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             } else {
                 throw new DataProcessingException("Can`t add country " + country + " to db", e);
             }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return country;
     }

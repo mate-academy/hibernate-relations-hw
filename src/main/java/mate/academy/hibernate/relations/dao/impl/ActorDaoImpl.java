@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,12 +22,14 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
-        } catch (HibernateException e) {
-            if (transaction == null) {
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
-            } else {
-                throw new DataProcessingException("Can`t add actor "
-                        + actor.getName() + " to db", e);
+            }
+            throw new DataProcessingException("Can't add actor to DB " + actor, e);
+        } finally {
+            if (session != null) {
+                session.close();
             }
         }
         return actor;
