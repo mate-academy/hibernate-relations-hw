@@ -31,10 +31,6 @@ public class Main {
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(sessionFactory);
         movieService.add(fastAndFurious);
-
-        System.out.println(countryService.get(usa.getId()));
-        System.out.println(actorService.get(vinDiesel.getId()));
         System.out.println(movieService.get(fastAndFurious.getId()));
-
     }
 }
