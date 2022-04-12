@@ -17,7 +17,6 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Movie movie = super.get(id, Movie.class);
-        return Optional.ofNullable(movie);
+        return super.get(id, Movie.class);
     }
 }

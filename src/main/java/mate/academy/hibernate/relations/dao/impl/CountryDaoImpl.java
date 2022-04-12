@@ -17,7 +17,6 @@ public class CountryDaoImpl extends AbstractDao<Country> implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Country country = super.get(id, Country.class);
-        return Optional.ofNullable(country);
+        return super.get(id, Country.class);
     }
 }
