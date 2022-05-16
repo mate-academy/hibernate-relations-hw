@@ -26,7 +26,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("it is not possible to add an movie "
+            throw new DataProcessingException("Failed to add an movie "
                     + movie + " to the database", e);
         } finally {
             if (session != null) {
@@ -42,7 +42,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("it is not possible to get an movie by id " + id, e);
+            throw new DataProcessingException("Failed to get an movie by id " + id, e);
         }
     }
 }
