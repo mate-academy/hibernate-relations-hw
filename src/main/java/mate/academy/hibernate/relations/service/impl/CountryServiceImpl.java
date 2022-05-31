@@ -1,17 +1,14 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.CountryDao;
-import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
-import mate.academy.hibernate.relations.util.HibernateUtil;
-import org.hibernate.SessionFactory;
 
 public class CountryServiceImpl implements CountryService {
-    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    private final CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+    private final CountryDao countryDao;
 
-    public CountryServiceImpl(SessionFactory sessionFactory) {
+    public CountryServiceImpl(CountryDao countryDao) {
+        this.countryDao = countryDao;
     }
 
     @Override
