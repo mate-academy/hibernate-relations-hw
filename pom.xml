@@ -77,22 +77,6 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <warName>${project.artifactId}</warName>
-                        <webResources>
-                            <resource>
-                                <filtering>true</filtering>
-                                <includes>
-                                    <include>src/test/resources/hibernate.cfg.xml</include>
-                                </includes>
-                            </resource>
-                        </webResources>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
