@@ -31,7 +31,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 transaction.rollback();
             }
             log.error("Can`t save to DB actor: {}", actor, e);
-            throw new DataProcessingException("Can`t save to DB", e);
+            throw new DataProcessingException("Can`t save actor to DB " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
