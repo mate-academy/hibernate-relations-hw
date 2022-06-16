@@ -1,14 +1,10 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.lib.Inject;
-import mate.academy.hibernate.relations.lib.Service;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
-@Service
 public class MovieServiceImpl implements MovieService {
-    @Inject
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
