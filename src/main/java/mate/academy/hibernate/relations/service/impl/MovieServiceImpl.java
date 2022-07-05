@@ -1,16 +1,14 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    private static MovieDao movieDao;
+    private final MovieDao movieDao;
 
-    public MovieServiceImpl(SessionFactory sessionFactory) {
-        movieDao = new MovieDaoImpl(sessionFactory);
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
@@ -20,6 +18,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow(
+                () -> new RuntimeException("No such movie present in database by id: " + id));
     }
 }
