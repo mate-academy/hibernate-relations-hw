@@ -19,6 +19,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id)
-                .orElseThrow(() -> new RuntimeException("Couldn't get country by id " + id));
+                .orElseThrow(() -> new RuntimeException("Couldn't find "
+                        + "such country in DB by id " + id));
     }
 }
