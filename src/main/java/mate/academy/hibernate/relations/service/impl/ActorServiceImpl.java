@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exeption.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
@@ -20,6 +21,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Cannot find any actor from DB with such id: " + id));
+                new NoSuchElementException("Actor with id: " + id + " not found"));
     }
 }

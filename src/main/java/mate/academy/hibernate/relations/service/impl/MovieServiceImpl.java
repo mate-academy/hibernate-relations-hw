@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exeption.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
@@ -20,6 +21,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Cannot find any movie from DB with such id: " + id));
+                new NoSuchElementException("Movie with id: " + id + " not found"));
     }
 }
