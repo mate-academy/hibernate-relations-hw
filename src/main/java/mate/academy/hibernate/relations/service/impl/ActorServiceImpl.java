@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Cannot find any actor in DB with such id=" + id));
+                new DataProcessingException("There isn't any actor in DB with such id=" + id));
     }
 }
