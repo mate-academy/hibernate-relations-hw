@@ -21,6 +21,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         Optional<Actor> actor = actorDao.get(id);
-        return actor.orElseThrow(() -> new NoSuchElementException("Can't find actor with id " + id));
+        return actor.orElseThrow(()
+                -> new NoSuchElementException("Can't find actor with id " + id));
     }
 }
