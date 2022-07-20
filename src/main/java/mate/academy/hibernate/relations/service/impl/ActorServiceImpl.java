@@ -20,6 +20,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Cannot get actor by this id: " + id));
+                .orElseThrow(() ->
+                        new NoSuchElementException("Cannot get actor by this id: " + id));
     }
 }

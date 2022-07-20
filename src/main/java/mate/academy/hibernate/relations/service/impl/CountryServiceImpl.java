@@ -20,6 +20,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Cannot get country by this id: " + id));
+                .orElseThrow(() ->
+                        new NoSuchElementException("Cannot get country by this id: " + id));
     }
 }
