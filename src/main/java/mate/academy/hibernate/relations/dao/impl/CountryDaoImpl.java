@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private final SessionFactory sessionFactory = super.factory;
-
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -20,6 +18,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         Session session = null;
         Transaction transaction = null;
         try {
+            SessionFactory sessionFactory = super.factory;
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(country);
@@ -39,6 +38,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
+        SessionFactory sessionFactory = super.factory;
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {

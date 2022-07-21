@@ -18,6 +18,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElseThrow();
+        return actorDao.get(id).orElseThrow(
+                () -> new RuntimeException("This actor is not present in database by id: " + id));
     }
 }

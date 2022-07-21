@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
-    private final SessionFactory sessionFactory = super.factory;
-
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -20,6 +18,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         Session session = null;
         Transaction transaction = null;
         try {
+            SessionFactory sessionFactory = super.factory;
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(actor);
@@ -39,6 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
+        SessionFactory sessionFactory = super.factory;
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
