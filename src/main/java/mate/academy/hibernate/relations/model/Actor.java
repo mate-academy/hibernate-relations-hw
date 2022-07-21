@@ -15,7 +15,7 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Country country;
 
     public Actor() {
