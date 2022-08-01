@@ -2,6 +2,7 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
@@ -37,7 +38,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try {
             country = session.get(Country.class, id);
         } catch (RuntimeException e) {
-            //            throw new DataProcessingException TO BE IMPLEMENTED
+            throw new DataProcessingException("Error when adding a country", e);
         } finally {
             session.close();
         }
