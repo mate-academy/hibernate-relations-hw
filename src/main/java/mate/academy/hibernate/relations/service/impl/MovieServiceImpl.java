@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.service.MovieService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class MovieServiceImpl implements MovieService {
-    MovieDao movieDao = new MovieDaoImpl(HibernateUtil.getSessionFactory());
+    private MovieDao movieDao = new MovieDaoImpl(HibernateUtil.getSessionFactory());
 
     @Override
     public Movie add(Movie movie) {
