@@ -16,10 +16,11 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = null;
+        Transaction transaction = null;
         try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
         } catch (RuntimeException e) {
@@ -32,10 +33,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = null;
         Country country = null;
         try {
+            session = factory.openSession();
             country = session.get(Country.class, id);
         } catch (RuntimeException e) {
             throw new DataProcessingException("Error when adding a country", e);
