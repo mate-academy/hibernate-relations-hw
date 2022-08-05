@@ -23,7 +23,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session.save(movie);
             transaction.commit();
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Error when adding a movie", e);
+            throw new DataProcessingException("Error when adding a movie: " + movie, e);
         } finally {
             session.close();
         }
@@ -38,7 +38,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session = factory.openSession();
             movie = session.get(Movie.class, id);
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Error when adding a movie", e);
+            throw new DataProcessingException("Error when getting a movie: " + movie, e);
         } finally {
             session.close();
         }

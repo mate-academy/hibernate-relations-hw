@@ -23,7 +23,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.save(country);
             transaction.commit();
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Error when adding a movie", e);
+            throw new DataProcessingException("Error when adding a country: " + country, e);
         } finally {
             session.close();
         }
@@ -38,7 +38,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session = factory.openSession();
             country = session.get(Country.class, id);
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Error when adding a country", e);
+            throw new DataProcessingException("Error when getting a country: " + country, e);
         } finally {
             session.close();
         }

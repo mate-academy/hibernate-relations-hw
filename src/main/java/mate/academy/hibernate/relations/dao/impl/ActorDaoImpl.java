@@ -24,7 +24,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction.commit();
         } catch (RuntimeException e) {
             transaction.rollback();
-            throw new DataProcessingException("Error when adding a movie", e);
+            throw new DataProcessingException("Error when adding an actor: " + actor, e);
         } finally {
             session.close();
         }
@@ -39,7 +39,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             session = factory.openSession();
             actor = session.get(Actor.class, id);
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Error when adding an actor", e);
+            throw new DataProcessingException("Error when getting an actor: " + actor, e);
         } finally {
             session.close();
         }
