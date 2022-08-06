@@ -21,8 +21,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id)
-                .orElseThrow(() -> new DataProcessingException("Could not get movie by id. "
-                        + "Movie does not exist. Id = " + id));
+        return movieDao.get(id).get();
     }
 }
