@@ -7,6 +7,10 @@ import mate.academy.hibernate.relations.service.MovieService;
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
+
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);

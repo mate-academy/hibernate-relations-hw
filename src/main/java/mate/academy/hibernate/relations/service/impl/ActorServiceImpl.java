@@ -7,6 +7,10 @@ import mate.academy.hibernate.relations.service.ActorService;
 public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao;
 
+    public ActorServiceImpl(ActorDao actorDao) {
+        this.actorDao = actorDao;
+    }
+
     @Override
     public Actor add(Actor actor) {
         return actorDao.add(actor);
