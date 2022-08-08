@@ -7,6 +7,9 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
