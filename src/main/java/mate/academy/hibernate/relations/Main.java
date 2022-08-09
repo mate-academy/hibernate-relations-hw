@@ -31,5 +31,14 @@ public class Main {
         MovieService movieService = new MovieServiceImpl(sessionFactory);
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
+
+        Actor bradPit = new Actor("Brad Pit");
+        bradPit.setCountry(usa);
+        actorService.add(bradPit);
+
+        Movie snatch = new Movie("Snatch");
+        snatch.setActors(List.of(bradPit));
+        movieService.add(snatch);
+        System.out.println(movieService.get(snatch.getId()));
     }
 }
