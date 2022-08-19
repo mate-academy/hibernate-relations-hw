@@ -4,6 +4,7 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,33 +16,36 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
-            session = factory.openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.persist(country);
             transaction.commit();
-            return country;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add country " + country, e);
+            throw new DataProcessingException("Can't add country " + country + " to DB!", e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
+        return country;
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        try (Session session = factory.openSession()) {
-            Country country = session.get(Country.class, id);
-            return Optional.ofNullable(country);
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't get country by id " + id, e);
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Country country = null;
+        try (Session session = sessionFactory.openSession()) {
+            country = session.get(Country.class, id);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Can't get country with id " + id + " from DB!", e);
         }
+        return Optional.ofNullable(country);
     }
 }
