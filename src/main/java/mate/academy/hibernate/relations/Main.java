@@ -35,7 +35,7 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
-        Movie fastAndFurious = new Movie("Fast and Furious 9");
+        Movie fastAndFurious = new Movie("Fast and Furious 7");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(movieDao);
