@@ -26,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save country "
+            throw new DataProcessingException("Can't save actor "
                     + actor.toString() + "to DB", e);
         } finally {
             if (session != null) {
@@ -38,17 +38,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Session session = null;
-        try {
-            session = factory.openSession();
+
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class,id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get actor id:"
                     + id.toString() + "from DB", e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
