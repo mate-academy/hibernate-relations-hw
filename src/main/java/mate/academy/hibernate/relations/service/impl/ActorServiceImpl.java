@@ -8,7 +8,6 @@ public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
-
         this.actorDao = actorDao;
     }
 

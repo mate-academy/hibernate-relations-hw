@@ -8,7 +8,6 @@ public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
     public CountryServiceImpl(CountryDao countryDao) {
-
         this.countryDao = countryDao;
     }
 
