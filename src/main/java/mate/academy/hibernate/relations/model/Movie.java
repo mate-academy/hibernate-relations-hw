@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ public class Movie implements Cloneable {
     private Long id;
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "actors_movies",
             joinColumns = @JoinColumn(name = "movie_id"),

@@ -1,12 +1,14 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
+import javax.persistence.NoResultException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -38,8 +40,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            return Optional.ofNullable(session.get(Movie.class, id));
+            Query<Movie> getMovieQuery = session.createQuery("from Movie m "
+                    + "left join fetch m.actors "
+                    + "where m.id = :id");
+            getMovieQuery.setParameter("id", id);
+            return Optional.ofNullable(getMovieQuery.getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie with id " + id, e);
         }
