@@ -13,7 +13,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-
         return movieDao.add(movie);
     }
 

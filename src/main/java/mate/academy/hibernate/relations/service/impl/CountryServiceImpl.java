@@ -13,13 +13,11 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country add(Country country) {
-
         return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
-
         return countryDao.get(id).get();
     }
 }

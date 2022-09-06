@@ -11,7 +11,6 @@ import org.hibernate.Transaction;
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
-
         super(sessionFactory);
     }
 
@@ -43,7 +42,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie with " + id + " from DB");
+            throw new DataProcessingException("Can't get movie with id" + id + " from DB");
         }
     }
 }
