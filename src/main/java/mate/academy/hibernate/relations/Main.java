@@ -20,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        int i = 0;
         Country usa = new Country("USA");
         CountryService countryService =
                 new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
