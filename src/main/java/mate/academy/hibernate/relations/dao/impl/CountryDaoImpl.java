@@ -22,17 +22,17 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
+            return country;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
-                throw new DataProcessingException("Can't get the country: " + country, e);
             }
+            throw new DataProcessingException("Can't get the country: " + country, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return country;
     }
     
     @Override
@@ -42,7 +42,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             country = session.get(Country.class, id);
             return Optional.ofNullable(country);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get the country bu ID: " + id, e);
+            throw new DataProcessingException("Can't add the country bu ID: " + id, e);
         }
     }
 }
