@@ -1,6 +1,7 @@
 package mate.academy.hibernate.relations.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
     private static SessionFactory instance = initSessionFactory();
@@ -9,7 +10,7 @@ public class HibernateUtil {
     }
     
     private static SessionFactory initSessionFactory() {
-        return null;
+        return new Configuration().configure().buildSessionFactory();
     }
     
     public static SessionFactory getSessionFactory() {
