@@ -7,10 +7,6 @@ import mate.academy.hibernate.relations.service.MovieService;
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
-    public MovieServiceImpl(MovieDao movieDao) {
-        this.movieDao = movieDao;
-    }
-
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
@@ -18,6 +14,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow();
+        return movieDao.get(id).orElseThrow(
+                () -> new RuntimeException("Can`t get movie by id " + id));
     }
 }
