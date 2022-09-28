@@ -5,7 +5,7 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
@@ -18,6 +18,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow(() ->
+                new RuntimeException("There is not movie with Id=" + id));
     }
 }
