@@ -32,7 +32,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-        return null;
+        return actor;
     }
 
     @Override
