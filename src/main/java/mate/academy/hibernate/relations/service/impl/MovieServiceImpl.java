@@ -1,22 +1,23 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-    private MovieService movieService;
+    private MovieDao movieDao;
 
-    public MovieServiceImpl(MovieService movieService) {
-        this.movieService = movieService;
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
     public Movie add(Movie movie) {
-        return movieService.add(movie);
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return movieService.get(id);
+        return movieDao.get(id).orElseThrow();
     }
 }
