@@ -18,6 +18,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).get();
+        return countryDao.get(id).orElseThrow(() ->
+                new RuntimeException("No country was found by index " + id));
     }
 }

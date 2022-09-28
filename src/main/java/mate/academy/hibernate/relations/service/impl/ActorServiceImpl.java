@@ -18,6 +18,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).get();
+        return actorDao.get(id).orElseThrow(() ->
+                new RuntimeException("No actor was found by index " + id));
     }
 }
