@@ -4,8 +4,6 @@ import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
-import java.util.zip.DataFormatException;
-
 public class ActorServiceImpl implements ActorService {
     private final ActorDao actorDao;
 
