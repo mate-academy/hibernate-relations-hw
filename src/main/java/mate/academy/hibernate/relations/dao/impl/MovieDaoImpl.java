@@ -28,7 +28,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't add movie: " + movie
-                    + " to Data Base.", e);
+                    + " to database.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie by id " + id
-                    + " from Data Base.", e);
+                    + " from database.", e);
         }
     }
 }

@@ -28,7 +28,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can't add country: " + country
-                    + " to Data Base.", e);
+                    + " to database.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             return Optional.ofNullable(country);
         } catch (Exception e) {
             throw new DataProcessingException("Can't get country by id " + id
-                    + " from Data Base.", e);
+                    + " from database.", e);
         }
     }
 }
