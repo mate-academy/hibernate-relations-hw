@@ -36,10 +36,14 @@ public class Main {
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
+        Movie xxx = new Movie("XXX");
         fastAndFurious.setActors(List.of(vinDiesel));
+        xxx.setActors(List.of(vinDiesel));
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
+        movieService.add(xxx);
         System.out.println(movieService.get(fastAndFurious.getId()));
+        System.out.println(movieService.get(xxx.getId()));
     }
 }
