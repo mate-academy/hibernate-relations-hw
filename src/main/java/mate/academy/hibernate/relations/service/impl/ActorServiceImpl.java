@@ -1,24 +1,23 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
-    private AbstractDao abstractDao;
+    private ActorDao actorDao;
 
-    public ActorServiceImpl(AbstractDao abstractDao) {
-        this.abstractDao = abstractDao;
+    public ActorServiceImpl(ActorDao actorDao) {
+        this.actorDao = actorDao;
     }
 
     @Override
     public Actor add(Actor actor) {
-        return ((ActorDao) abstractDao).add(actor);
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return ((ActorDao) abstractDao).get(id).get();
+        return actorDao.get(id).get();
     }
 }
