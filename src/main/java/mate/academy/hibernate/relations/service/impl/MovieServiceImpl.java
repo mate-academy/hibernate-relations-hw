@@ -5,20 +5,20 @@ import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
-public class MovieServiceImpl extends AbstractService implements MovieService {
+public class MovieServiceImpl implements MovieService {
+    private AbstractDao abstractDao;
+
     public MovieServiceImpl(AbstractDao abstractDao) {
-        super(abstractDao);
+        this.abstractDao = abstractDao;
     }
 
     @Override
     public Movie add(Movie movie) {
-        MovieDao movieDao = (MovieDao) abstractDao;
-        return movieDao.add(movie);
+        return ((MovieDao) abstractDao).add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        MovieDao movieDao = (MovieDao) abstractDao;
-        return movieDao.get(id).get();
+        return ((MovieDao) abstractDao).get(id).get();
     }
 }

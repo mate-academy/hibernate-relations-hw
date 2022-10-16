@@ -5,20 +5,20 @@ import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
-public class CountryServiceImpl extends AbstractService implements CountryService {
+public class CountryServiceImpl implements CountryService {
+    private AbstractDao abstractDao;
+
     public CountryServiceImpl(AbstractDao abstractDao) {
-        super(abstractDao);
+        this.abstractDao = abstractDao;
     }
 
     @Override
     public Country add(Country country) {
-        CountryDao countryDao = (CountryDao) abstractDao;
-        return countryDao.add(country);
+        return ((CountryDao) abstractDao).add(country);
     }
 
     @Override
     public Country get(Long id) {
-        CountryDao countryDao = (CountryDao) abstractDao;
-        return countryDao.get(id).get();
+        return ((CountryDao) abstractDao).get(id).get();
     }
 }
