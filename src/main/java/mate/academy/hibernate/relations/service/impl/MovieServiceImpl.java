@@ -13,13 +13,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-
         return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-
         return movieDao.get(id).orElseThrow(() ->
                 new RuntimeException("Movie not found by index " + id));
     }
