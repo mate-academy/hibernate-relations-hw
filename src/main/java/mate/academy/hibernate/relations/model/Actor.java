@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import java.util.Objects;
 
 @Entity
 public class Actor implements Cloneable {
@@ -45,24 +44,6 @@ public class Actor implements Cloneable {
 
     public void setCountry(Country country) {
         this.country = country;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Actor actor = (Actor) o;
-        return Objects.equals(id, actor.id) && Objects.equals(name, actor.name)
-                && Objects.equals(country, actor.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, country);
     }
 
     @Override

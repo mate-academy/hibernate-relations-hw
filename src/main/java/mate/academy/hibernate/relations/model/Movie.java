@@ -10,7 +10,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Movie implements Cloneable {
@@ -53,24 +52,6 @@ public class Movie implements Cloneable {
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title)
-                && Objects.equals(actors, movie.actors);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, actors);
     }
 
     @Override
