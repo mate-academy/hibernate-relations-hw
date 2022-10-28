@@ -1,17 +1,27 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.impl.AbstractDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
+import org.hibernate.SessionFactory;
 
 
-public class ActorServiceImpl implements ActorService {
+public class ActorServiceImpl extends AbstractDao implements ActorService {
+    ActorDao actorDao;
+
+    public ActorServiceImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public Actor add(Actor actor) {
-        return null;
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return null;
+        return actorDao.get(id).orElseThrow(() -> new DataProcessingException("Can't get actor by ID " + id));
     }
 }
