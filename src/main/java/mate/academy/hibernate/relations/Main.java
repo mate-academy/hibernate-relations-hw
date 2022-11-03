@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.MovieDao;
@@ -22,21 +21,26 @@ import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(sessionFactory); // TODO: initialize this instance
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        CountryService countryService =
+                new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(sessionFactory); // TODO: initialize this instance
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorService actorService =
+                new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = new MovieServiceImpl(sessionFactory); // TODO: initialize this instance
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+        MovieService movieService =
+                new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }

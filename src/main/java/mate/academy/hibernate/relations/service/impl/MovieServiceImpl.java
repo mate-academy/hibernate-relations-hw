@@ -1,17 +1,15 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import org.hibernate.SessionFactory;
 
-public class MovieServiceImpl extends AbstractDao implements MovieService {
-    MovieDao movieDao;
+public class MovieServiceImpl implements MovieService {
+    private MovieDao movieDao;
 
-    public MovieServiceImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
@@ -21,6 +19,7 @@ public class MovieServiceImpl extends AbstractDao implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() -> new DataProcessingException("Can't get movie by ID " + id));
+        return movieDao.get(id).orElseThrow(() ->
+                new DataProcessingException("Can't get movie by ID " + id));
     }
 }
