@@ -18,7 +18,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = super.factory.openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
