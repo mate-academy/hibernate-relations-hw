@@ -2,6 +2,7 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
@@ -17,6 +18,9 @@ public class CountryDaoImpl extends GenericDaoImpl<Country> implements CountryDa
         try (Session session = factory.openSession()) {
             Country country = session.get(Country.class, id);
             return Optional.ofNullable(country);
+        } catch (Exception e) {
+            throw new DataProcessingException(
+                    "Failed to get Country from db by id " + id, e);
         }
     }
 }
