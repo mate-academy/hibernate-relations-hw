@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public abstract class GenericDaoImpl<T> extends AbstractDao implements GenericDao<T>{
+public abstract class GenericDaoImpl<T> extends AbstractDao implements GenericDao<T> {
     protected GenericDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
