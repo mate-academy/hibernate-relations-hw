@@ -18,6 +18,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow();
+        return movieDao.get(id).orElseThrow(() ->
+                new RuntimeException("Can't get actor by id: " + id));
     }
 }
