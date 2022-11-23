@@ -19,6 +19,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(() ->
-                new RuntimeException("No such country in DB"));
+                new RuntimeException("No such country in DB with id: " + id));
     }
 }
