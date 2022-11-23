@@ -1,11 +1,13 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Movie implements Cloneable {
     private Long id;
     private String title;
+    @OneToMany
     private List<Actor> actors;
 
     public Movie() {
