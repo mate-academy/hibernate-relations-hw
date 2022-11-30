@@ -1,15 +1,17 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.NoSuchElementException;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
+import org.hibernate.SessionFactory;
 
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
-    public CountryServiceImpl(CountryDao countryDao) {
-        this.countryDao = countryDao;
+    public CountryServiceImpl(SessionFactory sessionFactory) {
+        countryDao = new CountryDaoImpl(sessionFactory);
     }
 
     @Override
@@ -20,6 +22,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(() ->
-                new NoSuchElementException("Can't find country by id " + id));
+                new EntityNotFoundException("Can't find country by id " + id));
     }
 }
