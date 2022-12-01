@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import javax.persistence.EntityExistsException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
@@ -21,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         return countryDao.get(id)
                 .orElseThrow(() ->
-                        new EntityExistsException("Can't get a country from DB with id " + id));
+                        new RuntimeException("Can't get a country from DB with id " + id));
     }
 }

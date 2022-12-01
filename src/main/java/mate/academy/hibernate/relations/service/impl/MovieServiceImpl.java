@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import javax.persistence.EntityExistsException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
@@ -21,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         return movieDao.get(id)
                 .orElseThrow(() ->
-                        new EntityExistsException("Can't get a movie from DB with id " + id));
+                        new RuntimeException("Can't get a movie from DB with id " + id));
     }
 }
