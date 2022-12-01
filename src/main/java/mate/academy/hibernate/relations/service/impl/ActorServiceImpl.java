@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.exception.ActorNotFoundException;
+import mate.academy.hibernate.relations.exception.EntityNotFoundException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(()
-                -> new ActorNotFoundException("Couldn't get actor from database by id " + id));
+                -> new EntityNotFoundException("Couldn't get actor from database by id " + id));
     }
 }

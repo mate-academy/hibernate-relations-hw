@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.CountryDao;
-import mate.academy.hibernate.relations.exception.CountryNotFoundException;
+import mate.academy.hibernate.relations.exception.EntityNotFoundException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
@@ -20,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(()
-                -> new CountryNotFoundException("Couldn't get country from database by id " + id));
+                -> new EntityNotFoundException("Couldn't get country from database by id " + id));
     }
 }
