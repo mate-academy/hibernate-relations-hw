@@ -5,7 +5,7 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 
 public interface ActorDao {
-    Actor add(Actor actor) throws DataProcessingException;
+    Actor add(Actor actor);
 
     Optional<Actor> get(Long id);
 }
