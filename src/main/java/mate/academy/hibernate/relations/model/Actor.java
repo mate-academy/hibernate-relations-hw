@@ -1,10 +1,10 @@
 package mate.academy.hibernate.relations.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -15,7 +15,8 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
