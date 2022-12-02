@@ -27,7 +27,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't create actor - " + actor.toString(), e);
+            throw new DataProcessingException("Can't create actor - " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
