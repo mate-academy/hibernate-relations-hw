@@ -6,6 +6,8 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
 
+import java.util.NoSuchElementException;
+
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
@@ -21,6 +23,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(()
-                -> new RuntimeException("No country with such by id " + id));
+                -> new NoSuchElementException("No country with such by id " + id));
     }
 }
