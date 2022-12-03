@@ -10,9 +10,6 @@ import org.hibernate.SessionFactory;
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
-    public MovieServiceImpl() {
-    }
-
     public MovieServiceImpl(SessionFactory sessionFactory) {
         this.movieDao = new MovieDaoImpl(sessionFactory);
     }

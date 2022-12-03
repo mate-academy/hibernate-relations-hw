@@ -10,9 +10,6 @@ import org.hibernate.SessionFactory;
 public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
-    public CountryServiceImpl() {
-    }
-
     public CountryServiceImpl(SessionFactory sessionFactory) {
         this.countryDao = new CountryDaoImpl(sessionFactory);
     }
