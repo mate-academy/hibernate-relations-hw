@@ -26,7 +26,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessException("Transaction with creation country failed");
+            throw new DataProcessException("Transaction failed with creation country "
+                    + country);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,7 +40,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
             Country actor = session.get(Country.class, id);
-            session.close();
             return Optional.ofNullable(actor);
         }
     }

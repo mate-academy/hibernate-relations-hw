@@ -26,7 +26,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessException("Transaction with creation actor failed");
+            throw new DataProcessException("Transaction failed with creation actor "
+                    + actor);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,7 +40,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             Actor actor = session.get(Actor.class, id);
-            session.close();
             return Optional.ofNullable(actor);
         }
     }
