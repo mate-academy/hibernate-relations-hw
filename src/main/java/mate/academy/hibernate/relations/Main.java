@@ -1,6 +1,12 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
@@ -19,20 +25,23 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         CountryService countryService =
-                new CountryServiceImpl(sessionFactory); // TODO: initialize this instance
+                new CountryServiceImpl(countryDao); // TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         ActorService actorService =
-                new ActorServiceImpl(sessionFactory); // TODO: initialize this instance
+                new ActorServiceImpl(actorDao); // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService =
-                new MovieServiceImpl(sessionFactory); // TODO: initialize this instance
+                new MovieServiceImpl(movieDao); // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
