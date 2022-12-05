@@ -1,13 +1,11 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.NoSuchElementException;
+import javax.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
-
-import javax.persistence.EntityNotFoundException;
 
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
