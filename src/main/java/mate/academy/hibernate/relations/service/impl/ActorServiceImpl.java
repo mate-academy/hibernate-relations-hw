@@ -6,6 +6,8 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityNotFoundException;
+
 public class ActorServiceImpl implements ActorService {
     private final ActorDaoImpl actorDao;
 
@@ -21,6 +23,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(()
-                -> new NoSuchElementException("No actor with such by id " + id));
+                -> new EntityNotFoundException("No actor with such id " + id));
     }
 }
