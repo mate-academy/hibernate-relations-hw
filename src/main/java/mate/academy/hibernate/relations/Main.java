@@ -33,7 +33,7 @@ public class Main {
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
-        ActorService actorService = new ActorServiceImpl(actorDao); 
+        ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
