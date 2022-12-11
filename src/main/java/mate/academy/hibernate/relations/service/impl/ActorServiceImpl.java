@@ -11,7 +11,6 @@ public class ActorServiceImpl implements ActorService {
 
     public ActorServiceImpl(SessionFactory sessionFactory) {
         this.actorDao = new ActorDaoImpl(sessionFactory);
-
     }
 
     @Override
