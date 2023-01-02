@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
 
 public class CountryServiceImpl implements CountryService {
-    final private CountryDao countryDao;
+    private final CountryDao countryDao;
 
     public CountryServiceImpl(SessionFactory sessionFactory) {
         countryDao = new CountryDaoImpl(sessionFactory);
