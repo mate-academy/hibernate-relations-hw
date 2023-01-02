@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.service.ActorService;
 import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
-    private ActorDao actorDao;
+    final private ActorDao actorDao;
 
     public ActorServiceImpl(SessionFactory sessionFactory) {
         actorDao = new ActorDaoImpl(sessionFactory);
@@ -15,11 +15,11 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-        return null;
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return null;
+        return actorDao.get(id).orElse(null);
     }
 }
