@@ -1,11 +1,28 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
     public Movie() {
@@ -42,15 +59,15 @@ public class Movie implements Cloneable {
     @Override
     public Movie clone() {
         try {
-            Movie movie = (Movie) super.clone();
-            if (movie.getActors() != null) {
-                List<Actor> actors = new ArrayList<>();
-                for (Actor actor : movie.getActors()) {
-                    actors.add(actor.clone());
+            Movie newMovie = (Movie) super.clone();
+            if (actors != null) {
+                List<Actor> newList = new ArrayList<>();
+                for (Actor actor: actors) {
+                    newList.add(actor.clone());
                 }
-                movie.setActors(actors);
+                newMovie.setActors(new ArrayList<>(actors));
             }
-            return movie;
+            return newMovie;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
@@ -58,9 +75,8 @@ public class Movie implements Cloneable {
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + '}';
+        return "Movie{" + "id=" + id
+                + ", title=\'" + title + "\'"
+                + ", actors=" + actors + "}";
     }
 }

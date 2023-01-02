@@ -1,8 +1,24 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
@@ -39,11 +55,11 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor actor = (Actor) super.clone();
+            Actor newActor = (Actor) super.clone();
             if (country != null) {
-                actor.setCountry(country.clone());
+                newActor.setCountry(country.clone());
             }
-            return actor;
+            return newActor;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
@@ -51,10 +67,8 @@ public class Actor implements Cloneable {
 
     @Override
     public String toString() {
-        return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+        return "Actor{" + "id=" + id
+                + ", name=\'" + name + "\'"
+                + ", country=" + country + "}";
     }
 }
