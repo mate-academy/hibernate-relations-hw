@@ -18,6 +18,7 @@ public class Country implements Cloneable {
     public Country(String name) {
         this.name = name;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {

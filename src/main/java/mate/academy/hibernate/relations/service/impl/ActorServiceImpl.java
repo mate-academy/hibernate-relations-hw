@@ -8,9 +8,11 @@ import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
     private final ActorDao actorDao;
+
     public ActorServiceImpl(SessionFactory factory) {
         this.actorDao = new ActorDaoImpl(factory);
     }
+
     @Override
     public Actor add(Actor actor) {
         return actorDao.add(actor);

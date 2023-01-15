@@ -12,6 +12,7 @@ public class CountryServiceImpl implements CountryService {
     public CountryServiceImpl(SessionFactory factory) {
         this.countryDao = new CountryDaoImpl(factory);
     }
+
     @Override
     public Country add(Country country) {
         return countryDao.add(country);

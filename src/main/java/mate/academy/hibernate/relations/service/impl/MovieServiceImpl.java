@@ -12,6 +12,7 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(SessionFactory factory) {
         this.movieDao = new MovieDaoImpl(factory);
     }
+
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
