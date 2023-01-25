@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add actor " + actor, e );
+            throw new DataProcessingException("Can't add actor " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,7 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         Actor actor = null;
-        try (Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             actor = session.get(Actor.class, id);
         } catch (Exception e) {
             throw new DataProcessingException("Can't get actor by id " + id, e);
