@@ -8,9 +8,11 @@ public class HibernateUtil {
 
     private HibernateUtil() {
     }
+
     private static SessionFactory initSessionFactory() {
         return new Configuration().configure().buildSessionFactory();
     }
+
     public static SessionFactory getSessionFactory() {
         return instance;
     }
