@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +40,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Optional<Actor> actor= Optional.ofNullable(session.get(Actor.class, id));
+        Optional<Actor> actor = Optional.ofNullable(session.get(Actor.class, id));
         session.close();
         return actor;
     }
