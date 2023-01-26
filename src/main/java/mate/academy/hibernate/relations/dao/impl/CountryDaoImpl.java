@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import java.util.Objects;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -18,18 +19,19 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Country add(Country country) {
         Session session = null;
         Transaction transaction = null;
+
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            if (Objects.nonNull(transaction)) {
                 transaction.rollback();
-                throw new DataProcessingException(String.format("Can't save %s to DB", country), e);
             }
+            throw new DataProcessingException(String.format("Can't add %s to DB", country), e);
         } finally {
-            if (session != null) {
+            if (Objects.nonNull(session)) {
                 session.close();
             }
         }
@@ -38,10 +40,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        try (Session session = factory.openSession()) {
-            return Optional.ofNullable(session.get(Country.class, id));
+        Country country = null;
+        try (Session session = factory.openSession()){
+            country = session.get(Country.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get country from DB by id: " + id, e);
+            throw new DataProcessingException("Can't get country by id " + id, e);
         }
+        return Optional.ofNullable(country);
     }
 }
