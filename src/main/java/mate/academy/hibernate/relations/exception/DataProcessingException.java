@@ -1,4 +1,4 @@
-package mate.academy.hibernate.relations.dao.exception;
+package mate.academy.hibernate.relations.exception;
 
 public class DataProcessingException extends RuntimeException {
     public DataProcessingException(String message) {
