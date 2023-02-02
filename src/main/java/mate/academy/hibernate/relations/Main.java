@@ -15,6 +15,7 @@ public class Main {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+
         Country usa = new Country("USA");
         CountryService countryService = null; // TODO: initialize this instance
         countryService.add(usa);
