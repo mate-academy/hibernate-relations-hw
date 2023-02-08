@@ -40,7 +40,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             Actor actor = session.get(Actor.class, id);
             return Optional.ofNullable(actor);
-        } catch (DataProcessingException e) {
+        } catch (Exception e) {
             throw new DataProcessingException("Can't get actor with id=" + id + " from DB", e);
         }
     }
