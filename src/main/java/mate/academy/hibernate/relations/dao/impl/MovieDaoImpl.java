@@ -4,14 +4,11 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
-    private final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -22,7 +19,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Transaction transaction = null;
 
         try {
-            session = sessionFactory.openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -41,7 +38,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get movie by id: " + id, e);
