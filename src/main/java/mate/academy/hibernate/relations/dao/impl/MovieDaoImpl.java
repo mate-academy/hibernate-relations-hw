@@ -20,7 +20,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.persist(movie);
+            session.save(movie);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
