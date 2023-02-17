@@ -10,7 +10,7 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
-        return null;
+        return instance;
     }
 
     private static SessionFactory initSessionFactory() {
