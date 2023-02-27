@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
-    private SessionFactory sessionFactory = super.factory;
+    private SessionFactory sessionFactory = this.factory;
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);

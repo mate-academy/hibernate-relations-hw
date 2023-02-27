@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private SessionFactory sessionFactory = super.factory;
+    private SessionFactory sessionFactory = this.factory;
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
