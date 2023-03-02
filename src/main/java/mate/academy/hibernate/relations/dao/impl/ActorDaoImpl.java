@@ -23,7 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
