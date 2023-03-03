@@ -41,7 +41,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (HibernateException e) {
-            throw new DataProcessingException("Can not get actor by id" + id,e);
+            throw new DataProcessingException("Can not get actor by id" + id, e);
         }
     }
 }
