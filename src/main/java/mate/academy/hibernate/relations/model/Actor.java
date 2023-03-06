@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -17,7 +18,9 @@ public class Actor implements Cloneable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "country_id")
+    @JoinTable(name = "actors_countries",
+            joinColumns = @JoinColumn(name = "actor_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id"))
     private Country country;
 
     public Actor() {
