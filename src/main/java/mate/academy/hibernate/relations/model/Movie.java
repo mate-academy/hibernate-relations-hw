@@ -15,7 +15,7 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Actor> actors;
 
     public Movie() {
@@ -71,7 +71,7 @@ public class Movie implements Cloneable {
         return "Movie{"
                 + "id=" + id
                 + ", title='" + title + '\''
-                + ", actors=" + actors
+                + ", actors='" + actors + '\''
                 + '}';
     }
 }
