@@ -21,9 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        if (movieDao.get(id).isEmpty()) {
-            throw new NoSuchElementException("Couldn't find movie with id = " + id);
-        }
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Couldn't find movie with id = " + id));
     }
 }

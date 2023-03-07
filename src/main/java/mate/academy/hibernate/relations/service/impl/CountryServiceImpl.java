@@ -21,9 +21,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        if (countryDao.get(id).isEmpty()) {
-            throw new NoSuchElementException("Couldn't find country with id = " + id);
-        }
-        return countryDao.get(id).get();
+        return countryDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Couldn't find country with id = " + id));
     }
 }
