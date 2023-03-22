@@ -12,7 +12,6 @@
         <jdk.version>11</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <skipTests>true</skipTests>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
@@ -111,9 +110,6 @@
                             <goals>
                                 <goal>testCompile</goal>
                             </goals>
-                            <configuration>
-                                <skip>${skipTests}</skip>
-                            </configuration>
                         </execution>
                     </executions>
                     <configuration>

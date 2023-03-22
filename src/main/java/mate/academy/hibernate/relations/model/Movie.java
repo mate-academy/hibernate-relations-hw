@@ -76,9 +76,9 @@ public class Movie implements Cloneable {
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "id=" + id
+        return "Movie{" + "id=" + id
                 + ", title='" + title + '\''
+                + ", actors=" + actors
                 + '}';
     }
 }
