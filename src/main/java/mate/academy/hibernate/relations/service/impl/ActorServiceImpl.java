@@ -22,7 +22,7 @@ public class ActorServiceImpl implements ActorService {
         if (actor.isPresent()) {
             return actor.get();
         }
-        throw new DataProcessingException("can't id author",
+        throw new DataProcessingException("Can't get actor by id" + id,
                 new RuntimeException());
     }
 }

@@ -22,7 +22,7 @@ public class CountryServiceImpl implements CountryService {
         if (country.isPresent()) {
             return country.get();
         }
-        throw new DataProcessingException("can't id author",
+        throw new DataProcessingException("Can't get country by id" + id,
                 new RuntimeException());
     }
 }
