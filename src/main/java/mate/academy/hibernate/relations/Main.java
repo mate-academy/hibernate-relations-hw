@@ -7,9 +7,6 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
-import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
-import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
-import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -20,19 +17,19 @@ public class Main {
 
         Country usa = new Country("USA");
         CountryService countryService =
-                new CountryServiceImpl();// TODO: initialize this instance
+                (CountryService) sessionFactory;// TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService =
-                new ActorServiceImpl(); // TODO: initialize this instance
+                (ActorService) sessionFactory;// TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService =
-                new MovieServiceImpl(); // TODO: initialize this instance
+                (MovieService) sessionFactory;// TODO: initialize this instance
 
     }
 }
