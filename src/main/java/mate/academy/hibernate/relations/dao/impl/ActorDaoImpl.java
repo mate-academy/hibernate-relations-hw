@@ -24,7 +24,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             session.save(actor);
             transaction.commit();
             return actor;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -41,7 +41,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (HibernateException e) {
-            throw new RuntimeException("Can't get actor by id:" + id);
+            throw new DataProcessingException("Can't get actor by id:" + id);
         }
     }
 }
