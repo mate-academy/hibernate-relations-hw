@@ -67,7 +67,7 @@ public class Actor implements Cloneable {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country=" + country
+                + ", country='" + country + '\''
                 + '}';
     }
 }
