@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
@@ -28,7 +27,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Exception while trying to save actor " + actor + " to DB.", e);
+            throw new DataProcessingException(
+                    "Exception while trying to save actor " + actor + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.of(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Exception while trying to get actor from DB with id = " + id, e);
+            throw new DataProcessingException(
+                    "Exception while trying to get actor from DB with id = " + id, e);
         }
     }
 }
