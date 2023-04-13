@@ -16,7 +16,7 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Country country;
 
     public Actor() {
@@ -43,9 +43,6 @@ public class Actor implements Cloneable {
     }
 
     public Country getCountry() {
-        Country country = new Country();
-        country.setId(1L);
-        country.setName("USA");
         return country;
     }
 
@@ -71,6 +68,7 @@ public class Actor implements Cloneable {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", country='" + country + '\''
                 + '}';
     }
 }
