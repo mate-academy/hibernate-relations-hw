@@ -6,7 +6,6 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
-
     private CountryDao countryDao;
 
     public CountryServiceImpl(CountryDao countryDao) {
