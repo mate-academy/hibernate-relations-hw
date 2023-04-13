@@ -3,16 +3,13 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
+import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private static final String EXCEPTION_MESSAGE
-            = "Exception while trying to persist entity to DB.";
-    private static final String EXCEPTION_GET
-            = "Exception while trying to get entity from DB with id = ";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -31,7 +28,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(EXCEPTION_MESSAGE, e);
+            throw new DataProcessingException("Exception while trying to save country " + country + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,24 +39,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Transaction transaction = null;
-        Country country = null;
-        Session session = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            country = session.get(Country.class, id);
-            transaction.commit();
+        try (Session session = factory.openSession()) {
+            return Optional.of(session.get(Country.class, id));
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException(EXCEPTION_GET + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Exception while trying to get country from DB with id = " + id, e);
         }
-        return Optional.ofNullable(country);
     }
 }

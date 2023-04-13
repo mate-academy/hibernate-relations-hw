@@ -3,17 +3,13 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
+import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
-    private static final String EXCEPTION_MESSAGE
-            = "Exception while trying to persist entity to DB.";
-
-    private static final String EXCEPTION_GET
-            = "Exception while trying to get entity from DB with id = ";
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -32,7 +28,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(EXCEPTION_MESSAGE, e);
+            throw new DataProcessingException("Exception while trying to save movie " + movie + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,24 +39,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Transaction transaction = null;
-        Movie movie = null;
-        Session session = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            movie = session.get(Movie.class, id);
-            transaction.commit();
+        try (Session session = factory.openSession()) {
+            return Optional.of(session.get(Movie.class, id));
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException(EXCEPTION_GET + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Exception while trying to get movie from DB with id = " + id, e);
         }
-        return Optional.ofNullable(movie);
     }
 }
