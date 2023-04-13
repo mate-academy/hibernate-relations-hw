@@ -21,15 +21,6 @@ public class Actor implements Cloneable {
     public Actor() {
     }
 
-    public Actor(String name, Country country) {
-        this.name = name;
-        this.country = country;
-    }
-
-    public Actor(String name) {
-        this.name = name;
-    }
-
     public Long getId() {
         return id;
     }
