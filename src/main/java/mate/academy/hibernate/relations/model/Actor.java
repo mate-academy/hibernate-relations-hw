@@ -11,12 +11,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "actors")
 public class Actor implements Cloneable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Country country;
 
     public Actor() {
