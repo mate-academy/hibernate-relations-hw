@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "movies")
 public class Movie implements Cloneable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -79,7 +78,6 @@ public class Movie implements Cloneable {
         return "Movie{"
                 + "id=" + id
                 + ", title='" + title + '\''
-                + ", actors='" + actors + '\''
                 + '}';
     }
 }
