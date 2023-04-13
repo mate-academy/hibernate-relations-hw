@@ -9,8 +9,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
-    private static final String EXCEPTION_MESSAGE
+    private static final String EXCEPTION_ADD
             = "Exception while trying to persist entity to DB.";
+
+    private static final String EXCEPTION_GET
+            = "Exception while trying to get entity from DB with id = ";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -29,7 +32,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(EXCEPTION_MESSAGE, e);
+            throw new DataProcessingException(EXCEPTION_ADD, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -49,10 +52,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             actor = session.get(Actor.class, id);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException(EXCEPTION_GET + id, e);
         } finally {
             if (session != null) {
                 session.close();

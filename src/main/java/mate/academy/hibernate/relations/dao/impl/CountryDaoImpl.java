@@ -11,6 +11,8 @@ import org.hibernate.Transaction;
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     private static final String EXCEPTION_MESSAGE
             = "Exception while trying to persist entity to DB.";
+    private static final String EXCEPTION_GET
+            = "Exception while trying to get entity from DB with id = ";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -49,10 +51,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             country = session.get(Country.class, id);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException(EXCEPTION_GET + id, e);
         } finally {
             if (session != null) {
                 session.close();

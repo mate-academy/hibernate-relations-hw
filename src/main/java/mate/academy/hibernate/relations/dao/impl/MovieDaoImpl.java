@@ -12,6 +12,9 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     private static final String EXCEPTION_MESSAGE
             = "Exception while trying to persist entity to DB.";
 
+    private static final String EXCEPTION_GET
+            = "Exception while trying to get entity from DB with id = ";
+
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -49,10 +52,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             movie = session.get(Movie.class, id);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
+            throw new DataProcessingException(EXCEPTION_GET + id, e);
         } finally {
             if (session != null) {
                 session.close();
