@@ -15,13 +15,11 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-
         return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-
         return actorDao.get(id).orElseThrow(() ->
                 new NoSuchElementException("Can't get actor by id " + id));
     }
