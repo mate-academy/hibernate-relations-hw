@@ -20,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return dao.get(id).get();
+        return dao.get(id).orElseThrow();
     }
 }
