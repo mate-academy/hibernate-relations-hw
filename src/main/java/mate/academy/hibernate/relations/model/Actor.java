@@ -20,6 +20,7 @@ public class Actor implements Cloneable {
     public Actor() {
     }
 
+    //1
     public Actor(String name) {
         this.name = name;
     }
