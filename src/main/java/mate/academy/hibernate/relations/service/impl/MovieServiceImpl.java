@@ -1,12 +1,16 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.time.DateTimeException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import java.time.DateTimeException;
 
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
+
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
+    }
 
     @Override
     public Movie add(Movie movie) {
