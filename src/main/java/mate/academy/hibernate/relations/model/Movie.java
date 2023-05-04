@@ -12,7 +12,7 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToMany
+    @ManyToMany
     private List<Actor> actors;
 
     public Movie() {
