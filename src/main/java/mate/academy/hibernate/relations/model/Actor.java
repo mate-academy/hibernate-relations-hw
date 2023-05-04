@@ -9,6 +9,7 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToOne
     private Country country;
 
     public Actor() {
