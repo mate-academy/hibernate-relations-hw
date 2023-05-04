@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.time.DateTimeException;
 import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new DateTimeException("Could not get actor by id: " + id));
+                new DataProcessingException("Could not get actor by id: " + id));
     }
 }
