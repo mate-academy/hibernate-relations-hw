@@ -17,11 +17,11 @@ public class Actor implements Cloneable {
     @OneToOne
     private Country country;
 
-    public Actor() {
-    }
-
     public Actor(String name) {
         this.name = name;
+    }
+
+    public Actor() {
     }
 
     public Long getId() {

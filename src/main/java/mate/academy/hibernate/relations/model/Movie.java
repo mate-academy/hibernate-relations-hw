@@ -21,11 +21,11 @@ public class Movie implements Cloneable {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Actor> actors;
 
-    public Movie() {
-    }
-
     public Movie(String title) {
         this.title = title;
+    }
+
+    public Movie() {
     }
 
     public Long getId() {
