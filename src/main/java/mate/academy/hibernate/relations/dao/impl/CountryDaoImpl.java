@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -28,7 +27,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save country to the database", e);
+            throw new DataProcessingException("Can't save country to the database: " + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +40,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Unable to get country by id " + id, e);
+            throw new DataProcessingException("Unable to get country from the db by id: " + id, e);
         }
     }
 }

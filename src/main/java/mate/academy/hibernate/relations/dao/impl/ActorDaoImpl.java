@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
-
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -28,7 +27,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save actor to the database", e);
+            throw new DataProcessingException("Can't save actor to the database: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +40,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Unable to get actor by id " + id, e);
+            throw new DataProcessingException("Unable to get actor from the db by id: " + id, e);
         }
     }
 }

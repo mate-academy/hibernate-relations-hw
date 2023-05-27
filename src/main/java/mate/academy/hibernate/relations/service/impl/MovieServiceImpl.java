@@ -5,7 +5,6 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-
     private MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
