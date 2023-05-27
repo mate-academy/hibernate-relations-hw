@@ -23,11 +23,11 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.persist(country);
             transaction.commit();
             return country;
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can not add a country to DB! ", e);
+            throw new DataProcessingException("Can not add a country to DB: " + country, e);
         } finally {
             if (session != null) {
                 session.close();
