@@ -1,7 +1,7 @@
-package mate.academy.relations.dao;
+package mate.academy.hibernate.relations.dao;
 
 import java.util.Optional;
-import mate.academy.relations.model.Country;
+import mate.academy.hibernate.relations.model.Country;
 
 public interface CountryDao {
     Country add(Country country);

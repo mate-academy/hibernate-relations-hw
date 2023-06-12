@@ -3,9 +3,9 @@ package mate.academy.dao.impl;
 import java.util.Optional;
 
 import mate.academy.dao.AbstractTest;
-import mate.academy.relations.dao.CountryDao;
-import mate.academy.relations.model.Country;
-import mate.academy.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,16 +1,16 @@
 package mate.academy;
 
 import java.util.List;
-import mate.academy.relations.model.Actor;
-import mate.academy.relations.model.Country;
-import mate.academy.relations.model.Movie;
-import mate.academy.relations.service.ActorService;
-import mate.academy.relations.service.CountryService;
-import mate.academy.relations.service.MovieService;
-import mate.academy.relations.service.impl.ActorServiceImpl;
-import mate.academy.relations.service.impl.CountryServiceImpl;
-import mate.academy.relations.service.impl.MovieServiceImpl;
-import mate.academy.relations.util.HibernateUtil;
+import mate.academy.hibernate.relations.model.Actor;
+import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.model.Movie;
+import mate.academy.hibernate.relations.service.ActorService;
+import mate.academy.hibernate.relations.service.CountryService;
+import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class Main {

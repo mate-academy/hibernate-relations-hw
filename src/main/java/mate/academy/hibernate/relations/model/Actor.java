@@ -1,23 +1,26 @@
-package mate.academy.relations.model;
+package mate.academy.hibernate.relations.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "countries")
-public class Country implements Cloneable {
+@Table(name = "actors")
+public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToOne
+    private Country country;
 
-    public Country() {
+    public Actor() {
     }
 
-    public Country(String name) {
+    public Actor(String name) {
         this.name = name;
     }
 
@@ -37,10 +40,22 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     @Override
-    public Country clone() {
+    public Actor clone() {
         try {
-            return (Country) super.clone();
+            Actor actor = (Actor) super.clone();
+            if (country != null) {
+                actor.setCountry(country.clone());
+            }
+            return actor;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
@@ -48,9 +63,10 @@ public class Country implements Cloneable {
 
     @Override
     public String toString() {
-        return "Country{"
+        return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", country='" + country + '\''
                 + '}';
     }
 }

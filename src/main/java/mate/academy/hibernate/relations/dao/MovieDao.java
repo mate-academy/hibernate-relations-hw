@@ -1,7 +1,7 @@
-package mate.academy.relations.dao;
+package mate.academy.hibernate.relations.dao;
 
 import java.util.Optional;
-import mate.academy.relations.model.Movie;
+import mate.academy.hibernate.relations.model.Movie;
 
 public interface MovieDao {
     Movie add(Movie movie);

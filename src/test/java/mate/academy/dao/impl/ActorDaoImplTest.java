@@ -3,10 +3,10 @@ package mate.academy.dao.impl;
 import java.util.Optional;
 
 import mate.academy.dao.AbstractTest;
-import mate.academy.relations.dao.ActorDao;
-import mate.academy.relations.model.Actor;
-import mate.academy.relations.model.Country;
-import mate.academy.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.model.Actor;
+import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

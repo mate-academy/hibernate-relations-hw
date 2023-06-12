@@ -1,7 +1,7 @@
-package mate.academy.relations.dao;
+package mate.academy.hibernate.relations.dao;
 
 import java.util.Optional;
-import mate.academy.relations.model.Actor;
+import mate.academy.hibernate.relations.model.Actor;
 
 public interface ActorDao {
     Actor add(Actor actor);

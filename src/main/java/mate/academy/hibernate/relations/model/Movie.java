@@ -1,4 +1,4 @@
-package mate.academy.relations.model;
+package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;

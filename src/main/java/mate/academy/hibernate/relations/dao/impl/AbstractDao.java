@@ -1,4 +1,4 @@
-package mate.academy.relations.dao.impl;
+package mate.academy.hibernate.relations.dao.impl;
 
 import org.hibernate.SessionFactory;
 

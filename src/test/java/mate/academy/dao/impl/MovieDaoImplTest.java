@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import mate.academy.dao.AbstractTest;
-import mate.academy.relations.dao.ActorDao;
-import mate.academy.relations.dao.CountryDao;
-import mate.academy.relations.dao.MovieDao;
-import mate.academy.relations.model.Actor;
-import mate.academy.relations.model.Country;
-import mate.academy.relations.model.Movie;
-import mate.academy.relations.dao.impl.ActorDaoImpl;
-import mate.academy.relations.dao.impl.CountryDaoImpl;
-import mate.academy.relations.dao.impl.MovieDaoImpl;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.model.Actor;
+import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.model.Movie;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
