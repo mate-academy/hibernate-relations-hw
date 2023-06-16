@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
@@ -23,6 +24,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         Optional<Actor> actor = actorDao.get(id);
         return actor.orElseThrow(() ->
-                new RuntimeException("Can't get an actor: " + actor + " from DB."));
+                new NoSuchElementException("Can't get an actor: " + actor + " from DB."));
     }
 }

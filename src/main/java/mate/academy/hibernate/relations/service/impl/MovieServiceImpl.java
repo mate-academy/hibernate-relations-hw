@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -23,6 +24,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         Optional<Movie> movie = movieDao.get(id);
         return movie.orElseThrow(() ->
-                new RuntimeException("Can't get a movie: " + movie + " from DB."));
+                new NoSuchElementException("Can't get a movie. Id: " + id + " from DB."));
     }
 }
