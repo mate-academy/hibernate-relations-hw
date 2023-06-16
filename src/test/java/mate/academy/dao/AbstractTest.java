@@ -1,4 +1,4 @@
-package mate.academy.hibernate.relations.dao;
+package mate.academy.dao;
 
 import java.util.Arrays;
 import java.util.List;

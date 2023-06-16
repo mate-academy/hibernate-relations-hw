@@ -1,9 +1,11 @@
-package mate.academy.hibernate.relations.dao.impl;
+package mate.academy.dao.impl;
 
 import java.util.Optional;
-import mate.academy.hibernate.relations.dao.AbstractTest;
+
+import mate.academy.dao.AbstractTest;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
