@@ -1,4 +1,4 @@
-package mate.academy.hibernate.relations;
+package mate.academy;
 
 import java.util.List;
 import mate.academy.hibernate.relations.model.Actor;
