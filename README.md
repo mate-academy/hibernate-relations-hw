@@ -15,12 +15,12 @@ And thus in methods `add(Entity entity)` and `get(Long id)` of DAO layer you nee
 instance of the parent AbstractDao class:
 
 ```java
-public Entity add(Entity entity) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-        session = factory.openSession();
-        transaction = ...
+    public Entity add(Entity entity) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = ...
 ```
 
 ### Requirements
