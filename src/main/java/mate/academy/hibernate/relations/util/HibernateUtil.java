@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static final SessionFactory INSTANCE  = initSessionFactory();
+    private static final SessionFactory INSTANCE = initSessionFactory();
 
     private HibernateUtil() {
     }
