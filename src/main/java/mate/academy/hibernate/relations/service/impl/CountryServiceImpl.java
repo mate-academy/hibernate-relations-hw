@@ -7,6 +7,8 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
 
+import java.util.NoSuchElementException;
+
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
@@ -23,6 +25,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         return countryDao.get(id)
                 .orElseThrow(() ->
-                        new DataProcessingException("Can't get country by id" + id));
+                        new NoSuchElementException("Can't get country by id" + id));
     }
 }
