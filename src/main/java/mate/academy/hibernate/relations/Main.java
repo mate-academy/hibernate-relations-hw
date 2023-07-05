@@ -26,7 +26,7 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(sessionFactory);
         actorService.add(vinDiesel);
 
-        Movie fastAndFurious = new Movie("Fast and Furious");
+        Movie fastAndFurious = new Movie("Fast and Furious 11");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(sessionFactory);
         movieService.add(fastAndFurious);
