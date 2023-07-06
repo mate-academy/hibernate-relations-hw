@@ -25,14 +25,12 @@ public class ActorServiceImpl implements ActorService {
         if (country != null && country.getId() == null) {
             countryDao.add(country);
         }
-
         return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElseThrow(() -> {
-            return new DataProcessingException("There is no such an actor with id: " + id);
-        });
+        return actorDao.get(id).orElseThrow(() ->
+                new DataProcessingException("There is no such an actor with id: " + id));
     }
 }

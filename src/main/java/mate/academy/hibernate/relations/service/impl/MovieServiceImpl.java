@@ -30,14 +30,12 @@ public class MovieServiceImpl implements MovieService {
                 }
             }
         }
-
         return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() -> {
-            return new DataProcessingException("There is no such a movie with id: " + id);
-        });
+        return movieDao.get(id).orElseThrow(() ->
+                new DataProcessingException("There is no such a movie with id: " + id));
     }
 }
