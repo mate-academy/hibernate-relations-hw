@@ -27,7 +27,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 transaction.rollback();
             }
             throw new DataProcessingException(
-                    "Could not save actor " + actor + " to DB.");
+                    "Could not save actor " + actor + " to DB.", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException(
-                    "Could not get actor from DB with id = " + id);
+                    "Could not get actor from DB with id = " + id, e);
         }
     }
 }
