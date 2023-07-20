@@ -42,7 +42,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
-            // Error here.add line below ->
             Movie movie = session.get(Movie.class, id);
             if (movie != null) {
                 Hibernate.initialize(movie.getActors());
