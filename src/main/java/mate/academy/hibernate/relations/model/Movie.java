@@ -8,7 +8,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Movie implements Cloneable {
     @JoinTable(name = "movies_actors",
             joinColumns = @JoinColumn(name = "movies_id"),
             inverseJoinColumns = @JoinColumn(name = "actors_id"))
-    private List<Actor> actors;  // ?
+    private List<Actor> actors;
 
     public Movie() {
     }
