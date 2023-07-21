@@ -42,7 +42,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException("Failed to retrieve Country from the database" + id, e);
+            throw new DataProcessingException("Failed to retrieve Country "
+                    + "from the database" + id, e);
         }
     }
 }
