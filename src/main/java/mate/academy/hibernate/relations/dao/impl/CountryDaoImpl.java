@@ -23,11 +23,11 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.save(country);
             transaction.commit();
             return country;
-        } catch (DataProcessingException exception) {
+        } catch (Exception exception) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't save object to DB. " + country);
+            throw new DataProcessingException("Can't save object to DB. " + country);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,8 +41,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try {
             session = factory.openSession();
             return Optional.ofNullable(session.get(Country.class, id));
-        } catch (DataProcessingException exception) {
-            throw new RuntimeException("Can't get data from DB. Wrong credentials: " + id);
+        } catch (Exception exception) {
+            throw new DataProcessingException("Can't get data from DB. Wrong credentials: " + id);
         } finally {
             if (session != null) {
                 session.close();

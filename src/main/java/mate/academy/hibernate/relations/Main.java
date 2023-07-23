@@ -21,7 +21,6 @@ public class Main {
         final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Country usa = new Country("USA");
         CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
-        Country add = countryService.add(usa);
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));

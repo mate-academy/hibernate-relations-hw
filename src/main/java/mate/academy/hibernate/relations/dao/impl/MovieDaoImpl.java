@@ -23,11 +23,11 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session.save(movie);
             transaction.commit();
             return movie;
-        } catch (DataProcessingException exception) {
+        } catch (Exception exception) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't save object to DB. " + movie);
+            throw new DataProcessingException("Can't save object to DB. " + movie);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,8 +41,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = factory.openSession();
             return Optional.ofNullable(session.get(Movie.class, id));
-        } catch (DataProcessingException exception) {
-            throw new RuntimeException("Can't get data from DB. Wrong credentials: " + id);
+        } catch (Exception exception) {
+            throw new DataProcessingException("Can't get data from DB. Wrong credentials: " + id);
         } finally {
             if (session != null) {
                 session.close();

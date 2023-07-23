@@ -22,11 +22,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
-        } catch (DataProcessingException exception) {
+        } catch (Exception exception) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't save object to DB. " + actor);
+            throw new DataProcessingException("Can't save object to DB. " + actor);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,8 +41,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             return Optional.ofNullable(session.get(Actor.class, id));
-        } catch (DataProcessingException exception) {
-            throw new RuntimeException("Can't get data from DB. Wrong credentials: " + id);
+        } catch (Exception exception) {
+            throw new DataProcessingException("Can't get data from DB. Wrong credentials: " + id);
         } finally {
             if (session != null) {
                 session.close();
