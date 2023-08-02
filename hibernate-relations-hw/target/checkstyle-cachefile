@@ -1,0 +1,21 @@
+#Wed Aug 02 12:15:24 EEST 2023
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/Main.java=1690960934009
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/ActorDao.java=1690821708905
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/CountryDao.java=1690821708905
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/MovieDao.java=1690821708905
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/impl/AbstractDao.java=1690821708906
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/impl/ActorDaoImpl.java=1690961688443
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/impl/CountryDaoImpl.java=1690961373980
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/dao/impl/MovieDaoImpl.java=1690961668081
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/exeption/DataProcessingException.java=1690891828850
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/model/Actor.java=1690961488382
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/model/Country.java=1690967547489
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/model/Movie.java=1690967713227
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/ActorService.java=1690821708908
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/CountryService.java=1690821708909
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/MovieService.java=1690821708911
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/impl/ActorServiceImpl.java=1690961544049
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/impl/CountryServiceImpl.java=1690961553670
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/service/impl/MovieServiceImpl.java=1690961548557
+/Users/andriy/Desktop/Hibernat_hw/hibernate-relations-hw/src/main/java/mate/academy/hibernate/relations/util/HibernateUtil.java=1690961322445
+configuration*?=353279946422919FA8A2B8C3B75D942DE52139C4

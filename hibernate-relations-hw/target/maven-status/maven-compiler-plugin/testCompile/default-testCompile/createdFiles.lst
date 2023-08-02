@@ -1,0 +1,8 @@
+mate/academy/hibernate/relations/dao/AbstractTest$DataSourceProvider$Database.class
+mate/academy/hibernate/relations/dao/impl/CountryDaoImplTest.class
+mate/academy/hibernate/relations/dao/AbstractTest$DataSourceProvider.class
+mate/academy/hibernate/relations/dao/AbstractTest.class
+mate/academy/hibernate/relations/dao/AbstractTest$DataSourceProvider$IdentifierStrategy.class
+mate/academy/hibernate/relations/dao/impl/MovieDaoImplTest.class
+mate/academy/hibernate/relations/dao/AbstractTest$HsqldbDataSourceProvider.class
+mate/academy/hibernate/relations/dao/impl/ActorDaoImplTest.class
