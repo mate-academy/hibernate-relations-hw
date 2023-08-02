@@ -33,7 +33,6 @@ public class Main {
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
-
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
