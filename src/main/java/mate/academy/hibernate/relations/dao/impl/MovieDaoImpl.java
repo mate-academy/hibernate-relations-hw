@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -34,7 +35,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie from DB. Movie's id: " + id, e);
+            throw new NoSuchElementException("Movie with id " + id + " wasn't found");
         }
     }
 }
