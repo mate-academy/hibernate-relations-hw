@@ -22,7 +22,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Can`t find actor with id: "
+                new DataProcessingException("Can`t find any actor with id: "
                         + id + " in database"));
     }
 }
