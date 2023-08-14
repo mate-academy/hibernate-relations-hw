@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,7 +18,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -27,7 +26,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie to DB with name: " + movie);
+            throw new DataProcessingException("Can't add movie to DB with name: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,17 +38,22 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Session session = null;
-        Movie movie;
+        Transaction transaction = null;
+        Optional<Movie> movie;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            movie = session.get(Movie.class, id);
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            movie = Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie from the DB with id: " + id);
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't get country from the DB with id: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return Optional.ofNullable(movie);
+        return movie;
     }
 }
