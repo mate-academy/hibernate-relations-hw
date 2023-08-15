@@ -12,11 +12,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        return null;
+        return addEntity(actor);
     }
 
     @Override
     public Optional<Actor> get(Long id) {
-        return null;
+        return getEntityById(Actor.class, id);
     }
 }
