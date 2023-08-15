@@ -16,7 +16,7 @@ public class Actor implements Cloneable {
     private Long id;
     private String name;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
