@@ -18,6 +18,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElse(new Actor());
+        return actorDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Actor is null by id = " + id));
     }
 }

@@ -28,12 +28,14 @@ public class Main {
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
+        System.out.println(countryService.get(usa.getId()));
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
+        System.out.println(actorService.get(vinDiesel.getId()));
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
