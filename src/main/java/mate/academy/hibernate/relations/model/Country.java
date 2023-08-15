@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "counties")
+@Table(name = "countries")
 public class Country implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
