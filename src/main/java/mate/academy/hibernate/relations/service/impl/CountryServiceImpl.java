@@ -1,11 +1,10 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
-
-import java.util.NoSuchElementException;
 
 public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
