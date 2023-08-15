@@ -4,6 +4,8 @@ import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
+import java.util.NoSuchElementException;
+
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
@@ -19,7 +21,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() -> new RuntimeException("Can't get movie"
+        return movieDao.get(id).orElseThrow(()
+                -> new NoSuchElementException("Can't get movie"
                 + "by provided id " + id));
     }
 }
