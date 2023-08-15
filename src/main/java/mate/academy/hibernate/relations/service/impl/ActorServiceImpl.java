@@ -18,7 +18,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id)
-                .orElseThrow(() -> new RuntimeException("Can't get an actor by id: " + id));
+        return actorDao.get(id).orElseThrow();
     }
 }
