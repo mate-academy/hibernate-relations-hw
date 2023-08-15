@@ -22,19 +22,19 @@ public class Main {
 
         Country usa = new Country("USA");
         CountryService countryService = new CountryServiceImpl(
-                new CountryDaoImpl(sessionFactory)); // TODO: initialize this instance
+                new CountryDaoImpl(sessionFactory));
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(
-                new ActorDaoImpl(sessionFactory));; // TODO: initialize this instance
+                new ActorDaoImpl(sessionFactory));
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(
-                new MovieDaoImpl(sessionFactory));; // TODO: initialize this instance
+                new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
