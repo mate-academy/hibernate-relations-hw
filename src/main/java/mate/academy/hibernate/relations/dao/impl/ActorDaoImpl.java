@@ -21,13 +21,14 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(actor);
-            if (session == null) {
-                throw new RuntimeException("There is no value to save!");
-            }
             transaction.commit();
-        } catch (RuntimeException e) {
-            transaction.rollback();
-            throw new DataProcessingException("Error occurred during transaction", e);
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't add actor "
+                    + actor.getName()
+                    + " to DB", e);
         } finally {
             if (session != null) {
                 session.close();
