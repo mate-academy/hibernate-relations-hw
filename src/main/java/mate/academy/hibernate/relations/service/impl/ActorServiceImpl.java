@@ -5,6 +5,8 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
+import java.util.NoSuchElementException;
+
 public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao;
 
@@ -21,6 +23,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(
                 () -> new DataProcessingException(
-                        "Cannot get actor with id " + id, new RuntimeException()));
+                        "Cannot get actor with id " + id, new NoSuchElementException()));
     }
 }
