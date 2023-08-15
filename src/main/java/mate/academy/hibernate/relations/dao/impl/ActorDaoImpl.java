@@ -20,7 +20,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -39,7 +39,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
-
         } catch (Exception e) {
             throw new DataProcessException("Can't get actor by id: " + id, e);
         }
