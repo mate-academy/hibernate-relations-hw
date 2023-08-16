@@ -15,7 +15,8 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
 
     @Override
     public Movie add(Movie entity) {
-        try (Session session = factory.openSession()) {
+        try {
+            Session session = factory.openSession();
             session.beginTransaction();
             Long entityId = (Long) session.save(entity);
             session.getTransaction().commit();
@@ -27,7 +28,8 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = factory.openSession()) {
+        try {
+            Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
             Movie movie = session.get(Movie.class, id);
             if (movie != null) {

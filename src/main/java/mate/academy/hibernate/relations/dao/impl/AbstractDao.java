@@ -12,7 +12,8 @@ public abstract class AbstractDao<T> {
     }
 
     public T add(T entity) {
-        try (Session session = factory.openSession()) {
+        try {
+            Session session = factory.openSession();
             session.beginTransaction();
             Long entityId = (Long) session.save(entity);
             session.getTransaction().commit();
