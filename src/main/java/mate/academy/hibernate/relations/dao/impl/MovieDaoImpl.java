@@ -20,7 +20,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            Long entityId = (Long) session.save(entity);
+            session.persist(entity);
             session.getTransaction().commit();
             return entity;
         } catch (Exception e) {
@@ -39,9 +39,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Optional<Movie> get(Long id) {
         try {
             Session session = factory.openSession();
-            Transaction transaction = session.beginTransaction();
             Movie movie = session.get(Movie.class, id);
-            transaction.commit();
             return Optional.ofNullable(movie);
         } catch (Exception e) {
             throw new DataProcessingException("Error while getting entity with id " + id, e);
