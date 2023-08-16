@@ -2,21 +2,58 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
-public class ActorDaoImpl extends AbstractDao<Actor> implements ActorDao {
+public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
     public Actor add(Actor actor) {
-        return super.add(actor);
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Long entityId = (Long) session.save(actor);
+            session.getTransaction().commit();
+            return actor;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Error while adding actor: " + actor, e);
+        } finally {
+            if (transaction != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public Optional<Actor> get(Long id) {
-        return Optional.ofNullable(super.get(id, Actor.class));
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Actor actor = session.get(Actor.class, id);
+            transaction.commit();
+            return Optional.ofNullable(actor);
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Error while getting entity with id " + id, e);
+        } finally {
+            if (transaction != null) {
+                session.close();
+            }
+        }
     }
 }

@@ -8,21 +8,30 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
+public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
     public Movie add(Movie entity) {
+        Session session = null;
+        Transaction transaction = null;
         try {
-            Session session = factory.openSession();
-            session.beginTransaction();
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             Long entityId = (Long) session.save(entity);
             session.getTransaction().commit();
             return entity;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Error while adding entity: " + entity, e);
+        } finally {
+            if (transaction != null) {
+                session.close();
+            }
         }
     }
 
@@ -32,9 +41,6 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
             Session session = factory.openSession();
             Transaction transaction = session.beginTransaction();
             Movie movie = session.get(Movie.class, id);
-            if (movie != null) {
-                movie.getActors().size();
-            }
             transaction.commit();
             return Optional.ofNullable(movie);
         } catch (Exception e) {
