@@ -1,16 +1,32 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
+import org.hibernate.SessionFactory;
 
-public class MovieServiceImpl implements MovieService {
+public class MovieServiceImpl extends AbstractService implements MovieService {
+    private static MovieDao movieDao;
+
+    public MovieServiceImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+        initMovieDao();
+    }
+
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return null;
+        return movieDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Can't get movie by id: " + id));
+    }
+
+    private void initMovieDao() {
+        movieDao = new MovieDaoImpl(factory);
     }
 }
