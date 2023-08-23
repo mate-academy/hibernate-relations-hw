@@ -7,6 +7,7 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -16,7 +17,7 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
+        CountryService countryService = new CountryServiceImpl(); // TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
