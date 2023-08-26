@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
@@ -50,7 +49,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("An error occurred while finding actor with id " + id, e);
+            throw new DataProcessingException("An error occurred while "
+                    + "finding actor with id " + id, e);
         } finally {
             if (session != null) {
                 session.close();

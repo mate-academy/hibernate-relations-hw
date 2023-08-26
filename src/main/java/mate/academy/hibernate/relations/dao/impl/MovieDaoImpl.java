@@ -49,7 +49,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("An error occurred while finding movie with id " + id, e);
+            throw new DataProcessingException("An error occurred while "
+                    + "finding movie with id " + id, e);
         } finally {
             if (session != null) {
                 session.close();
