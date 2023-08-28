@@ -20,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new DataProcessingException("Cant get Movie by id = " + id)
+                () -> new DataProcessingException("Can't get Movie by id = " + id)
         );
     }
 }
