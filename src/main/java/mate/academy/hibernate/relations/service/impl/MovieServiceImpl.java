@@ -10,8 +10,8 @@ import org.hibernate.SessionFactory;
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
-    public MovieServiceImpl(SessionFactory sessionFactory) {
-        movieDao = new MovieDaoImpl(sessionFactory);
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
