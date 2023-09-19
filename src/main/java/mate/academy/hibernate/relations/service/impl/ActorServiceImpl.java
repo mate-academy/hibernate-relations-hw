@@ -1,26 +1,25 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import java.util.Optional;
-import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
-import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
-    private SessionFactory factory;
+    private final ActorDao actorDao;
 
-    public ActorServiceImpl(SessionFactory factory) {
-        this.factory = factory;
+    public ActorServiceImpl(ActorDao actorDao) {
+        this.actorDao = actorDao;
     }
 
     @Override
     public Actor add(Actor actor) {
-        return new ActorDaoImpl(factory).add(actor);
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        Optional<Actor> actorGetOptional = new ActorDaoImpl(factory).get(id);
+        Optional<Actor> actorGetOptional = actorDao.get(id);
         if (actorGetOptional.isEmpty()) {
             return null;
         }
