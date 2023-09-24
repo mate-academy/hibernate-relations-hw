@@ -21,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         return movieDao.get(id)
                 .orElseThrow(() -> new DataProcessingException(
-                        String.format("Movie with id=%d was not found", id))
+                        "Movie with id=%d was not found".formatted(id))
                 );
     }
 }

@@ -21,7 +21,7 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         return actorDao.get(id)
                 .orElseThrow(() -> new DataProcessingException(
-                        String.format("Actor with id=%d was not found", id))
+                        "Actor with id=%d was not found".formatted(id))
                 );
     }
 }

@@ -21,7 +21,7 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         return countryDao.get(id)
                 .orElseThrow(() -> new DataProcessingException(
-                        String.format("Country with id=%d was not found", id))
+                        "Country with id=%d was not found".formatted(id))
                 );
     }
 }
