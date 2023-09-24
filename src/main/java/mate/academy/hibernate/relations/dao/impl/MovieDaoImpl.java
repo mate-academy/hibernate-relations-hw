@@ -15,25 +15,27 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Movie add(Movie movie) {
 
-        Session session = this.factory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = null;
+        Transaction transaction = null;
         try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-            System.out.println(transaction.getStatus());
-        } catch (RuntimeException e) {
-            transaction.rollback();
-            session.close();
-            throw new DataProcessingException();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can`t add movie to DB", e);
         }
-        session.close();
+        if (session != null) {
+            session.close();
+        }
         return movie;
-
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-
         Session session = this.factory.openSession();
         Optional<Movie> answer = Optional.ofNullable(session.get(Movie.class,id));
         session.close();

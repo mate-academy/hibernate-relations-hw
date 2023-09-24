@@ -14,19 +14,23 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        Session session = this.factory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Session session = null;
+        Transaction transaction = null;
         try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
-        } catch (RuntimeException e) {
-            transaction.rollback();
-            session.close();
-            throw new DataProcessingException();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("can`t add country to DB", e);
         }
-        session.close();
+        if (session != null) {
+            session.close();
+        }
         return country;
-
     }
 
     @Override
