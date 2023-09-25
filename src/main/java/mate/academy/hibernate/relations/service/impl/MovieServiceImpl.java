@@ -1,16 +1,32 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.Optional;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
+import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
+    private MovieDao movieDao;
+
+    public MovieServiceImpl(SessionFactory sessionFactory) {
+        movieDao = new MovieDaoImpl(sessionFactory);
+    }
+
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        return null;
+        Optional<Movie> movieOptional = movieDao.get(id);
+        if (movieOptional.isPresent()) {
+            return movieOptional.get();
+        } else {
+            throw new DataProcessingException("No movie found with id: " + id);
+        }
     }
 }
