@@ -1,6 +1,9 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
@@ -19,19 +22,19 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(sessionFactory);
+        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
         // TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(sessionFactory);
+        ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = new MovieServiceImpl(sessionFactory);
+        MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
