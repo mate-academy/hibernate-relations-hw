@@ -15,11 +15,6 @@ public class Country implements Cloneable {
     public Country() {
     }
 
-    public Country(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public Country(String name) {
         this.name = name;
     }

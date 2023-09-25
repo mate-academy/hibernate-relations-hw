@@ -20,12 +20,6 @@ public class Movie implements Cloneable {
     public Movie() {
     }
 
-    public Movie(Long id, String title, List<Actor> actors) {
-        this.id = id;
-        this.title = title;
-        this.actors = actors;
-    }
-
     public Movie(String title) {
         this.title = title;
     }
