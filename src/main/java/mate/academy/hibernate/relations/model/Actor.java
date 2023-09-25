@@ -1,11 +1,28 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @ManyToOne
     private Country country;
 
     public Actor() {
+    }
+
+    public Actor(Long id, String name, Country country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
     }
 
     public Actor(String name) {
