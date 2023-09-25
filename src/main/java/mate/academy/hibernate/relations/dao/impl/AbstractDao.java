@@ -13,8 +13,10 @@ public abstract class AbstractDao {
     }
 
     protected <T> T add(T entity) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = factory.openSession()) {
+        try {
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.persist(entity);
             transaction.commit();
@@ -25,6 +27,10 @@ public abstract class AbstractDao {
             throw new DataProcessingException(
                     "Can't add %s entity to DB".formatted(entity.getClass().getSimpleName()), e
             );
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return entity;
     }
