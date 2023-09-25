@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -22,11 +21,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> countryOptional = countryDao.get(id);
-        if (countryOptional.isPresent()) {
-            return countryOptional.get();
-        } else {
-            throw new DataProcessingException("No country found with id: " + id);
-        }
+        return countryDao.get(id).orElseThrow(() ->
+                new DataProcessingException("No country found with id: " + id));
     }
 }
