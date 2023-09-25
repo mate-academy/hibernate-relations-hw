@@ -14,10 +14,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        try{
+        try {
             factory.inTransaction(session -> session.persist(actor));
             return actor;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             throw new DataProcessingException("Can't add actor to the Database");
         }
     }

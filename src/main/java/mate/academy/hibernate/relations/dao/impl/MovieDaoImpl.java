@@ -14,10 +14,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        try{
+        try {
             factory.inTransaction(session -> session.persist(movie));
             return movie;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             throw new DataProcessingException("Can't add movie to the Database");
         }
     }

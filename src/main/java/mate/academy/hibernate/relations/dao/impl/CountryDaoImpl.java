@@ -14,10 +14,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        try{
+        try {
             factory.inTransaction(session -> session.persist(country));
             return country;
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             throw new DataProcessingException("Can't add country to the Database");
         }
     }
