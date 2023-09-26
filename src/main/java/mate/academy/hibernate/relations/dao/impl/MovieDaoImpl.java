@@ -2,8 +2,15 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.exceptions.DataProcessingException;
+import mate.academy.hibernate.relations.model.Actor;
+import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
+import mate.academy.hibernate.relations.util.HibernateUtil;
+import org.hibernate.HibernateError;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -12,11 +19,33 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        return null;
+        Transaction transaction = null;
+        Session session = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(movie);
+            transaction.commit();
+            return movie;
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't add this movie: " + movie);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return null;
+        try (Session session = factory.openSession()) {
+            Movie movie = session.get(Movie.class, id);
+            return Optional.ofNullable(movie);
+        } catch (HibernateError e) {
+            throw new DataProcessingException("Can't find actor by this id: " + id);
+        }
     }
 }
