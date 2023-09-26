@@ -31,8 +31,12 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
+        Actor bredPit = new Actor("Bred Pit");
+        bredPit.setCountry(usa);
+        actorService.add(bredPit);
+
         Movie fastAndFurious = new Movie("Fast and Furious");
-        fastAndFurious.setActors(List.of(vinDiesel));
+        fastAndFurious.setActors(List.of(vinDiesel, bredPit));
         MovieDaoImpl movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
