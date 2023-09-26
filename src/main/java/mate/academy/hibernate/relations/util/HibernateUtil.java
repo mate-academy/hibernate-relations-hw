@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.util;
 
-import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 

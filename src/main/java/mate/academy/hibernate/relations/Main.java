@@ -19,17 +19,20 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(HibernateUtil.getSessionFactory()); // TODO: initialize this instance
+        CountryService countryService = new CountryServiceImpl(
+                HibernateUtil.getSessionFactory());
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(HibernateUtil.getSessionFactory()); // TODO: initialize this instance
+        ActorService actorService = new ActorServiceImpl(
+                HibernateUtil.getSessionFactory());
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = new MovieServiceImpl(HibernateUtil.getSessionFactory()); // TODO: initialize this instance
+        MovieService movieService = new MovieServiceImpl(
+                HibernateUtil.getSessionFactory());
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }

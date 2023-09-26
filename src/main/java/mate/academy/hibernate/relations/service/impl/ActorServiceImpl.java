@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
     private final ActorDao actorDao;
+
     public ActorServiceImpl(SessionFactory sessionFactory) {
         actorDao = new ActorDaoImpl(sessionFactory);
     }
