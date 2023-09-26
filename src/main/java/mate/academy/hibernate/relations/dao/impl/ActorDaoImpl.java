@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,7 +19,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         Transaction transaction = null;
         try {
             session = factory.openSession();
-            transaction =session.beginTransaction();
+            transaction = session.beginTransaction();
             session.persist(actor);
             transaction.commit();
         } catch (Exception e) {
@@ -39,7 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         Optional<Actor> result;
-        try(Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             result = Optional.ofNullable(session.get(Actor.class,id));
         } catch (RuntimeException e) {
             throw new DataProcessingException("Can't find any actor with id " + id, e);

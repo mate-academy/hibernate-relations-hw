@@ -6,10 +6,8 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
-import java.util.Optional;
-
 public class MovieServiceImpl implements MovieService {
-    private final SessionFactory factory ;
+    private final SessionFactory factory;
 
     public MovieServiceImpl(SessionFactory factory) {
         this.factory = factory;

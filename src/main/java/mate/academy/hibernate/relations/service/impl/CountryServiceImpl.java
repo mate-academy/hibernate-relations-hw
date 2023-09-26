@@ -6,8 +6,6 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
 
-import java.util.Optional;
-
 public class CountryServiceImpl implements CountryService {
     private final SessionFactory factory;
 
