@@ -13,7 +13,8 @@ import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MovieDaoImplTest extends AbstractTest {
+public class
+MovieDaoImplTest extends AbstractTest {
     private static final Movie shawshankRedemption = new Movie("The Shawshank Redemption");
     private static final Actor morganFreeman = new Actor("Morgan Freeman");
     private static final Country usa = new Country("USA");
