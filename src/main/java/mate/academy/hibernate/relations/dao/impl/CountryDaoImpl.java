@@ -13,6 +13,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         super(sessionFactory);
     }
 
+    @Override
     public Country add(Country country) {
         Session session = null;
         Transaction transaction = null;
