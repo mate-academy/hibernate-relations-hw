@@ -20,13 +20,13 @@ public class Main {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        Country usa = new Country("China");
+        Country china = new Country("China");
         CountryDaoImpl countryDao = new CountryDaoImpl(sessionFactory);
         CountryService countryService = new CountryServiceImpl(countryDao);
-        countryService.add(usa);
+        countryService.add(china);
 
         Actor jackieChan = new Actor("Jackie Chan");
-        jackieChan.setCountry(usa);
+        jackieChan.setCountry(china);
         ActorDaoImpl actorDao = new ActorDaoImpl(sessionFactory);
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(jackieChan);
@@ -37,5 +37,6 @@ public class Main {
         MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(karateKid);
         System.out.println(movieService.get(karateKid.getId()));
+        System.out.println(karateKid.getActors());
     }
 }
