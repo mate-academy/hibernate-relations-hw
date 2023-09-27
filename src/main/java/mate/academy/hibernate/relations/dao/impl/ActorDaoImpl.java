@@ -23,7 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException(
-                    "Cant' find an actor by id: %d".formatted(id), e);
+                    "Can't find an actor by id: %d".formatted(id), e);
         }
     }
 }
