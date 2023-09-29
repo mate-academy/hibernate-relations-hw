@@ -4,7 +4,7 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
-import org.hibernate.HibernateError;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -24,11 +24,11 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session.persist(movie);
             transaction.commit();
             return movie;
-        } catch (RuntimeException e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add this movie: " + movie);
+            throw new DataProcessingException("Can't create connection to DB: " + movie);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,8 +41,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try (Session session = factory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
-        } catch (HibernateError e) {
-            throw new DataProcessingException("Can't find actor by this id: " + id);
+        } catch (HibernateException e) {
+            throw new DataProcessingException("Can't create connection to DB: " + id);
         }
     }
 }
