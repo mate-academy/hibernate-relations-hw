@@ -6,6 +6,7 @@ import mate.academy.hibernate.relations.exception.DataProcessionException;
 import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -14,14 +15,18 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        try {
-            return factory.fromTransaction(session -> {
-                session.persist(actor);
-                return actor;
-            });
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.persist(actor);
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessionException("Can't add actor to DB: " + actor.getName(), e);
         }
+        return actor;
     }
 
     @Override
