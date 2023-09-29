@@ -29,7 +29,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't create connection to DB");
+            throw new DataProcessingException("Can't add this actor to DB: " + actor);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             Actor actor = session.get(Actor.class, id);
             return Optional.ofNullable(actor);
         } catch (HibernateException e) {
-            throw new DataProcessingException("Can't create connection to DB");
+            throw new DataProcessingException("Can't find Actor in DB by this id: " + id);
         }
     }
 }

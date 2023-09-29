@@ -28,7 +28,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't create connection to DB: " + country);
+            throw new DataProcessingException("Can't add this country to DB: " + country);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             Country country = session.get(Country.class, id);
             return Optional.ofNullable(country);
         } catch (HibernateException e) {
-            throw new DataProcessingException("Can't create connection to DB: " + id);
+            throw new DataProcessingException("Can't find country in DB by this id: " + id);
         }
     }
 }
