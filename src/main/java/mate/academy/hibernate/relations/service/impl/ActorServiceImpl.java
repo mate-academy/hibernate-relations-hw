@@ -19,6 +19,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Optional<Actor> get(Long id) {
-        return actorDao.get(id).isPresent() ? actorDao.get(id) : Optional.empty();
+        return Optional.of(actorDao.get(id).orElseThrow());
     }
 }
