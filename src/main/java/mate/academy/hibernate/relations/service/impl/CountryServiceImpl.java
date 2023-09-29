@@ -22,6 +22,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         Optional<Country> actor = countryDao.get(id);
         return actor.orElseThrow(() -> new DataProcessingException(
-                "There is no country with id %d in DB".formatted(id), new RuntimeException()));
+                "There is no country with id %d in DB".formatted(id)));
     }
 }

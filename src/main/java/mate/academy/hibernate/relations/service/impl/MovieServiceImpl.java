@@ -22,6 +22,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         Optional<Movie> actor = movieDao.get(id);
         return actor.orElseThrow(() -> new DataProcessingException(
-                "There is no movie with id %d in DB".formatted(id), new RuntimeException()));
+                "There is no movie with id %d in DB".formatted(id)));
     }
 }
