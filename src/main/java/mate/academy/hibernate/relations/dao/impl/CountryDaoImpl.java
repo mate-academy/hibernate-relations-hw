@@ -12,11 +12,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        return null;
+        return (Country) super.add(country);
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        return null;
+        Optional<Object> optional = super.get(id, Country.class);
+        return Optional.ofNullable((Country) optional.orElse(null));
     }
 }

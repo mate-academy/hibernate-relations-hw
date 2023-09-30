@@ -12,11 +12,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        return null;
+        return (Actor) super.add(actor);
     }
 
     @Override
     public Optional<Actor> get(Long id) {
-        return null;
+        Optional<Object> optional = super.get(id, Actor.class);
+        return Optional.ofNullable((Actor)optional.orElse(null));
     }
 }
