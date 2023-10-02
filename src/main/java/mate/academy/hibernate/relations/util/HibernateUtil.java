@@ -11,11 +11,7 @@ public class HibernateUtil {
     }
 
     private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration().configure().buildSessionFactory();
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError("Initial SessionFactory creation failed.");
-        }
+        return new Configuration().configure().buildSessionFactory();
     }
 
     public static SessionFactory getSessionFactory() {
