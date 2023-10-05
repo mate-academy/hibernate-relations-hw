@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.DataProcessingException;
 public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao;
 
-    public void setActorDao(ActorDao actorDao) {
+    public ActorServiceImpl(ActorDao actorDao) {
         this.actorDao = actorDao;
     }
 

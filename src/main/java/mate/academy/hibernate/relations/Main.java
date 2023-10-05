@@ -25,23 +25,23 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl();// TODO: initialize this instance
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
-        ((CountryServiceImpl) countryService).setCountryDao(countryDao);
+        CountryService countryService =
+                new CountryServiceImpl(countryDao);// TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(); // TODO: initialize this instance
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
-        ((ActorServiceImpl) actorService).setActorDao(actorDao);
+        ActorService actorService =
+                new ActorServiceImpl(actorDao); // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = new MovieServiceImpl(); // TODO: initialize this instance
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
-        ((MovieServiceImpl) movieService).setMovieDao(movieDao);
+        MovieService movieService =
+                new MovieServiceImpl(movieDao); // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }

@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.DataProcessingException;
 public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
-    public void setCountryDao(CountryDao countryDao) {
+    public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
 
