@@ -17,7 +17,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Optional<Object> optional = super.get(id, Actor.class);
-        return Optional.ofNullable((Actor)optional.orElse(null));
+        return Optional.ofNullable((Actor) super.get(id, Actor.class).orElse(null));
     }
 }
