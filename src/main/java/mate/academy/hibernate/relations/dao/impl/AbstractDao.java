@@ -13,9 +13,6 @@ public abstract class AbstractDao {
         this.factory = sessionFactory;
     }
 
-    //I`m not sure here I can use abstract method, cause
-    //in this case I will not be able to specify concrete
-    //entity name in exception
     protected <T> T add(T entity) {
         Session session = null;
         Transaction transaction = null;
