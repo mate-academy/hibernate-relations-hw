@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import java.util.Objects;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -25,10 +24,15 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             session.persist(movie);
             transaction.commit();
         } catch (Exception e) {
-            Objects.requireNonNull(transaction).rollback();
-            throw new DataProcessingException("Can't add movie to dataBase", e);
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't add movie to DB", e);
+
         } finally {
-            Objects.requireNonNull(session).close();
+            if (session != null) {
+                session.close();
+            }
         }
         return movie;
     }
@@ -39,7 +43,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             Movie movieFromDb = session.get(Movie.class, id);
             return Optional.ofNullable(movieFromDb);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie from dataBase with id: " + id, e);
+            throw new DataProcessingException("Can't get movie from DB with id: " + id, e);
         }
     }
 }

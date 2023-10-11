@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import java.util.Objects;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -25,10 +24,14 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             session.persist(actor);
             transaction.commit();
         } catch (Exception e) {
-            Objects.requireNonNull(transaction).rollback();
-            throw new DataProcessingException("Can't add actor to dataBase", e);
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't add actor to DB", e);
         } finally {
-            Objects.requireNonNull(session).close();
+            if (session != null) {
+                session.close();
+            }
         }
         return actor;
     }
@@ -36,10 +39,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
-            Actor actorFromDb = session.get(Actor.class, id);
-            return Optional.ofNullable(actorFromDb);
+            Actor actor = session.get(Actor.class, id);
+            return Optional.ofNullable(actor);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get actor from dataBase by whom id: " + id, e);
+            throw new DataProcessingException("Can't get actor from DB by id: " + id, e);
         }
     }
 }
