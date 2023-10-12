@@ -18,10 +18,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Session session = null;
         Transaction transaction = null;
         try {
-           session = factory.openSession();
-           transaction = session.beginTransaction();
-           session.save(movie);
-           transaction.commit();
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.save(movie);
+            transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

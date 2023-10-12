@@ -6,9 +6,11 @@ import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
+
     public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
+
     @Override
     public Country add(Country country) {
         return countryDao.add(country);
@@ -16,6 +18,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).orElseThrow(() -> new RuntimeException("Can't get country with id = " + id));
+        return countryDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Can't get country with id = " + id));
     }
 }
