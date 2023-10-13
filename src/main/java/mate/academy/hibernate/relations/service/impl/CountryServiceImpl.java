@@ -4,6 +4,7 @@ import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
+import mate.academy.hibernate.relations.service.DataProcessingException;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class CountryServiceImpl implements CountryService {
@@ -17,6 +18,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).get();
+        return countryDao.get(id).orElseThrow(() ->
+                new DataProcessingException("Can't get a country from database with id " + id));
     }
 }

@@ -4,6 +4,7 @@ import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
+import mate.academy.hibernate.relations.service.DataProcessingException;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class ActorServiceImpl implements ActorService {
@@ -17,6 +18,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).get();
+        return actorDao.get(id).orElseThrow(() ->
+                new DataProcessingException("Can't get an actor from database with id " + id));
     }
 }
