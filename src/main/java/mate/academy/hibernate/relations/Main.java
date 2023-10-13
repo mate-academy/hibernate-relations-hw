@@ -7,6 +7,9 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -16,17 +19,19 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
-        countryService.add(usa);
+        CountryService countryService = new CountryServiceImpl(sessionFactory);
+        usa = countryService.add(usa);
 
-        Actor vinDiesel = new Actor("Vin Diesel");
+        Actor vinDiesel = new Actor();
+        vinDiesel.setName("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
-        actorService.add(vinDiesel);
+        ActorService actorService = new ActorServiceImpl(sessionFactory);
+        vinDiesel = actorService.add(vinDiesel);
 
-        Movie fastAndFurious = new Movie("Fast and Furious");
+        Movie fastAndFurious = new Movie();
+        fastAndFurious.setTitle("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
+        MovieService movieService = new MovieServiceImpl(sessionFactory);
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
