@@ -37,7 +37,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             return Optional.ofNullable(country);
 
         } catch (Exception e) {
-            throw new DataProcessingException("Can not find an object ", e);
+            throw new DataProcessingException("Can not find a country with id :  " + id, e);
         }
 
     }

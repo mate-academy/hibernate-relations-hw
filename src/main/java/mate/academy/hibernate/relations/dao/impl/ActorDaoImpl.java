@@ -31,7 +31,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (session != null) {
                 session.close();
             }
-
             return actor;
         }
     }
@@ -43,7 +42,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             return Optional.ofNullable(actor);
 
         } catch (Exception e) {
-            throw new DataProcessingException("Can not find an object ", e);
+            throw new DataProcessingException("Can not find an actor with id :  " + id, e);
         }
 
     }

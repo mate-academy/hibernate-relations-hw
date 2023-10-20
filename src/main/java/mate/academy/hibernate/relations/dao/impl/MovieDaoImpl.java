@@ -31,9 +31,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (session != null) {
                 session.close();
             }
-
             return movie;
-
         }
     }
 
@@ -44,7 +42,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             return Optional.ofNullable(movie);
 
         } catch (Exception e) {
-            throw new DataProcessingException("Can not find an object ", e);
+            throw new DataProcessingException("Can not find a movie with id : " + id, e);
         }
     }
 }
