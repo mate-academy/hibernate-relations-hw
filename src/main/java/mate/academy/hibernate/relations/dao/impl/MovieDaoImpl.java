@@ -20,7 +20,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Transaction transaction = null;
 
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
@@ -40,7 +40,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {

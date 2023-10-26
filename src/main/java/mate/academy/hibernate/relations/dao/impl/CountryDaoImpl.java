@@ -20,7 +20,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         Transaction transaction = null;
 
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.persist(country);
             transaction.commit();
@@ -40,7 +40,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             Country movie = session.get(Country.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception e) {
