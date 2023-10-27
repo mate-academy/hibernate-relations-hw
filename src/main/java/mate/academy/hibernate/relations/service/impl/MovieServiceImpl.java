@@ -23,12 +23,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        try {
-            return movieDao.get(id)
-                    .orElseThrow(() -> new DataProcessingException("Movie with ID "
+        return movieDao.get(id).orElseThrow(() -> new DataProcessingException("Movie with ID "
                             + id + " not found"));
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error while getting a movie", e);
-        }
     }
 }
