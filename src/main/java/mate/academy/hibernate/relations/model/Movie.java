@@ -1,6 +1,7 @@
 package mate.academy.hibernate.relations.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +17,9 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToMany
+    //Изменил Фетч тип и исправил toString  чтобы в консоли было видно кто актер в фильме
+    // и с какой он страны(но это не обязательно и можно это убрать)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Actor> actors;
 
     public Movie() {
@@ -69,9 +72,11 @@ public class Movie implements Cloneable {
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + '}';
+        final StringBuffer sb = new StringBuffer("Movie{");
+        sb.append("id=").append(id);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", actors=").append(actors);
+        sb.append('}');
+        return sb.toString();
     }
 }
