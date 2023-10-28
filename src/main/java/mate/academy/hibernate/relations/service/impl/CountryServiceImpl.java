@@ -14,11 +14,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country add(Country country) {
-        try {
-            return countryDao.add(country);
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error while adding a country" + country, e);
-        }
+        return countryDao.add(country);
     }
 
     @Override

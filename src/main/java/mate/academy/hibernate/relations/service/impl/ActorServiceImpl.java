@@ -14,11 +14,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-        try {
-            return actorDao.add(actor);
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error while adding an actor" + actor, e);
-        }
+        return actorDao.add(actor);
     }
 
     @Override

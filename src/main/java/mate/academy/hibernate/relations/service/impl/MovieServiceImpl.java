@@ -14,11 +14,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        try {
-            return movieDao.add(movie);
-        } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error while adding a movie", e);
-        }
+        return movieDao.add(movie);
     }
 
     @Override
