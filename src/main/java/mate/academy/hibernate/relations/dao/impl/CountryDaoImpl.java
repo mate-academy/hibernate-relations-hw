@@ -30,7 +30,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         }
     }
 
-
     @Override
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {

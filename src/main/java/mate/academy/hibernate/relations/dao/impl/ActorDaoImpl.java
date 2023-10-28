@@ -30,7 +30,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         }
     }
 
-
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
