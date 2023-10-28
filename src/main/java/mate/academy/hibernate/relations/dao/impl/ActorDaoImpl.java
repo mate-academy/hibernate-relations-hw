@@ -23,7 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             session.persist(actor);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction!= null) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can`t save data into DB by Actor = " + actor, e);
@@ -37,7 +37,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        try (Session session = factory.openSession()){
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class,id));
         } catch (Exception e) {
             throw new DataProcessingException("Can`t get data from DB by id =" + id,e);
