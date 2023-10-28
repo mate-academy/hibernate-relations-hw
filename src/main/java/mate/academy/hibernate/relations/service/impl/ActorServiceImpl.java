@@ -17,7 +17,7 @@ public class ActorServiceImpl implements ActorService {
         try {
             return actorDao.add(actor);
         } catch (DataProcessingException e) {
-            throw new DataProcessingException("Error while finding an actor" + actor, e);
+            throw new DataProcessingException("Error while adding an actor" + actor, e);
         }
     }
 
