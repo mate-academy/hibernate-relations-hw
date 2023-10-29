@@ -26,12 +26,15 @@ public class Main {
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
+        Actor kolombo = new Actor("Kolombo");
         vinDiesel.setCountry(usa);
+        kolombo.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         actorService.add(vinDiesel);
+        actorService.add(kolombo);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
-        fastAndFurious.setActors(List.of(vinDiesel));
+        fastAndFurious.setActors(List.of(vinDiesel,kolombo));
         MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
