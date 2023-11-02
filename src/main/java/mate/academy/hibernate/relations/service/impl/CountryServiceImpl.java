@@ -1,16 +1,27 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
+    private CountryDao countryDao;
+
+    public CountryServiceImpl(final CountryDao countryDao) {
+        this.countryDao = countryDao;
+    }
+
     @Override
     public Country add(Country country) {
-        return null;
+        if (country.getId() != null) {
+            throw new RuntimeException("New country must have ID with null value.");
+        }
+        return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
-        return null;
+        return countryDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Country with ID: " + id + " not found"));
     }
 }
