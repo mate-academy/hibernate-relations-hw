@@ -13,9 +13,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-        if (actor.getId() != null) {
-            throw new RuntimeException("New actor must have ID with null value.");
-        }
         return actorDao.add(actor);
     }
 

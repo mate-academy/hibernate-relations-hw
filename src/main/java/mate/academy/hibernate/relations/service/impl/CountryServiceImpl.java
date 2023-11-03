@@ -13,9 +13,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country add(Country country) {
-        if (country.getId() != null) {
-            throw new RuntimeException("New country must have ID with null value.");
-        }
         return countryDao.add(country);
     }
 

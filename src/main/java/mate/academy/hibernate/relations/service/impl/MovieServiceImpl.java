@@ -13,9 +13,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        if (movie.getId() != null) {
-            throw new RuntimeException("New movie must have ID with null value.");
-        }
         return movieDao.add(movie);
     }
 
