@@ -9,7 +9,7 @@ public class HibernateUtil {
     private HibernateUtil() {
     }
 
-    private static void initSessionFactory(){
+    private static void initSessionFactory() {
         final Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
         SESSION_FACTORY = configuration.buildSessionFactory();
     }
