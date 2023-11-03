@@ -1,6 +1,5 @@
-package mate.academy.hibernate.relations.util;
+package mate.academy.hibernate.relations.exceptions;
 
-//TODO: In which package should i put exceptions?
 public class DataProcessingException extends RuntimeException {
     public DataProcessingException(String message) {
         super(message);
