@@ -17,12 +17,17 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Actor add(Actor actor) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
-            Long actorId = (Long) session.save(actor);
-            session.getTransaction().commit();
-            actor.setId(actorId);
-            return actor;
+            try {
+                Long actorId = (Long) session.save(actor);
+                session.getTransaction().commit();
+                actor.setId(actorId);
+                return actor;
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                throw new DataProcessingException("Error while adding actor to the database", e);
+            }
         } catch (Exception e) {
-            throw new DataProcessingException("Error while adding actor to the database", e);
+            throw new DataProcessingException("Error while opening session", e);
         }
     }
 
