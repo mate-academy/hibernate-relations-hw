@@ -22,6 +22,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id)
-                .orElseThrow(() -> new DataProcessingException("Failed to get country with id: " + id, new Exception()));
+                .orElseThrow(() -> new DataProcessingException("Failed to get country with id: "
+                        + id, new Exception()));
     }
 }
