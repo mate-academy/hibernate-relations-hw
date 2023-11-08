@@ -7,7 +7,7 @@ public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
 
     private HibernateUtil() {
-        throw new AssertionError("HibernateUtil should not be instantiated.");
+        throw new IllegalStateException("HibernateUtil should not be instantiated.");
     }
 
     private static SessionFactory initSessionFactory() {
