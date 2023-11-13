@@ -13,6 +13,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
+
     @Override
     public Movie add(Movie movie) {
         Session session = null;
@@ -38,18 +39,12 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
 
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             return Optional.of(session.get(Movie.class, id));
         } catch (HibernateException e) {
             throw new DataProcessingException("Could not get instance of movies", e);
         } catch (Exception e) {
             return Optional.empty();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }

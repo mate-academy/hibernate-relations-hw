@@ -4,10 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import java.util.List;
 
 @Entity
 @Table(name = "countries")
@@ -16,9 +13,6 @@ public class Country implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @OneToMany(mappedBy = "country")
-    private List<Actor> actors;
 
     public Country() {
     }
@@ -43,15 +37,6 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
-    public List<Actor> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<Actor> actors) {
-        this.actors = actors;
-    }
-
-
     @Override
     public Country clone() {
         try {
@@ -66,7 +51,6 @@ public class Country implements Cloneable {
         return "Country{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", actors='" + actors + '\''
                 + '}';
     }
 }
