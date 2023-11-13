@@ -38,18 +38,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             Country country = session.get(Country.class, id);
             return Optional.ofNullable(country);
         } catch (RuntimeException ex) {
             throw new DataProcessingException("Data getting failure! "
                     + "Params: " + id, ex);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
