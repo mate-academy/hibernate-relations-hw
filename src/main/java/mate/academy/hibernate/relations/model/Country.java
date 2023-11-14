@@ -1,6 +1,12 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "country")
 public class Country implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -35,6 +41,8 @@ public class Country implements Cloneable {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
     }
+
+
 
     @Override
     public String toString() {

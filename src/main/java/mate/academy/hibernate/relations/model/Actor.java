@@ -1,8 +1,19 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.JoinColumn;
+
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "actor")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @OneToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
@@ -47,6 +58,19 @@ public class Actor implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Actor actor = (Actor) o;
+        return Objects.equals(id, actor.id) && Objects.equals(name, actor.name) && Objects.equals(country, actor.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, country);
     }
 
     @Override
