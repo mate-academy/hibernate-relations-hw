@@ -1,9 +1,9 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
-import mate.academy.hibernate.relations.exeptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
@@ -21,9 +21,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         Optional<Actor> actorOptional = actorDao.get(id);
-        if (actorOptional.isEmpty()) {
-            throw new DataProcessingException("Actor with id = " + id + " no exist.");
-        }
-        return actorOptional.get();
+        return actorOptional.orElseThrow(() ->
+         new EntityNotFoundException("Actor with id = " + id + " no exist."));
     }
 }
