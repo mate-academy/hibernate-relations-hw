@@ -9,7 +9,8 @@ import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     private static final String CAN_NOT_ADD_MOVIE_EXCEPTION = "Can't add movie into DB";
-    private static final String CAN_NOT_GET_MOVIE_FROM_DB_EXCEPTION = "Can't get movie from DB";
+    private static final String CAN_NOT_GET_MOVIE_FROM_DB_EXCEPTION
+            = "Can't get movie from DB with current ID: ";
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -17,20 +18,24 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        try (Session session = factory.openSession()) {
-            Transaction transaction = null;
-            try {
-                transaction = session.beginTransaction();
-                session.persist(movie);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) {
-                    transaction.rollback();
-                }
-                throw new DataProcessingException(CAN_NOT_ADD_MOVIE_EXCEPTION, e);
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.persist(movie);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
             }
-            return movie;
+            throw new DataProcessingException(CAN_NOT_ADD_MOVIE_EXCEPTION, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+        return movie;
     }
 
     @Override
@@ -38,7 +43,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException(CAN_NOT_GET_MOVIE_FROM_DB_EXCEPTION, e);
+            throw new DataProcessingException(
+                    String.format(CAN_NOT_GET_MOVIE_FROM_DB_EXCEPTION + id), e);
         }
     }
 }
