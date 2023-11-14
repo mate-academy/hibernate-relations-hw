@@ -20,26 +20,24 @@ import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class Main {
+    public static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
         Country usa = new Country("USA");
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
-        Actor vinDiesel = new Actor("Vin Diesel");
+        Actor vinDiesel = new Actor("Vin Diesel", usa);
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
-        vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
-        Movie fastAndFurious = new Movie("Fast and Furious");
-        fastAndFurious.setActors(List.of(vinDiesel));
+        Movie movieFurious = new Movie("Fast and Furious", List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(movieDao);
-        movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+        movieService.add(movieFurious);
+
+        System.out.println(movieService.get(movieFurious.getId()));
     }
 }
