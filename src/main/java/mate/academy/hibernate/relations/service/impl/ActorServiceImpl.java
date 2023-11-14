@@ -19,7 +19,8 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id)
-                .orElseThrow(() -> new RuntimeException("Data getting failure."
-                + "Actor with Id: " + id + " not found."));
+                .orElseThrow(() -> new IllegalArgumentException(String
+                        .format("Data getting failure. Actor with Id: %d"
+                                + " not found.", id)));
     }
 }
