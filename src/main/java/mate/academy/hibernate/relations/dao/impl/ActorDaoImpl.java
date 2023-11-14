@@ -15,18 +15,18 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = null;
         Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.save(actor);
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-            throw new DataProcessingException("can't add actor data: " + actor, e);
-        } finally {
-            session.close();
+        try (Session session = factory.openSession()) {
+            try {
+                transaction = session.beginTransaction();
+                session.save(actor);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                throw new DataProcessingException("can't add movie data: " + actor, e);
+            }
         }
         return actor;
     }
@@ -34,8 +34,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
-            Actor actor = session.get(Actor.class, id);
-            return Optional.ofNullable(actor);
+            return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("can't get actor data id - " + id, e);
         }
