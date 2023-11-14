@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     private static final String CAN_NOT_ADD_COUNTRY_EXCEPTION = "Can't add country into DB";
+    private static final String CAN_NOT_GET_COUNTRY_FROM_DB_EXCEPTION = "Can't get country from DB";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -16,30 +17,28 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.persist(country);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+        try (Session session = factory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.persist(country);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                throw new DataProcessingException(CAN_NOT_ADD_COUNTRY_EXCEPTION, e);
             }
-            throw new DataProcessingException(CAN_NOT_ADD_COUNTRY_EXCEPTION, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            return country;
         }
-        return country;
     }
 
     @Override
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(CAN_NOT_GET_COUNTRY_FROM_DB_EXCEPTION, e);
         }
     }
 }

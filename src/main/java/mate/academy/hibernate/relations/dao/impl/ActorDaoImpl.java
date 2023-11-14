@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     private static final String CAN_NOT_ADD_ACTOR_EXCEPTION = "Can't add actor into DB";
+    private static final String CAN_NOT_GET_ACTOR_FROM_DB_EXCEPTION = "Can't get actor from DB";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -16,30 +17,28 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.persist(actor);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+        try (Session session = factory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.persist(actor);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                throw new DataProcessingException(CAN_NOT_ADD_ACTOR_EXCEPTION, e);
             }
-            throw new DataProcessingException(CAN_NOT_ADD_ACTOR_EXCEPTION, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            return actor;
         }
-        return actor;
     }
 
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(CAN_NOT_GET_ACTOR_FROM_DB_EXCEPTION, e);
         }
     }
 }
