@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
+    private static final String CANNOT_ADD_EXCEPTION_MESSAGE = "Can't add movie!";
+    private static final String CANNOT_GET_EXCEPTION_MESSAGE = "Can't get movie by id - ";
+
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -26,7 +29,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie!", e);
+            throw new DataProcessingException(CANNOT_ADD_EXCEPTION_MESSAGE, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,6 +42,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(CANNOT_GET_EXCEPTION_MESSAGE + id, e);
         }
     }
 }

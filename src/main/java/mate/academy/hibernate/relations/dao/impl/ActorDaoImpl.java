@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
+    private static final String CANNOT_ADD_EXCEPTION_MESSAGE = "Can't add actor!";
+    private static final String CANNOT_GET_EXCEPTION_MESSAGE = "Can't get actor by id - ";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -27,7 +29,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Cant add actor!", e);
+            throw new DataProcessingException(CANNOT_ADD_EXCEPTION_MESSAGE, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -40,6 +42,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(CANNOT_GET_EXCEPTION_MESSAGE + id, e);
         }
     }
 }

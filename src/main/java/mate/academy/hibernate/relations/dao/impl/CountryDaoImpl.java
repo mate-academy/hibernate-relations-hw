@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
+    private static final String CANNOT_ADD_EXCEPTION_MESSAGE = "Can't add country!";
+    private static final String CANNOT_GET_EXCEPTION_MESSAGE = "Can't get country by id - ";
+
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -26,7 +29,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add country!", e);
+            throw new DataProcessingException(CANNOT_ADD_EXCEPTION_MESSAGE, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -39,6 +42,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(CANNOT_GET_EXCEPTION_MESSAGE + id, e);
         }
     }
 }
