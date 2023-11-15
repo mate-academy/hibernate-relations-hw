@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Country implements Cloneable {
-    @Id()
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
