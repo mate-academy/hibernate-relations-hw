@@ -1,8 +1,8 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.JoinColumn;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity

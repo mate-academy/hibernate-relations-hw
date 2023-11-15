@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "country")
