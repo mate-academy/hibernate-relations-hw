@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
@@ -13,6 +12,7 @@ import org.hibernate.Transaction;
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     private static final String ADD_EXCEPTION_MESSAGE = "Failed to add actor to db";
     private static final String FIND_EXCEPTION_MESSAGE = "Failed to find object by id";
+
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -24,7 +24,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {

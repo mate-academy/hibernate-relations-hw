@@ -1,6 +1,11 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "country")
@@ -42,7 +47,22 @@ public class Country implements Cloneable {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Country country = (Country) o;
+        return Objects.equals(id, country.id) && Objects.equals(name, country.name);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 
     @Override
     public String toString() {

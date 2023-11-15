@@ -1,7 +1,13 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -69,10 +75,16 @@ public class Movie implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title) && Objects.equals(actors, movie.actors);
+        return Objects.equals(id, movie.id)
+                    && Objects.equals(title, movie.title)
+                    && Objects.equals(actors, movie.actors);
     }
 
     @Override

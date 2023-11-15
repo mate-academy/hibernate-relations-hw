@@ -1,12 +1,12 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
-import java.util.NoSuchElementException;
 
 public class ActorServiceImpl implements ActorService {
-    private static final String EXCEPTION_MESSAGE = "Can't get movie by id=";
+    private static final String EXCEPTION_MESSAGE = "Can't get actor by id=";
 
     private final ActorDao actorDao;
 
