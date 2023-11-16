@@ -5,7 +5,6 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-    private static final String NOT_GET_THE_MOVIE_BY_ID = "Unable to get the movie by ID";
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -20,6 +19,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(() ->
-                new IllegalArgumentException(NOT_GET_THE_MOVIE_BY_ID + id));
+                new IllegalArgumentException(String.format("Movie with ID: %d not found", id)));
     }
 }
