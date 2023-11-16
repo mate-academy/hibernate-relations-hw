@@ -6,8 +6,8 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
-    private static final String CANNOT_GET_ACTOR_BY_ID_MSG = "Cannot "
-            + "get actor by id: ";
+    private static final String CANNOT_GET_ACTOR_BY_ID_MSG =
+            "Actor with some ID not found";
     private ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
