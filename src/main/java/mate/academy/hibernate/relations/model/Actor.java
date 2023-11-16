@@ -14,6 +14,7 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @ManyToOne
     private Country country;
 
@@ -22,6 +23,11 @@ public class Actor implements Cloneable {
 
     public Actor(String name) {
         this.name = name;
+    }
+
+    public Actor(String name, Country country) {
+        this.name = name;
+        this.country = country;
     }
 
     public Long getId() {
