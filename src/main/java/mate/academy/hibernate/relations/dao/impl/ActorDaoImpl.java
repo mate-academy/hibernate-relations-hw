@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
-    private static final String NOT_ADD_ACTOR = "Can not add the actor to DB";
-    private static final String NOT_GET_AN_ACTOR = "Unable to retrieve an actor by ID";
+    private static final String NOT_ADD_THE_ACTOR_TO_DB = "Can not add the actor to DB";
+    private static final String NOT_GET_THE_ACTOR_BY_ID = "Unable to retrieve an actor by ID";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -29,7 +29,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(NOT_ADD_ACTOR + actor, e);
+            throw new DataProcessingException(NOT_ADD_THE_ACTOR_TO_DB + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException(NOT_GET_AN_ACTOR + id, e);
+            throw new DataProcessingException(NOT_GET_THE_ACTOR_BY_ID + id, e);
         }
     }
 }

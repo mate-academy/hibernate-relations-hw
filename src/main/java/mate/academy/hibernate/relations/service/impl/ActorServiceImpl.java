@@ -5,7 +5,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
-    private static final String CAN_NOT_GET = "Unable to get the actor by ID";
+    private static final String NOT_GET_THE_ACTOR_BY_ID = "Unable to get the actor by ID";
     private final ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
@@ -19,6 +19,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElseThrow(() -> new IllegalArgumentException(CAN_NOT_GET + id));
+        return actorDao.get(id).orElseThrow(() ->
+                new IllegalArgumentException(NOT_GET_THE_ACTOR_BY_ID + id));
     }
 }

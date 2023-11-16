@@ -9,8 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private static final String NOT_ADD_COUNTRY = "Can not add the country to DB";
-    private static final String NOT_GET_COUNTRY = "Unable to retrieve an country by ID";
+    private static final String NOT_ADD_THE_COUNTRY_TO_DB = "Can not add the country to DB";
+    private static final String NOT_GET_THE_COUNTRY_BY_ID = "Unable to retrieve an country by ID";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -29,7 +29,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(NOT_ADD_COUNTRY + country, e);
+            throw new DataProcessingException(NOT_ADD_THE_COUNTRY_TO_DB + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException(NOT_GET_COUNTRY + id, e);
+            throw new DataProcessingException(NOT_GET_THE_COUNTRY_BY_ID + id, e);
         }
     }
 }
