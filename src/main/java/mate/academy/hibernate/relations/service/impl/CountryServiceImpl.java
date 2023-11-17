@@ -5,6 +5,8 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
+    private static final String FAILED_TO_GET_COUNTRY_BY_ID = "Unable to retrieve"
+            + " a country by ID: ";
     private final CountryDao countryDao;
 
     public CountryServiceImpl(CountryDao countryDao) {
@@ -19,6 +21,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(() ->
-                new IllegalArgumentException((String.format("Country with ID: %d not found", id))));
+                new IllegalArgumentException((FAILED_TO_GET_COUNTRY_BY_ID + id)));
     }
 }

@@ -5,6 +5,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
+    private static final String FAILED_TO_GET_ACTOR_BY_ID = "Unable to retrieve a actor by ID: ";
     private final ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
@@ -19,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(() ->
-                new IllegalArgumentException(String.format("Actor with ID: %d not found", id)));
+                new IllegalArgumentException(FAILED_TO_GET_ACTOR_BY_ID + id));
     }
 }
