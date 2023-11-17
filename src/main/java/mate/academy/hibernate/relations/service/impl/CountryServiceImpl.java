@@ -7,6 +7,7 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
+    private static final String CANT_GET_BY_ID_MSG = "Can't get country with id: ";
     private final CountryDao countryDao;
 
     public CountryServiceImpl(CountryDao countryDao) {
@@ -22,6 +23,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         Optional<Country> country = countryDao.get(id);
         return country.orElseThrow(
-                () -> new DataProcessingException("Can't get country with id: " + id));
+                () -> new DataProcessingException(CANT_GET_BY_ID_MSG + id));
     }
 }

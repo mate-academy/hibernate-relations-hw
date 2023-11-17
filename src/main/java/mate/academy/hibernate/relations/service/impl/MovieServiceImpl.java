@@ -7,6 +7,7 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
+    private static final String CANT_GET_BY_ID_MSG = "Can't get movie with id: ";
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -22,6 +23,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         Optional<Movie> movie = movieDao.get(id);
         return movie.orElseThrow(
-                () -> new DataProcessingException("Can't get movie with id: " + id));
+                () -> new DataProcessingException(CANT_GET_BY_ID_MSG + id));
     }
 }
