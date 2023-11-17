@@ -5,6 +5,7 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
+    private static final String EXCEPTION_MESSAGE = "Can't get a movie with ID:";
     private MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -19,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new RuntimeException("Can't get a movie with ID:" + id));
+                () -> new RuntimeException(EXCEPTION_MESSAGE + id));
     }
 }

@@ -5,6 +5,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
+    private static final String EXCEPTION_MESSAGE = "Can't get a actor with ID:";
     private ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
@@ -19,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(
-                () -> new RuntimeException("Can't get a actor with ID:" + id));
+                () -> new RuntimeException(EXCEPTION_MESSAGE + id));
     }
 }
