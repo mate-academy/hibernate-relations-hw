@@ -2,17 +2,38 @@ package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
+@Entity
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
     private List<Actor> actors;
 
     public Movie() {
+        this.actors = new ArrayList<>();
     }
 
     public Movie(String title) {
         this.title = title;
+        this.actors = new ArrayList<>();
     }
 
     public Long getId() {
@@ -39,6 +60,11 @@ public class Movie implements Cloneable {
         this.actors = actors;
     }
 
+    public void addActor(Actor actor) {
+        this.actors.add(actor);
+        actor.getMovies().add(this);
+    }
+
     @Override
     public Movie clone() {
         try {
@@ -54,6 +80,25 @@ public class Movie implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Movie movie = (Movie) o;
+        return Objects.equals(id, movie.id)
+                && Objects.equals(title, movie.title)
+                && Objects.equals(actors, movie.actors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, actors);
     }
 
     @Override
