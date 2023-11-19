@@ -1,15 +1,36 @@
 package mate.academy.hibernate.relations.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
+    @ManyToOne
     private Country country;
 
+    @ManyToMany(mappedBy = "actors")
+    private List<Movie> movies;
+
     public Actor() {
+        this.movies = new ArrayList<>();
     }
 
     public Actor(String name) {
         this.name = name;
+        this.movies = new ArrayList<>();
     }
 
     public Long getId() {
@@ -36,6 +57,14 @@ public class Actor implements Cloneable {
         this.country = country;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     @Override
     public Actor clone() {
         try {
@@ -50,11 +79,30 @@ public class Actor implements Cloneable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Actor actor = (Actor) o;
+        return Objects.equals(id, actor.id)
+                && Objects.equals(name, actor.name)
+                && Objects.equals(country, actor.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, country);
+    }
+
+    @Override
     public String toString() {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country + '\''
+                + ", country=" + country
                 + '}';
     }
 }
