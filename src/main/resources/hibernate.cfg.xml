@@ -3,7 +3,7 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/relations</property>
-        <property name="connection.username">name</property>
+        <property name="connection.username">name12</property>
         <property name="connection.password">pass</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
