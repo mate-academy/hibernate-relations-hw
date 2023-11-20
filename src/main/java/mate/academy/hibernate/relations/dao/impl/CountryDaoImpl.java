@@ -3,11 +3,11 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.hibernate.relations.DataProcessingException;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import mate.academy.hibernate.relations.dao.CountryDao;
-import mate.academy.hibernate.relations.model.Country;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -56,7 +56,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try {
             return session.createQuery("FROM Country", Country.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Error while getting all countries from the database", e);
+            throw new DataProcessingException("Error while getting countries from the database", e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

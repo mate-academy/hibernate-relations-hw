@@ -22,7 +22,7 @@ public class Main {
 
         CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
         ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
-        MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
+        final MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
 
         Country usa = new Country("USA");
         countryService.add(usa);

@@ -3,11 +3,11 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.List;
 import java.util.Optional;
 import mate.academy.hibernate.relations.DataProcessingException;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.model.Actor;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -56,7 +56,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             return session.createQuery("FROM Actor", Actor.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Error while getting all actors from the database", e);
+            throw new DataProcessingException("Error while getting  actors from the database", e);
         } finally {
             if (session != null) {
                 session.close();
