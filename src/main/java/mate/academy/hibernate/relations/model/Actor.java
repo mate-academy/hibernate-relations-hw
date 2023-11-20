@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Actor implements Cloneable {
@@ -22,15 +22,13 @@ public class Actor implements Cloneable {
     private Country country;
 
     @ManyToMany(mappedBy = "actors")
-    private List<Movie> movies;
+    private List<Movie> movies = new ArrayList<>();
 
     public Actor() {
-        this.movies = new ArrayList<>();
     }
 
     public Actor(String name) {
         this.name = name;
-        this.movies = new ArrayList<>();
     }
 
     public Long getId() {

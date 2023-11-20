@@ -16,55 +16,91 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        try (Session session = factory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
             session.save(movie);
             transaction.commit();
             return movie;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Error while adding movie: " + movie, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = factory.openSession()) {
+        Session session = factory.openSession();
+        try {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Error while getting movie by id: " + id, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public List<Movie> getAll() {
-        try (Session session = factory.openSession()) {
+        Session session = factory.openSession();
+        try {
             return session.createQuery("FROM Movie", Movie.class).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Error while getting all movies", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Movie update(Movie movie) {
-        try (Session session = factory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
             session.update(movie);
             transaction.commit();
             return movie;
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Error while updating movie: " + movie, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public void delete(Long id) {
-        try (Session session = factory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
             Movie movie = session.get(Movie.class, id);
-            session.delete(movie);
+            if (movie != null) {
+                session.delete(movie);
+            }
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DataProcessingException("Error while deleting movie by id: " + id, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }

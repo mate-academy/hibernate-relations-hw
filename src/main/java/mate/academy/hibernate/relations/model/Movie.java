@@ -60,11 +60,6 @@ public class Movie implements Cloneable {
         this.actors = actors;
     }
 
-    public void addActor(Actor actor) {
-        this.actors.add(actor);
-        actor.getMovies().add(this);
-    }
-
     @Override
     public Movie clone() {
         try {

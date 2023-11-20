@@ -24,23 +24,19 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
 
-        try {
-            Country usa = new Country("USA");
-            countryService.add(usa);
+        Country usa = new Country("USA");
+        countryService.add(usa);
 
-            Actor vinDiesel = new Actor("Vin Diesel");
-            vinDiesel.setCountry(usa);
-            actorService.add(vinDiesel);
+        Actor vinDiesel = new Actor("Vin Diesel");
+        vinDiesel.setCountry(usa);
+        actorService.add(vinDiesel);
 
-            Movie fastAndFurious = new Movie("Fast and Furious");
-            fastAndFurious.setActors(List.of(vinDiesel));
-            movieService.add(fastAndFurious);
+        Movie fastAndFurious = new Movie("Fast and Furious");
+        fastAndFurious.setActors(List.of(vinDiesel));
+        movieService.add(fastAndFurious);
 
-            System.out.println(movieService.get(fastAndFurious.getId()));
-        } catch (DataProcessingException e) {
-            System.err.println("Error while processing data: " + e.getMessage());
-        } finally {
-            HibernateUtil.shutdown();
-        }
+        System.out.println(movieService.get(fastAndFurious.getId()));
+
+        HibernateUtil.shutdown();
     }
 }
