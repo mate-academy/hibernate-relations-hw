@@ -5,10 +5,10 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    private static final SessionFactory factory = initFactory();
+    private static final SessionFactory FACTORY = initFactory();
 
     public static SessionFactory getSessionFactory() {
-        return factory;
+        return FACTORY;
     }
 
     private static SessionFactory initFactory() {
