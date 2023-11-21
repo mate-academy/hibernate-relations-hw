@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
+    private static final String EXCEPTION_CAN_T_GET_MOVIE_MESSAGE = "Can not get movie with id: ";
+
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -33,9 +35,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Optional<Movie> get(Long id) {
-        Session session = factory.openSession();
-        Optional movie = Optional.ofNullable(session.get(Movie.class, id));
-        session.close();
-        return movie;
+        try (Session session = factory.openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(EXCEPTION_CAN_T_GET_MOVIE_MESSAGE + id, e);
+        }
     }
 }

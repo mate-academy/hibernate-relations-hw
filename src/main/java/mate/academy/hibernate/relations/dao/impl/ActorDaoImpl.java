@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
+    private static final String EXCEPTION_CAN_T_GET_ACTOR_MESSAGE = "Can not get actor with id: ";
+
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -33,9 +35,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Session session = factory.openSession();
-        Optional<Actor> actor = Optional.ofNullable(session.get(Actor.class, id));
-        session.close();
-        return actor;
+        try (Session session = factory.openSession()) {
+            return Optional.ofNullable(session.get(Actor.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(EXCEPTION_CAN_T_GET_ACTOR_MESSAGE + id, e);
+        }
     }
 }

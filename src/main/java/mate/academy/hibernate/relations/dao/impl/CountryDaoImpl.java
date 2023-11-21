@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
+    private static final String EXCEPTION_CAN_T_GET_COUNTRY_MESSAGE =
+            "Can not get country with id: ";
+
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -33,9 +36,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Session session = factory.openSession();
-        Optional country = Optional.ofNullable(session.get(Country.class, id));
-        session.close();
-        return country;
+        try (Session session = factory.openSession()) {
+            return Optional.ofNullable(session.get(Country.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(EXCEPTION_CAN_T_GET_COUNTRY_MESSAGE + id, e);
+        }
     }
 }
