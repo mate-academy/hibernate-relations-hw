@@ -28,7 +28,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while adding actor to the database", e);
+            throw new DataProcessingException("Error while adding actor to the database. Actor: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Error while getting actor from the database", e);
+            throw new DataProcessingException("Error while getting actor from the database. Actor ID: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -56,7 +56,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             return session.createQuery("FROM Actor", Actor.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Error while getting  actors from the database", e);
+            throw new DataProcessingException("Error while getting actors from the database", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -77,7 +77,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while updating actor in the database", e);
+            throw new DataProcessingException("Error while updating actor in the database. Actor: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -100,7 +100,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while deleting actor from the database", e);
+            throw new DataProcessingException("Error while deleting actor from the database. Actor ID: " + id, e);
         } finally {
             if (session != null) {
                 session.close();
