@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.model;
 
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,24 +43,6 @@ public class Country implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Country country = (Country) o;
-        return Objects.equals(id, country.id)
-                && Objects.equals(name, country.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
     }
 
     @Override
