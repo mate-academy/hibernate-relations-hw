@@ -38,16 +38,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         Movie movie = null;
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             movie = session.get(Movie.class, id);
         } catch (Exception e) {
             throw new DataProcessingException("Can't get the movie by id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
         return Optional.ofNullable(movie);
     }
