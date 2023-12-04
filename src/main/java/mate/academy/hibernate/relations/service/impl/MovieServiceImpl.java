@@ -1,3 +1,4 @@
+
 package mate.academy.hibernate.relations.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -20,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id)
-                .orElseThrow(() -> new EntityNotFoundException("Movie with id " + id
+                .orElseThrow(() -> new EntityNotFoundException("Country with id " + id
                 + "not found"));
     }
 }
