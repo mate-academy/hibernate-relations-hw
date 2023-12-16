@@ -18,9 +18,12 @@ public class Main {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        CountryService countryService = new CountryServiceImpl(); // TODO: Initialize with the actual implementation
-        ActorService actorService = new ActorServiceImpl(); // TODO: Initialize with the actual implementation
-        MovieService movieService = new MovieServiceImpl(); // TODO: Initialize with the actual implementation
+        CountryService countryService = new CountryServiceImpl();
+        // TODO: Initialize with the actual implementation
+        ActorService actorService = new ActorServiceImpl();
+        // TODO: Initialize with the actual implementation
+        MovieService movieService = new MovieServiceImpl();
+        // TODO: Initialize with the actual implementation
 
         Country usa = new Country("USA");
         countryService.add(usa);
