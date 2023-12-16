@@ -17,26 +17,20 @@ public class Main {
     public static void main(String[] args) {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
         CountryService countryService = new CountryServiceImpl();
         // TODO: Initialize with the actual implementation
         ActorService actorService = new ActorServiceImpl();
         // TODO: Initialize with the actual implementation
         MovieService movieService = new MovieServiceImpl();
         // TODO: Initialize with the actual implementation
-
         Country usa = new Country("USA");
         countryService.add(usa);
-
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         actorService.add(vinDiesel);
-
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         movieService.add(fastAndFurious);
-
-        // Retrieve and print the movie details
         Movie retrievedMovie = movieService.get(fastAndFurious.getId());
         System.out.println("Retrieved Movie: " + retrievedMovie);
     }
