@@ -7,6 +7,9 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -15,19 +18,23 @@ public class Main {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        CountryService countryService = new CountryServiceImpl(); // TODO: Initialize with the actual implementation
+        ActorService actorService = new ActorServiceImpl(); // TODO: Initialize with the actual implementation
+        MovieService movieService = new MovieServiceImpl(); // TODO: Initialize with the actual implementation
+
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
         movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+
+        // Retrieve and print the movie details
+        Movie retrievedMovie = movieService.get(fastAndFurious.getId());
+        System.out.println("Retrieved Movie: " + retrievedMovie);
     }
 }
