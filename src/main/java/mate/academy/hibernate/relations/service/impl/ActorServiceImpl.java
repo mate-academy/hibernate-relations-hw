@@ -9,6 +9,7 @@ import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class ActorServiceImpl implements ActorService {
     private ActorDao actorDao = new ActorDaoImpl(HibernateUtil.getSessionFactory());
+
     @Override
     public Actor add(Actor actor) {
         return actorDao.add(actor);
