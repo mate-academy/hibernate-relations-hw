@@ -5,9 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
+    private static SessionFactory instance = initSessionFactory();
 
-    public static SessionFactory buildSessionFactory() {
+    public HibernateUtil() {
+
+    }
+
+    public static SessionFactory initSessionFactory() {
         try {
             return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         } catch (DataProcessingException e) {
@@ -17,10 +21,6 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
-        return SESSION_FACTORY;
-    }
-
-    public static void shutdown() {
-        getSessionFactory().close();
+        return instance;
     }
 }
