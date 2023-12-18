@@ -23,6 +23,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
+            return country;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -33,13 +34,15 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 session.close();
             }
         }
-        return country;
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return Optional.ofNullable(session.get(Country.class, id));
+        try (Session session = factory.openSession()) {
+            Country country = session.get(Country.class, id);
+            return Optional.ofNullable(country);
+        } catch (Exception e) {
+            throw new DataProcessingException("Can`t find country for id: " + id, e);
         }
     }
 }
