@@ -23,6 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
+            return actor;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -33,13 +34,15 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-        return actor;
     }
 
     @Override
     public Optional<Actor> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return Optional.ofNullable(session.get(Actor.class, id));
+        try (Session session = factory.openSession()) {
+            Actor actor = session.get(Actor.class, id);
+            return Optional.ofNullable(actor);
+        } catch (Exception e) {
+            throw new DataProcessingException("Can not find actor for id: " + id, e);
         }
     }
 }
