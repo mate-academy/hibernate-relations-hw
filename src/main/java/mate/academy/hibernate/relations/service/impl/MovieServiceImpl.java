@@ -2,16 +2,16 @@ package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.DataProcessingException;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import mate.academy.hibernate.relations.util.HibernateUtil;
+
+import java.util.Optional;
 
 public class MovieServiceImpl implements MovieService {
-    private MovieDao movieDao = new MovieDaoImpl(HibernateUtil.getSessionFactory());
+    private final MovieDao movieDao;
 
-    public MovieDao getMovieDao() {
-        return movieDao;
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() ->
-                new DataProcessingException("Can`t get movie from DB"));
+        Optional<Movie> movieOptional = movieDao.get(id);
+        return movieOptional.orElse(null);
     }
 }
