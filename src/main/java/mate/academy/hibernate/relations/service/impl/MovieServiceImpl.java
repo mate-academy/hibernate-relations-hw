@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> movieOptional = movieDao.get(id);
-        return movieOptional.orElse(null);
+        Optional<Movie> optionalMovie = movieDao.get(id);
+        return optionalMovie.orElse(null);
     }
 }
