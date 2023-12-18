@@ -22,8 +22,8 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl
-                ((sessionFactory)));
+        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl(
+                (sessionFactory)));
         // TODO: initialize this instance
         countryService.add(usa);
 
