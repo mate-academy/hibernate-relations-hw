@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "id", nullable = false)
     private Long id;
     private String name;
     @ManyToOne(fetch = FetchType.EAGER)
