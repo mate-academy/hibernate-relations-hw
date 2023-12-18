@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -23,7 +22,8 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(new CountryDaoImpl((sessionFactory)));
+        CountryService countryService = new CountryServiceImpl
+                (new CountryDaoImpl((sessionFactory)));
         // TODO: initialize this instance
         countryService.add(usa);
 
