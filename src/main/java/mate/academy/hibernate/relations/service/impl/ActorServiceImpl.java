@@ -1,11 +1,9 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.dao.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
-
-import java.util.Optional;
 
 public class ActorServiceImpl implements ActorService {
     private final ActorDao actorDao;
