@@ -1,7 +1,11 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "actors")
@@ -59,10 +63,9 @@ public class Actor implements Cloneable {
 
     @Override
     public String toString() {
-        return "Actor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", country=" + country +
-                '}';
+        return "Actor{" + "id=" + id
+                + ", name='" + name + '\''
+                + ", country=" + country
+                + '}';
     }
 }
