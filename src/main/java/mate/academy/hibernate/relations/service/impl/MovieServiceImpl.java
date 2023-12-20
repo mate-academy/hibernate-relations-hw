@@ -2,16 +2,14 @@ package mate.academy.hibernate.relations.service.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    private static MovieDao dao;
+    private final MovieDao dao;
 
-    public MovieServiceImpl(SessionFactory factory) {
-        dao = new MovieDaoImpl(factory);
+    public MovieServiceImpl(MovieDao dao) {
+        this.dao = dao;
     }
 
     @Override
