@@ -41,7 +41,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
         } catch (Exception ex) {
-            throw new DataProcessingException("Can't get a country with id: " + id, ex);
+            throw new DataProcessingException("Can't get a movie with id: " + id, ex);
         }
     }
 }
