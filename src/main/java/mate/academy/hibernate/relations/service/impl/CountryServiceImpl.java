@@ -20,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         Optional<Country> result = dao.get(id);
-        return result.orElseGet(Country::new);
+        return result.orElseThrow();
     }
 }

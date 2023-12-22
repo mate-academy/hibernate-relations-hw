@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         Optional<Actor> result = dao.get(id);
-        return result.orElseGet(Actor::new);
+        return result.orElseThrow();
     }
 }

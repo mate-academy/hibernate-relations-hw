@@ -20,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         Optional<Movie> result = dao.get(id);
-        return result.orElseGet(Movie::new);
+        return result.orElseThrow();
     }
 }
