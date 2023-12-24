@@ -34,6 +34,7 @@ public class ActorDaoImplTest extends AbstractTest {
         Assert.assertNotNull(actualChristianBale);
         Assert.assertEquals(1L, actualChristianBale.getId().longValue());
         Assert.assertEquals(christianBale.getName(), actualChristianBale.getName());
+
         verifyCreateActorWorks(actorDao, bradPitt.clone(), 2L);
         Optional<Actor> bradPittOptional = actorDao.get(2L);
         Assert.assertTrue(bradPittOptional.isPresent());
