@@ -5,13 +5,13 @@ import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import org.hibernate.SessionFactory;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
-    public MovieServiceImpl(SessionFactory sessionFactory) {
-        movieDao = new MovieDaoImpl(sessionFactory);
+    public MovieServiceImpl() {
+        movieDao = new MovieDaoImpl(HibernateUtil.getSessionFactory());
     }
 
     @Override
