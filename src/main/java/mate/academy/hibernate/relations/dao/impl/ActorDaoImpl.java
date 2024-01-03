@@ -27,7 +27,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error adding video to database", e);
+            throw new DataProcessingException("Error adding actor to database", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Error"
-                    + " while retrieving the movie from database", e);
+                    + " while retrieving the actor from database", e);
         }
     }
 }

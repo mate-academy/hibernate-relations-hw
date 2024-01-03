@@ -27,7 +27,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error adding video to database", e);
+            throw new DataProcessingException("Error adding country to database", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,7 +42,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Error"
-                    + " while retrieving the movie from database", e);
+                    + " while retrieving the country from database", e);
         }
     }
 }
