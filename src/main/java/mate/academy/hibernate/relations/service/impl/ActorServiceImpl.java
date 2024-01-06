@@ -7,6 +7,8 @@ import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
+import java.util.NoSuchElementException;
+
 public class ActorServiceImpl implements ActorService {
     private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private static final ActorDao actorDao = new ActorDaoImpl(sessionFactory);
@@ -18,6 +20,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).get();
+        return actorDao.get(id).orElseThrow(
+                () -> new NoSuchElementException("Unable get Actor by id: " + id));
     }
 }

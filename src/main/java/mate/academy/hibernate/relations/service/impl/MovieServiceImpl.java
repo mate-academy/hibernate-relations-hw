@@ -7,6 +7,8 @@ import mate.academy.hibernate.relations.service.MovieService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
+import java.util.NoSuchElementException;
+
 public class MovieServiceImpl implements MovieService {
     private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
     private static final MovieDao movieDao = new MovieDaoImpl(sessionFactory);
@@ -18,6 +20,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow(
+                () -> new NoSuchElementException("Unable get Movie by id: " + id));
     }
 }
