@@ -27,10 +27,12 @@ public class Main {
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
 
-        MovieService movieService = new MovieServiceImpl(movieDao);
         CountryService countryService = new CountryServiceImpl(countryDao);
         ActorService actorService = new ActorServiceImpl(actorDao);
+        MovieService movieService = new MovieServiceImpl(movieDao);
 
+        Movie fastAndFurious = new Movie("Fast and Furious");
+        movieService.add(fastAndFurious);
 
         Country usa = new Country("USA");
         countryService.add(usa);
@@ -39,10 +41,7 @@ public class Main {
         vinDiesel.setCountry(usa);
         actorService.add(vinDiesel);
 
-        Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        movieService.add(fastAndFurious);
-
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
