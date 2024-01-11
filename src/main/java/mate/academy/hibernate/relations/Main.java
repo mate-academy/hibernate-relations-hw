@@ -27,9 +27,10 @@ public class Main {
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
 
+        MovieService movieService = new MovieServiceImpl(movieDao);
         CountryService countryService = new CountryServiceImpl(countryDao);
         ActorService actorService = new ActorServiceImpl(actorDao);
-        MovieService movieService = new MovieServiceImpl(movieDao);
+
 
         Country usa = new Country("USA");
         countryService.add(usa);
