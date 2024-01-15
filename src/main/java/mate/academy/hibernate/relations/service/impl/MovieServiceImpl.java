@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -19,6 +20,7 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         Optional<Movie> optional = movieDao.get(id);
 
-        return optional.orElse(null);
+        return optional.orElseThrow(() ->
+                new EntityNotFoundException("Failed to find movie with ID " + id + "."));
     }
 }

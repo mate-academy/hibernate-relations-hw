@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
@@ -19,6 +20,7 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         Optional<Actor> optional = actorDao.get(id);
 
-        return optional.orElse(null);
+        return optional.orElseThrow(() ->
+                new EntityNotFoundException("Failed to find actor with ID " + id + "."));
     }
 }
