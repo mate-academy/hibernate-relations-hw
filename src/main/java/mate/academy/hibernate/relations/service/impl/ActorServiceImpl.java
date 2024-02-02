@@ -11,6 +11,7 @@ public class ActorServiceImpl implements ActorService {
     public ActorServiceImpl(ActorDao actorDao) {
         this.actorDao = actorDao;
     }
+
     @Override
     public Actor add(Actor actor) {
         try {
@@ -19,8 +20,9 @@ public class ActorServiceImpl implements ActorService {
             throw new DataProcessingException("Failed to add to the Db actor: " + actor);
         }
     }
+
     @Override
-    public Actor get(Long id){
+    public Actor get(Long id) {
         return actorDao.get(id)
                 .orElseThrow(() -> new DataProcessingException("Actor not found with id: " + id));
     }
