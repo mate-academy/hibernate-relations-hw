@@ -19,7 +19,6 @@ public class Movie implements Cloneable {
     @ManyToMany
     private List<Actor> actors;
 
-
     public Movie() {
     }
 
