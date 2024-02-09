@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.DataProcessingException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
@@ -20,6 +21,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(
-                () -> new DataProcessingException("Actor with required ID is not found"));
+                () -> new EntityNotFoundException("Actor with required ID is not found"));
     }
 }
