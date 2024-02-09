@@ -1,12 +1,10 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-
     private MovieDao movieDao;
 
     public MovieServiceImpl() {
@@ -23,7 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        Optional<Movie> optionalMovie = movieDao.get(id);
-        return optionalMovie.orElse(null);
+        return movieDao.get(id).orElseThrow(() ->
+                new IllegalArgumentException("Movie not found with id: " + id));
     }
 }

@@ -1,12 +1,10 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
-
     private CountryDao countryDao;
 
     public CountryServiceImpl() {
@@ -23,7 +21,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> optionalCountry = countryDao.get(id);
-        return optionalCountry.orElse(null);
+        return countryDao.get(id).orElseThrow(() ->
+                new IllegalArgumentException("Country not found with id: " + id));
     }
 }
