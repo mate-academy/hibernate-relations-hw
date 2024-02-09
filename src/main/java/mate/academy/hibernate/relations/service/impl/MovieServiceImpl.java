@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
-import mate.academy.hibernate.relations.DataProcessingException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
