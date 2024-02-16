@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(()
                 -> new RuntimeException("There is no way to get Actor by id: "
-                + id + ". That you get null"));
+                + id));
     }
 }

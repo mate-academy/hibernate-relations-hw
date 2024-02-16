@@ -20,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(()
                 -> new RuntimeException("There is no way to get Country by id: "
-                + id + ". That you get null"));
+                + id));
     }
 }
