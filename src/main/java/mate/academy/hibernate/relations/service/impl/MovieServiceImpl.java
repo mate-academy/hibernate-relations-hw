@@ -7,21 +7,19 @@ import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    private SessionFactory sessionFactory;
+    private MovieDao movieDao;
 
     public MovieServiceImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        movieDao = new MovieDaoImpl(sessionFactory);
     }
 
     @Override
     public Movie add(Movie movie) {
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         return movieDao.get(id).get();
     }
 }
