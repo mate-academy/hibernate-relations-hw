@@ -13,10 +13,8 @@ import javax.persistence.Table;
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "countryID")
     private Country country;
