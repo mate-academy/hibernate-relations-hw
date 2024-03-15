@@ -1,12 +1,9 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
