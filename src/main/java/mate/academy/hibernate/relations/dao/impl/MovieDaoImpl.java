@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -25,14 +26,11 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
-            if (movie.getId() == null) {
-                throw new RuntimeException("Can't add this movie to db -" + movie);
-            }
-        } catch (RuntimeException ex) {
+        } catch (EntityNotFoundException ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Exception", ex);
+            throw new DataProcessingException("Can't add this movie to db -" + movie, ex);
         } finally {
             if (session != null) {
                 session.close();
@@ -49,7 +47,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Movie movie;
         try (Session session = factory.openSession()) {
             movie = session.get(Movie.class, id);
-        } catch (RuntimeException ex) {
+        } catch (EntityNotFoundException ex) {
             throw new DataProcessingException("Can't get movie from db by id = " + id, ex);
         }
         return Optional.ofNullable(movie);

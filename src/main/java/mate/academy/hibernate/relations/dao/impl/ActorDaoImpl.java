@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -25,14 +26,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.persist(actor);
             transaction.commit();
-            if (actor.getId() == null) {
-                throw new RuntimeException("Can't add this actor to db - " + actor);
-            }
-        } catch (RuntimeException ex) {
+        } catch (EntityNotFoundException ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Exception!", ex);
+            throw new DataProcessingException("Can't add this actor to db - " + actor, ex);
         } finally {
             if (session != null) {
                 session.close();
@@ -49,7 +47,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         Actor actor;
         try (Session session = factory.openSession()) {
             actor = session.get(Actor.class, id);
-        } catch (RuntimeException ex) {
+        } catch (EntityNotFoundException ex) {
             throw new DataProcessingException("Can't get actor from db by id = " + id, ex);
         }
         return Optional.ofNullable(actor);
