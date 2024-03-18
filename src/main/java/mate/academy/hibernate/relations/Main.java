@@ -25,7 +25,7 @@ public class Main {
         Country usa = new Country("USA");
         Country ukraine = new Country("Ukraine");
         CountryService countryService =
-                new CountryServiceImpl(new CountryDaoImpl(sessionFactory)); // TODO: initialize this instance
+                new CountryServiceImpl(new CountryDaoImpl(sessionFactory));
         countryService.add(usa);
         countryService.add(ukraine);
         System.out.println(countryService.get(1L));
@@ -34,7 +34,7 @@ public class Main {
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService =
-                new ActorServiceImpl(new ActorDaoImpl(sessionFactory)); // TODO: initialize this instance
+                new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         actorService.add(vinDiesel);
         Actor ostapStupka = new Actor("Ostap Stupka");
         ostapStupka.setCountry(ukraine);
@@ -45,7 +45,7 @@ public class Main {
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService =
-                new MovieServiceImpl(new MovieDaoImpl(sessionFactory)); // TODO: initialize this instance
+                new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
         Movie tarasBulba = new Movie("Taras Bulba");
