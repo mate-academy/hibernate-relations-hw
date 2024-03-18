@@ -2,7 +2,6 @@ package mate.academy.hibernate.relations.service.impl;
 
 import java.util.Optional;
 import java.util.function.Supplier;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
