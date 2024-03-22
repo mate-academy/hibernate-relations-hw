@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
@@ -19,9 +19,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        if (movieDao.get(id).isEmpty()) {
-            throw new DataProcessingException("Can't find movie by id: " + id);
-        }
-        return movieDao.get(id).get();
+        return movieDao.get(id)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find actor by id: " + id));
     }
 }

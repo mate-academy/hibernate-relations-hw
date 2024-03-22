@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.CountryDao;
-import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
@@ -19,9 +19,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        if (countryDao.get(id).isEmpty()) {
-            throw new DataProcessingException("Can't find country by id: " + id);
-        }
-        return countryDao.get(id).get();
+        return countryDao.get(id)
+                .orElseThrow(() -> new EntityNotFoundException("Can't find actor by id: " + id));
     }
 }
