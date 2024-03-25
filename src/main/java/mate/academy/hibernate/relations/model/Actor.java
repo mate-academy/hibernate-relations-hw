@@ -1,8 +1,12 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.ManyToOne;
+
 public class Actor implements Cloneable {
     private Long id;
     private String name;
+
+    @ManyToOne
     private Country country;
 
     public Actor() {
