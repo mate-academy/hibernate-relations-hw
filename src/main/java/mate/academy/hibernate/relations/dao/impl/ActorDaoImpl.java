@@ -15,22 +15,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
+        try (Session session = factory.openSession()) {
+            Transaction transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add movie: " + actor, ex);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Can't add actor: " + actor, ex);
         }
         return actor;
     }
@@ -40,7 +30,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception ex) {
-            throw new DataProcessingException("Can't get movie with id: " + id, ex);
+            throw new DataProcessingException("Can't get actor with id: " + id, ex);
         }
     }
 }
