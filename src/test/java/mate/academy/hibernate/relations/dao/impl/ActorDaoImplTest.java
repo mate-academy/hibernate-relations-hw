@@ -5,6 +5,7 @@ import mate.academy.hibernate.relations.dao.AbstractTest;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
