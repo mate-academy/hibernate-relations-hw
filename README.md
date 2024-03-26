@@ -29,8 +29,7 @@ Your task is to implement the following steps:
 - complete implementation of all classes in the `mate/academy/hibernate/relations/model` package
 - complete implementation of all classes in the `mate/academy/hibernate/relations/dao/impl` package
 - create your custom unchecked DataProcessingException and throw it in the catch block on the DAO layer
-- complete implementation of all classes in the `mate/academy/hibernate/relations/service/impl/` package
-- create a `hibernate.cfg.xml` file and implement `mate/academy/hibernate/relations/util/HibernateUtil` class (this is required for the next step)
+fg- create a `hibernate.cfg.xml` file and implement `mate/academy/hibernate/relations/util/HibernateUtil` class (this is required for the next step)
 - make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
 
 #### [Try to avoid these common mistakes, while solving task](./checklist.md)
