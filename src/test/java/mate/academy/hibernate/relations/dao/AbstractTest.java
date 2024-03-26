@@ -13,7 +13,6 @@ import org.junit.Before;
 
 public abstract class AbstractTest {
     protected interface DataSourceProvider {
-
         enum IdentifierStrategy {
             IDENTITY,
             SEQUENCE
