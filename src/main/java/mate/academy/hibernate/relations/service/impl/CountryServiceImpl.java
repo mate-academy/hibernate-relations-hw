@@ -23,6 +23,7 @@ public class CountryServiceImpl implements CountryService {
         if (countryDao.get(id).isEmpty()) {
             throw new DataProcessingException("Can't get country with id: " + id);
         }
-        return countryDao.get(id).get();
+        return countryDao.get(id)
+                .orElseThrow(() -> new DataProcessingException("Can't get country with id:" + id));
     }
 }
