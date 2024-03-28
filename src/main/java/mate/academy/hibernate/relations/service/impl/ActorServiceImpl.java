@@ -2,6 +2,7 @@ package mate.academy.hibernate.relations.service.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
@@ -20,6 +21,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         Optional<Actor> actorList = actorDao.get(id);
-        return actorList.orElse(null);
+        return actorList.orElseThrow(() ->
+                new DataProcessingException("Can't find actror in db by id:" + id));
     }
 }
