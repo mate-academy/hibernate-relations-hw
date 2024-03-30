@@ -15,7 +15,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor add(Actor actor) {
         if (actor == null) {
-            throw new DataProcessingException("Cannot add null data");
+            throw new RuntimeException("Cannot add null data");
         }
         actorDao.add(actor);
         return actor;
@@ -24,8 +24,9 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         if (id == null) {
-            throw new DataProcessingException("Cannot get by null id");
+            throw new RuntimeException("Cannot get by null id");
         }
-        return actorDao.get(id).orElseThrow(DataProcessingException::new);
+        return actorDao.get(id).
+                orElseThrow(() -> new RuntimeException("No actor found with id: " + id));
     }
 }

@@ -15,7 +15,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie add(Movie movie) {
         if (movie == null) {
-            throw new DataProcessingException("Cannot add null data");
+            throw new RuntimeException("Cannot add null data");
         }
         movieDao.add(movie);
         return movie;
@@ -24,8 +24,9 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         if (id == null) {
-            throw new DataProcessingException("Cannot get by null id");
+            throw new RuntimeException("Cannot get by null id");
         }
-        return movieDao.get(id).orElseThrow(DataProcessingException::new);
+        return movieDao.get(id).
+                orElseThrow(() -> new RuntimeException("No movie found with id: " + id));
     }
 }

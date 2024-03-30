@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
@@ -15,7 +16,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country add(Country country) {
         if (country == null) {
-            throw new DataProcessingException("Cannot add null data");
+            throw new RuntimeException("Cannot add null data");
         }
         countryDao.add(country);
         return country;
@@ -24,8 +25,9 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         if (id == null) {
-            throw new DataProcessingException("Cannot get by null id");
+            throw new RuntimeException("Cannot get by null id");
         }
-        return countryDao.get(id).orElseThrow(DataProcessingException::new);
+        return countryDao.get(id).
+                orElseThrow(() -> new RuntimeException("No country found with id: " + id));
     }
 }
