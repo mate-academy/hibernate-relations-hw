@@ -1,8 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import java.sql.SQLException;
 import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;

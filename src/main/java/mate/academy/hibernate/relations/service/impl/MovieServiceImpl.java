@@ -1,10 +1,9 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-
-import java.util.NoSuchElementException;
 
 public class MovieServiceImpl implements MovieService {
     private static final String EXCEPTION_MESSAGE = "Failed to get movie by id ";
@@ -22,6 +21,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() -> new NoSuchElementException(EXCEPTION_MESSAGE + id));
+        return movieDao.get(id).orElseThrow(() ->
+                    new NoSuchElementException(EXCEPTION_MESSAGE + id));
     }
 }

@@ -36,7 +36,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 session.close();
             }
         }
-        return null;
+        return country;
     }
 
     @Override
