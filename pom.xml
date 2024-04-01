@@ -19,7 +19,6 @@
         <hibernate-core.version>6.4.4.Final</hibernate-core.version>
         <mysql-connector-j.version>8.3.0</mysql-connector-j.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
