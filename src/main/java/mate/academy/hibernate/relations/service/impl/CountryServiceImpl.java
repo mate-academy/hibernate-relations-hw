@@ -6,20 +6,20 @@ import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
-    private final CountryDao dao;
+    private final CountryDao countryDao;
 
-    public CountryServiceImpl(CountryDao dao) {
-        this.dao = dao;
+    public CountryServiceImpl(CountryDao countryDao) {
+        this.countryDao = countryDao;
     }
 
     @Override
     public Country add(Country country) {
-        return dao.add(country);
+        return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
-        return dao.get(id).orElseThrow(() -> new NoSuchElementException(
+        return countryDao.get(id).orElseThrow(() -> new NoSuchElementException(
                 String.format("Country with ID %d does not exist in the database.", id)));
     }
 }
