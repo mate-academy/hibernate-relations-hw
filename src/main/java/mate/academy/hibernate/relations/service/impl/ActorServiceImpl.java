@@ -18,6 +18,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElse(null);
+        return actorDao.get(id).orElseThrow(RuntimeException::new);
     }
 }
