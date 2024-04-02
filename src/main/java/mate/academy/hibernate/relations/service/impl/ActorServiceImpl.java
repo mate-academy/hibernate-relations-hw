@@ -19,9 +19,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        if (actorDao.get(id).isEmpty()) {
-            throw new DataProcessingException("There's no actor with specified id: " + id);
-        }
-        return actorDao.get(id).get();
+        return actorDao.get(id).orElseThrow(() ->
+                new DataProcessingException("There's no actor with specified id: " + id));
     }
 }
