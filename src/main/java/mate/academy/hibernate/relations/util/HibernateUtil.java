@@ -4,10 +4,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    private static SessionFactory instance = getInstance();
+    private static final SessionFactory INSTANCE = getInstance();
 
     public static SessionFactory getSessionFactory() {
-        return instance;
+        return INSTANCE;
     }
 
     private static SessionFactory getInstance() {
