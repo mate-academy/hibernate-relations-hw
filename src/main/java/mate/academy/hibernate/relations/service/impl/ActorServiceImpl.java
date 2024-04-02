@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
@@ -22,10 +23,8 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        if (id == null) {
-            throw new RuntimeException("Cannot get by null id");
-        }
         return actorDao.get(id)
-                        .orElseThrow(() -> new RuntimeException("No actor found with id: " + id));
+                        .orElseThrow(() ->
+                                new NoSuchElementException("No actor found with id: " + id));
     }
 }
