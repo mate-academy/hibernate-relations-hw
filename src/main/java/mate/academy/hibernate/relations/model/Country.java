@@ -1,19 +1,16 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
-
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "countries")
 public class Country implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Actor> actors;
 
     public Country() {
     }
@@ -38,14 +35,6 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
-    public List<Actor> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<Actor> actors) {
-        this.actors = actors;
-    }
-
     @Override
     public Country clone() {
         try {
@@ -60,7 +49,6 @@ public class Country implements Cloneable {
         return "Country{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", actor='" + actors + '\''
                 + '}';
     }
 }

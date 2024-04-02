@@ -3,9 +3,7 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
-import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Movie;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,31 +15,33 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (DataProcessingException e) {
             if (transaction != null) {
                 transaction.rollback();
-                throw new DataProcessingException("can`t save movie" + movie,e);
             }
+            throw new DataProcessingException("Cannot save movie " + movie);
         } finally {
-            session.close();
+            if (transaction != null) {
+                session.close();
+            }
         }
         return movie;
     }
+
     @Override
     public Optional<Movie> get(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = factory.openSession()) {
             Movie movie = session.get(Movie.class, id);
             return Optional.ofNullable(movie);
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie with id " + id,e);
+        } catch (DataProcessingException e) {
+            throw new RuntimeException("сannot  get movie from database " + id);
         }
     }
 }
