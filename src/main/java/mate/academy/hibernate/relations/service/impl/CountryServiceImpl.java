@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.service.CountryService;
 import org.hibernate.SessionFactory;
 
 public class CountryServiceImpl implements CountryService {
-    private CountryDao countryDao;
+    private final CountryDao countryDao;
 
     public CountryServiceImpl(SessionFactory sessionFactory) {
         countryDao = new CountryDaoImpl(sessionFactory);
@@ -20,6 +20,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return null;
+        return countryDao.get(id).orElseThrow();
     }
 }

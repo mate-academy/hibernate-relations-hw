@@ -7,7 +7,7 @@ import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
 
     public MovieServiceImpl(SessionFactory sessionFactory) {
         movieDao = new MovieDaoImpl(sessionFactory);
@@ -20,6 +20,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).get();
+        return movieDao.get(id).orElseThrow();
     }
 }
