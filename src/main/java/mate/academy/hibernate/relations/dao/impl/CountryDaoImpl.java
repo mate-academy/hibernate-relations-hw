@@ -22,30 +22,25 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.persist(country);
             transaction.commit();
             return country;
-        } catch (Exception exception) {
+        } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("can't add country");
+            throw new DataProcessingException("can't add country " + country, ex);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        Session session = factory.openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
+        try (Session session = factory.openSession()) {
             Country country = session.get(Country.class, id);
-            transaction.commit();
             return Optional.ofNullable(country);
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("can't get country");
+        } catch (Exception ex) {
+            throw new DataProcessingException("can't get country by id " + id, ex);
         }
     }
 }
