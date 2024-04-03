@@ -7,7 +7,6 @@ public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
 
     private HibernateUtil() {
-        throw new UnsupportedOperationException("Can't instantiate utility class");
     }
 
     private static SessionFactory initSessionFactory() {

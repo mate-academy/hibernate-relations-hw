@@ -26,7 +26,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while adding country");
+            throw new DataProcessingException("Error while adding country" + country, e);
         } finally {
             if (transaction != null) {
                 session.close();
