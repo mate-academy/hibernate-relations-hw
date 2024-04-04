@@ -20,7 +20,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (DataProcessingException e) {
             if (transaction != null) {
@@ -28,9 +28,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             }
             throw new DataProcessingException("Cannot add actor " + actor);
         } finally {
-            if (transaction != null) {
-                session.close();
-            }
+            session.close();
         }
         return actor;
 
