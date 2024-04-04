@@ -23,14 +23,15 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             transaction = session.beginTransaction();
             session.persist(country);
             transaction.commit();
-            session.close();
             return country;
         } catch (Exception e) {
             transaction.rollback();
             throw new DataProcessingException("Error adding entity: "
-                    + Country.class + " to the database", e);
+                    + country + " to the database", e);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -39,8 +40,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("can't get an entity: "
-                    + Country.class + " from the DB", e);
+            throw new DataProcessingException("can't get an entity with id: "
+                    + id + " from the DB", e);
         }
     }
 }
