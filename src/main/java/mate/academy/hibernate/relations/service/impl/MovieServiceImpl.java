@@ -21,8 +21,7 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         return movieDao.get(id)
                 .orElseThrow(
-                            ()
-                                -> new DataProcessingException("Can`t get any movie with id: "
-                                    + id));
+                            () -> new DataProcessingException("Can`t get any movie with id: "
+                                + id));
     }
 }
