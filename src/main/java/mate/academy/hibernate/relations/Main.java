@@ -24,14 +24,14 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryDao country = new CountryDaoImpl(sessionFactory);
-        CountryService countryService = new CountryServiceImpl(country);
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorDao actor = new ActorDaoImpl(sessionFactory);
-        ActorService actorService = new ActorServiceImpl(actor);
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
