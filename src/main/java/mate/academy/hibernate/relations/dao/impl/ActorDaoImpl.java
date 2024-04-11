@@ -21,7 +21,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
