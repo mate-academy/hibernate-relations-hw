@@ -14,8 +14,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-        actorDao.add(actor);
-        return null;
+        return actorDao.add(actor);
     }
 
     @Override
