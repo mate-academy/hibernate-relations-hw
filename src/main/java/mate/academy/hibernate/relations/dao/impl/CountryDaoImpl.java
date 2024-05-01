@@ -28,18 +28,25 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             }
             throw new DataProcessingException("Error adding country to the database", e);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return country;
     }
 
     @Override
     public Optional<Country> get(Long id) {
+        Session session = null;
         try {
-            Session session = factory.openSession();
+            session = factory.openSession();
             return Optional.ofNullable(session.get(Country.class,id));
         } catch (Exception e) {
             throw new DataProcessingException("Error retrieving country from the database", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
