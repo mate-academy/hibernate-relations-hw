@@ -29,7 +29,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             throw new DataProcessingException("Can not save actor" + actor.toString(), e);
         } finally {
             if (session != null) {
-             session.close();
+                session.close();
             }
         }
         return actor;

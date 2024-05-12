@@ -1,15 +1,14 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
-import java.util.NoSuchElementException;
-
 public class ActorServiceImpl implements ActorService {
     private final ActorDao actorDao;
 
-    public ActorServiceImpl (ActorDao actorDao) {
+    public ActorServiceImpl(ActorDao actorDao) {
         this.actorDao = actorDao;
     }
 
