@@ -38,11 +38,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         }
 
         try (Session session = factory.openSession()) {
-            if (session != null) {
-                return Optional.ofNullable(session.get(Country.class, id));
-            } else {
-                return Optional.empty();
-            }
+            return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can not get country with id: " + id, e);
         }
