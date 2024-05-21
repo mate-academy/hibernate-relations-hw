@@ -14,7 +14,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     }
 
     @Override
-    public Country add(Country country) throws DataProcessingException {
+    public Country add(Country country) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -37,7 +37,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     }
 
     @Override
-    public Optional<Country> get(Long id) throws DataProcessingException {
+    public Optional<Country> get(Long id) {
         try (Session session = super.factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {

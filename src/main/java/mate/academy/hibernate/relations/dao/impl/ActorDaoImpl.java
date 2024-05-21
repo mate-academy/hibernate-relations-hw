@@ -14,11 +14,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     }
 
     @Override
-    public Actor add(Actor actor) throws DataProcessingException {
+    public Actor add(Actor actor) {
         Transaction transaction = null;
         try (Session session = super.factory.openSession()) {
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
             return actor;
         } catch (Exception e) {
@@ -30,8 +30,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     }
 
     @Override
-    public Optional<Actor> get(Long id) throws DataProcessingException {
-        try (Session session = super.factory.openSession()) {
+    public Optional<Actor> get(Long id) {
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can not get actor from DB", e);

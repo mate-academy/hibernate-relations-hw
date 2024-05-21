@@ -14,7 +14,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     }
 
     @Override
-    public Movie add(Movie movie) throws DataProcessingException {
+    public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -37,7 +37,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     }
 
     @Override
-    public Optional<Movie> get(Long id) throws DataProcessingException {
+    public Optional<Movie> get(Long id) {
         try (Session session = super.factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
