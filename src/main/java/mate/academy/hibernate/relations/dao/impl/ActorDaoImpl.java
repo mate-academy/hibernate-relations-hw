@@ -15,13 +15,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        SessionFactory sessionFactory = factory;
         Session session = null;
         Transaction transaction = null;
         try {
-            session = sessionFactory.openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -39,8 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         Optional<Actor> actor;
-        try (SessionFactory sessionFactory = factory;
-                Session session = sessionFactory.openSession()) {
+        try (Session session = factory.openSession()) {
             actor = Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception ex) {
             throw new DataProcessingException("Can't find actor with id: " + id, ex);
