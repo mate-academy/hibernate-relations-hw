@@ -1,10 +1,8 @@
 package mate.academy.hibernate.relations.util;
 
-import jakarta.persistence.Entity;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-@Entity
 public class HibernateUtil {
     private static final SessionFactory instance = initSessionFactory();
 
