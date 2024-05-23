@@ -24,6 +24,9 @@ public class Movie implements Cloneable {
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
+    public Movie() {
+    }
+
     public Movie(String title) {
         this.title = title;
     }
