@@ -4,9 +4,9 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -15,11 +15,13 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = factory.openSession();
+        Session session = null;
+        Transaction transaction = null;
         try {
-            session.beginTransaction();
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.persist(actor);
-            session.getTransaction().commit();
+            transaction.commit();
             return actor;
         } catch (Exception e) {
             if (session.getTransaction() != null) {
@@ -36,12 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
-            Actor actor;
-            actor = session.get(Actor.class, id);
-            if (actor != null) {
-                Hibernate.initialize(actor.getCountry());
-            }
-            return Optional.ofNullable(actor);
+            return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get Actor entity by id: " + id, e);
         }
