@@ -6,6 +6,7 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -14,15 +15,17 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        Session session = factory.openSession();
+        Session session = null;
+        Transaction transaction = null;
         try {
-            session.beginTransaction();
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.persist(movie);
-            session.getTransaction().commit();
+            transaction.commit();
             return movie;
         } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
             }
             throw new DataProcessingException("Can't insert Movie entity", e);
         } finally {
@@ -35,11 +38,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
-            Movie movie;
-            movie = session.get(Movie.class, id);
-            return Optional.ofNullable(movie);
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get Movie entity by id: " + id, e);
+            throw new DataProcessingException("Can't get Movie entity by id: "
+                    + id, e);
         }
     }
 }

@@ -24,8 +24,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction.commit();
             return actor;
         } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
             }
             throw new DataProcessingException("Can't insert Actor entity", e);
         } finally {
@@ -40,7 +40,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get Actor entity by id: " + id, e);
+            throw new DataProcessingException("Can't get Actor entity by id: "
+                    + id, e);
         }
     }
 }

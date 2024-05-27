@@ -6,6 +6,7 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -14,15 +15,17 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        Session session = factory.openSession();
+        Session session = null;
+        Transaction transaction = null;
         try {
-            session.beginTransaction();
+            session = factory.openSession();
+            transaction = session.beginTransaction();
             session.persist(country);
-            session.getTransaction().commit();
+            transaction.commit();
             return country;
         } catch (Exception e) {
-            if (session.getTransaction() != null) {
-                session.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
             }
             throw new DataProcessingException("Can't insert Country entity", e);
         } finally {
@@ -35,11 +38,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
-            Country country;
-            country = session.get(Country.class, id);
-            return Optional.ofNullable(country);
+            return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get Country entity by id: " + id, e);
+            throw new DataProcessingException("Can't get Country entity by id: "
+                    + id, e);
         }
     }
 }
