@@ -6,7 +6,7 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
-    private static final String ACTOR_NOT_FOUND = "Actor by id not found, id: ";
+    private static final String ACTOR_NOT_FOUND_MESSAGE = "Actor by id not found, id: ";
     private final ActorDao actorDao;
 
     public ActorServiceImpl(ActorDao actorDao) {
@@ -21,6 +21,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(
-                () -> new NoSuchElementException(ACTOR_NOT_FOUND + id));
+                () -> new NoSuchElementException(ACTOR_NOT_FOUND_MESSAGE + id));
     }
 }

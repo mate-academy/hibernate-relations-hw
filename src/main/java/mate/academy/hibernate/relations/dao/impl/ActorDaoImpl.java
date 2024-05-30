@@ -9,9 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
-    private static final String FAILED_ADDING_ACTOR
+    private static final String FAILED_ADDING_ACTOR_MESSAGE
             = "Failed to add Actor to the database. Actor: ";
-    private static final String FAILED_RETRIEVE_ACTOR
+    private static final String FAILED_RETRIEVE_ACTOR_MESSAGE
             = "Failed to retrieve Actor from the database. Actor id: ";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -25,13 +25,13 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(actor);
+            session.persist(actor);
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(FAILED_ADDING_ACTOR + actor, e);
+            throw new DataProcessingException(FAILED_ADDING_ACTOR_MESSAGE + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -45,7 +45,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException(FAILED_RETRIEVE_ACTOR + id, e);
+            throw new DataProcessingException(FAILED_RETRIEVE_ACTOR_MESSAGE + id, e);
         }
     }
 }

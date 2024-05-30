@@ -9,9 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private static final String FAILED_ADDING_COUNTRY
+    private static final String FAILED_ADDING_COUNTRY_MESSAGE
             = "Failed to add Country to the database. Country: ";
-    private static final String FAILED_RETRIEVE_COUNTRY
+    private static final String FAILED_RETRIEVE_COUNTRY_MESSAGE
             = "Failed to retrieve Country from the database. Country id: ";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -25,13 +25,13 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(country);
+            session.persist(country);
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(FAILED_ADDING_COUNTRY + country, e);
+            throw new DataProcessingException(FAILED_ADDING_COUNTRY_MESSAGE + country, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -45,7 +45,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (RuntimeException e) {
-            throw new DataProcessingException(FAILED_RETRIEVE_COUNTRY + id, e);
+            throw new DataProcessingException(FAILED_RETRIEVE_COUNTRY_MESSAGE + id, e);
         }
     }
 }

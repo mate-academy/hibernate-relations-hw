@@ -10,9 +10,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
-    private static final String FAILED_ADDING_MOVIE
+    private static final String FAILED_ADDING_MOVIE_MESSAGE
             = "Failed to add Movie to the database. Movie: ";
-    private static final String FAILED_RETRIEVE_COUNTRY
+    private static final String FAILED_RETRIEVE_COUNTRY_MESSAGE
             = "Failed to retrieve movie from the database. Movie id: ";
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -26,13 +26,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException(FAILED_ADDING_MOVIE + movie, e);
+            throw new DataProcessingException(FAILED_ADDING_MOVIE_MESSAGE + movie, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -50,7 +50,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             }
             return Optional.ofNullable(movie);
         } catch (RuntimeException e) {
-            throw new DataProcessingException(FAILED_RETRIEVE_COUNTRY + id, e);
+            throw new DataProcessingException(FAILED_RETRIEVE_COUNTRY_MESSAGE + id, e);
         }
     }
 }

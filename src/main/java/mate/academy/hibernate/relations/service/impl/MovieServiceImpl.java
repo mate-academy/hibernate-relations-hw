@@ -6,7 +6,7 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
-    private static final String MOVIE_NOT_FOUND = "Movie by id not found, id: ";
+    private static final String MOVIE_NOT_FOUND_MESSAGE = "Movie by id not found, id: ";
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -21,6 +21,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new NoSuchElementException(MOVIE_NOT_FOUND + id));
+                () -> new NoSuchElementException(MOVIE_NOT_FOUND_MESSAGE + id));
     }
 }
