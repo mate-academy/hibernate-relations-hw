@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.MovieService;
 public class MovieServiceImpl implements MovieService {
     private final MovieDao movieDao;
 
-    MovieServiceImpl(MovieDao movieDao) {
+    public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
 

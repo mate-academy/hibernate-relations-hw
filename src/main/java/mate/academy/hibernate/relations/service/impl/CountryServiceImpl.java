@@ -8,9 +8,10 @@ import mate.academy.hibernate.relations.service.CountryService;
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
-    CountryServiceImpl(CountryDao countryDao) {
+    public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
+
     @Override
     public Country add(Country country) {
         return countryDao.add(country);
