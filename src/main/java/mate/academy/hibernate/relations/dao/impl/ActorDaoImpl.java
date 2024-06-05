@@ -33,7 +33,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-
         return actor;
     }
 
