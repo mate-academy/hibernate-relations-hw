@@ -1,25 +1,28 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
-import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
-    private ActorDao dao;
+    private ActorDao actorDao;
 
-    public ActorServiceImpl(SessionFactory sessionFactory) {
-        this.dao = new ActorDaoImpl(sessionFactory);
+    public ActorServiceImpl(ActorDao actorDao) {
+        this.actorDao = actorDao;
     }
 
     @Override
     public Actor add(Actor actor) {
-        return dao.add(actor);
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return dao.get(id).orElse(null);
+        return actorDao.get(id).orElseThrow(
+                () -> new DataProcessingException("Can't get actor with id: " + id,
+                        new EntityNotFoundException())
+        );
     }
 }
