@@ -15,32 +15,42 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
+        return executeInsideTransaction(session -> {
             session.persist(actor);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add an actor " + actor, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return actor;
+            return actor;
+        });
     }
 
     @Override
     public Optional<Actor> get(Long id) {
+        return execute(session -> Optional.ofNullable(session.get(Actor.class, id)));
+    }
+
+    private <T> T executeInsideTransaction(SessionAction<T> action) {
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
-            return Optional.ofNullable(session.get(Actor.class, id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't receive an actor with id: " + id, e);
+            transaction = session.beginTransaction();
+            T result = action.execute(session);
+            transaction.commit();
+            return result;
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Transaction failed", e);
         }
+    }
+
+    private <T> T execute(SessionAction<T> action) {
+        try (Session session = factory.openSession()) {
+            return action.execute(session);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Operation failed", e);
+        }
+    }
+
+    @FunctionalInterface
+    private interface SessionAction<T> {
+        T execute(Session session);
     }
 }

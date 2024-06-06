@@ -15,33 +15,42 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
+        return executeInsideTransaction(session -> {
             session.persist(movie);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add a movie " + movie, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return movie;
+            return movie;
+        });
     }
 
     @Override
     public Optional<Movie> get(Long id) {
+        return execute(session -> Optional.ofNullable(session.get(Movie.class, id)));
+    }
+
+    private <T> T executeInsideTransaction(SessionAction<T> action) {
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
-            Movie movie = session.get(Movie.class, id);
-            return Optional.ofNullable(movie);
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't receive a movie with id: " + id, e);
+            transaction = session.beginTransaction();
+            T result = action.execute(session);
+            transaction.commit();
+            return result;
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Transaction failed", e);
         }
+    }
+
+    private <T> T execute(SessionAction<T> action) {
+        try (Session session = factory.openSession()) {
+            return action.execute(session);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Operation failed", e);
+        }
+    }
+
+    @FunctionalInterface
+    private interface SessionAction<T> {
+        T execute(Session session);
     }
 }

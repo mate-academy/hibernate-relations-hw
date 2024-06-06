@@ -15,33 +15,42 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
+        return executeInsideTransaction(session -> {
             session.persist(country);
-            transaction.commit();
-        } catch (RuntimeException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                throw new DataProcessingException("Can't add a country " + country, e);
-            }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return country;
+            return country;
+        });
     }
 
     @Override
     public Optional<Country> get(Long id) {
+        return execute(session -> Optional.ofNullable(session.get(Country.class, id)));
+    }
+
+    private <T> T executeInsideTransaction(SessionAction<T> action) {
+        Transaction transaction = null;
         try (Session session = factory.openSession()) {
-            Country country = session.get(Country.class, id);
-            return Optional.ofNullable(session.get(Country.class, id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't receive a country with id: " + id, e);
+            transaction = session.beginTransaction();
+            T result = action.execute(session);
+            transaction.commit();
+            return result;
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Transaction failed", e);
         }
+    }
+
+    private <T> T execute(SessionAction<T> action) {
+        try (Session session = factory.openSession()) {
+            return action.execute(session);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Operation failed", e);
+        }
+    }
+
+    @FunctionalInterface
+    private interface SessionAction<T> {
+        T execute(Session session);
     }
 }
