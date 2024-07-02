@@ -10,8 +10,13 @@ public class HibernateUtil {
     }
 
     private static SessionFactory initSessionFactory() {
-        return new Configuration().configure().buildSessionFactory();
+        try {
+            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        } catch (Exception e) {
+            throw new RuntimeException("Can't initialize Hibernate session factory", e);
+        }
     }
+
     public static SessionFactory getSessionFactory() {
         return instance;
     }
