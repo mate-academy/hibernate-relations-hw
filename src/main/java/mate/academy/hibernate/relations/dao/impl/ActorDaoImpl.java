@@ -38,17 +38,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             Actor actor = session.get(Actor.class, id);
             return Optional.ofNullable(actor);
         } catch (HibernateException e) {
             throw new DataProcessingException("Error retrieving actor with id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
