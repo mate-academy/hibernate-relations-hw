@@ -22,6 +22,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
 
         return countryDao.get(id).orElseThrow(() ->
-                new EntityNotFoundException("Can't get actor by id", new RuntimeException()));
+                new EntityNotFoundException("Can't get country by id"));
     }
 }

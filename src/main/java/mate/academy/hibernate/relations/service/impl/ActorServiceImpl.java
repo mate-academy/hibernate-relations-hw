@@ -21,6 +21,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
 
         return actorDao.get(id).orElseThrow(() ->
-                new EntityNotFoundException("Can't get actor by id", new RuntimeException()));
+                new EntityNotFoundException("Can't get actor by id"));
     }
 }
