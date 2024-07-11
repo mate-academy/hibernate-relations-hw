@@ -2,17 +2,14 @@ package mate.academy.hibernate.relations.service.impl;
 
 import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
-import mate.academy.hibernate.relations.util.HibernateUtil;
-import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    private static MovieDao movieDao;
+    private final MovieDao movieDao;
 
-    public MovieServiceImpl(SessionFactory sessionFactory) {
-        movieDao = new MovieDaoImpl(HibernateUtil.getInstance());
+    public MovieServiceImpl(MovieDao movieDao) {
+        this.movieDao = movieDao;
     }
 
     @Override
