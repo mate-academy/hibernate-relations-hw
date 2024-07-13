@@ -1,9 +1,25 @@
 package mate.academy.hibernate.relations.util;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-    public static SessionFactory getSessionFactory() {
-        return null;
+    private static final SessionFactory sessionFactory = initSessionFactory();
+
+    private HibernateUtil() {
     }
+
+    private static SessionFactory initSessionFactory() {
+        try {
+            return new Configuration().configure().buildSessionFactory();
+        } catch (HibernateException e) {
+            throw new RuntimeException("Can't create session factory", e);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
 }
