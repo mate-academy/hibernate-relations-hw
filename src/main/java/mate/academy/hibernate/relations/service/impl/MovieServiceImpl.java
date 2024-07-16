@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
@@ -12,6 +11,7 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
+
     @Override
     public Movie add(Movie movie) {
         movieDao.add(movie);
@@ -20,6 +20,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(() -> new DataProcessingException("Unable to get movie with id " + id));
+        return movieDao.get(id).orElseThrow(() ->
+                new DataProcessingException("Unable to get movie with id " + id));
     }
 }
