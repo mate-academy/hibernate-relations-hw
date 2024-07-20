@@ -12,11 +12,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        return null;
+        String errorMessage = "Cannot add the movie: " + movie.toString();
+        return (Movie) super.add(movie, errorMessage);
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return null;
+        String errormesage = "Cannot get movie(ID=" + id + ") from DB";
+        return (Optional<Movie>) super.get(id, Movie.class.toString(), errormesage);
     }
 }

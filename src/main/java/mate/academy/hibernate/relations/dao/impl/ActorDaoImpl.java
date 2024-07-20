@@ -12,11 +12,13 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        return null;
+        String errorMessage = "Cannot add the actor: " + actor.toString();
+        return (Actor) super.add(actor, errorMessage);
     }
 
     @Override
     public Optional<Actor> get(Long id) {
-        return null;
+        String errormesage = "Cannot get actor(ID=" + id + ") from DB";
+        return (Optional<Actor>) super.get(id, Actor.class.toString(), errormesage);
     }
 }

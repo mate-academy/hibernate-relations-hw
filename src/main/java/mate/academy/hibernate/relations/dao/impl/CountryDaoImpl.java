@@ -12,11 +12,13 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        return null;
+        String errorMessage = "Cannot add the country: " + country.toString();
+        return (Country) super.add(country, errorMessage);
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        return null;
+        String errormesage = "Cannot get country(ID=" + id + ") from DB";
+        return (Optional<Country>) super.get(id, Country.class.toString(), errormesage);
     }
 }
