@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
@@ -26,6 +27,6 @@ public class CountryServiceImpl implements CountryService {
             throw new DataProcessingException("The argument (id) is null");
         }
         return countryDao.get(id).orElseThrow(()
-                -> new DataProcessingException("Can't get country by id, country is null"));
+                -> new EntityNotFoundException("Can't get country by id, country is null. " + id));
     }
 }

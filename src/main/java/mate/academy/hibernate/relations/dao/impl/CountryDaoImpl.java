@@ -23,7 +23,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             transaction = session.beginTransaction();
             session.persist(country);
             transaction.commit();
-            country.setId((Long) session.getIdentifier(country));
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

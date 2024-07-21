@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
@@ -26,6 +27,6 @@ public class MovieServiceImpl implements MovieService {
             throw new DataProcessingException("The argument (id) is null");
         }
         return movieDao.get(id).orElseThrow(()
-                -> new DataProcessingException("Can't get movie by id, movie is null"));
+                -> new EntityNotFoundException("Can't get movie by id, movie is null. " + id));
     }
 }
