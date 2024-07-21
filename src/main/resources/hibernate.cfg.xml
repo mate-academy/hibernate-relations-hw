@@ -5,7 +5,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/my_db?serverTimezone=UTC</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">illya</property>
+        <property name="hibernate.connection.password">password</property>
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <!-- https://docs.jboss.org/hibernate/orm/3.5/reference/en/html/session-configuration.html -->
