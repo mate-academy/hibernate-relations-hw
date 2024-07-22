@@ -1,6 +1,9 @@
 package mate.academy.hibernate.relations;
 
-import java.util.ArrayList;
+import java.util.List;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -14,39 +17,29 @@ import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
 import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
 import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
+import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        final ActorService actorService = new ActorServiceImpl(
-                new ActorDaoImpl(HibernateUtil.getSessionFactory())
-        );
-        final CountryService countryService = new CountryServiceImpl(
-                new CountryDaoImpl(HibernateUtil.getSessionFactory())
-        );
-        final MovieService movieService = new MovieServiceImpl(
-                new MovieDaoImpl(HibernateUtil.getSessionFactory())
-        );
+        // use this session factory when you will initialize service instances
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        Actor actor = new Actor();
-        actor.setName("Leonardo DiCaprio");
-        actorService.add(actor);
+        Country usa = new Country("USA");
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        CountryService countryService = new CountryServiceImpl(countryDao);
+        countryService.add(usa);
 
-        Country country = new Country();
-        country.setName("USA");
-        countryService.add(country);
+        Actor vinDiesel = new Actor("Vin Diesel");
+        vinDiesel.setCountry(usa);
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorService actorService = new ActorServiceImpl(actorDao);
+        actorService.add(vinDiesel);
 
-        Movie movie = new Movie();
-        movie.setTitle("Inception");
-        movie.setActors(new ArrayList<>());
-        movieService.add(movie);
-
-        Actor retrievedActor = actorService.get(actor.getId());
-        System.out.println("Retrieved Actor: " + retrievedActor.getName());
-
-        Country retrievedCountry = countryService.get(country.getId());
-        System.out.println("Retrieved Country: " + retrievedCountry.getName());
-
-        Movie retrievedMovie = movieService.get(movie.getId());
-        System.out.println("Retrieved Movie: " + retrievedMovie.getTitle());
+        Movie fastAndFurious = new Movie("Fast and Furious");
+        fastAndFurious.setActors(List.of(vinDiesel));
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+        MovieService movieService = new MovieServiceImpl(movieDao);
+        movieService.add(fastAndFurious);
+        System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
