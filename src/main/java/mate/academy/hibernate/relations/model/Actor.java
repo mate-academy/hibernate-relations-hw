@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "actors")
@@ -21,7 +21,7 @@ public class Actor implements Cloneable {
     @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 
-    @Transient
+    @ManyToOne
     private Country country;
 
     public Actor() {
@@ -31,7 +31,6 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -67,11 +66,7 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor cloned = (Actor) super.clone();
-            if (this.country != null) {
-                cloned.setCountry(this.country.clone());
-            }
-            return cloned;
+            return (Actor) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
@@ -82,7 +77,7 @@ public class Actor implements Cloneable {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country=" + (country != null ? country.getName() : "null")
+                + ", country=" + country
                 + '}';
     }
 }
