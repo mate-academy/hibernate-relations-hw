@@ -19,7 +19,6 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return Optional.ofNullable(actorDao.get(id)).get()
-                .orElse(null);
+        return Optional.ofNullable(actorDao.get(id)).get().orElse(null);
     }
 }

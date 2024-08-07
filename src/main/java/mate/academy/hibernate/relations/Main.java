@@ -18,26 +18,25 @@ import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
         CountryService countryService = new CountryServiceImpl(
-                new CountryDaoImpl(HibernateUtil.getSessionFactory())
+                new CountryDaoImpl(sessionFactory)
         );
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(
-                new ActorDaoImpl(HibernateUtil.getSessionFactory())
+                new ActorDaoImpl(sessionFactory)
         );
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(
-                new MovieDaoImpl(HibernateUtil.getSessionFactory())
+                new MovieDaoImpl(sessionFactory)
         );
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));

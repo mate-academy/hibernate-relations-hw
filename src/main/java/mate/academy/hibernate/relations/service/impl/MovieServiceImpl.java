@@ -19,7 +19,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return Optional.ofNullable(movieDao.get(id))
-                .get().orElse(null);
+        return Optional.ofNullable(movieDao.get(id)).get().orElse(null);
     }
 }

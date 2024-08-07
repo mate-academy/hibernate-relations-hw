@@ -19,7 +19,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return Optional.ofNullable(countryDao.get(id)).get()
-                .orElse(null);
+        return Optional.ofNullable(countryDao.get(id)).get().orElse(null);
     }
 }
