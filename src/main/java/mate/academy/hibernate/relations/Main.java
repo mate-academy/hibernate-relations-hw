@@ -36,6 +36,7 @@ public class Main {
         MovieService movieService
                 = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         movieService.add(fastAndFurious);
+
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
