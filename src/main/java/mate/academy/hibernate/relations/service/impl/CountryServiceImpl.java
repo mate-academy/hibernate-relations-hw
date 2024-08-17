@@ -14,21 +14,13 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country add(Country country) {
-        try {
-            return countryDao.add(country);
-        } catch (Exception e) {
-            throw new DataProcessingException("Error adding country: " + country, e);
-        }
+        return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
-        try {
-            return countryDao.get(id)
-                    .orElseThrow(()
-                            -> new DataProcessingException("Country not found with id: " + id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Error fetching country with id " + id, e);
-        }
+        return countryDao.get(id)
+                .orElseThrow(()
+                        -> new DataProcessingException("Country not found with id: " + id));
     }
 }

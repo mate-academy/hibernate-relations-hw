@@ -14,21 +14,14 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        try {
-            return movieDao.add(movie);
-        } catch (Exception e) {
-            throw new DataProcessingException("Error adding movie: " + movie, e);
-        }
+        return movieDao.add(movie);
     }
 
     @Override
     public Movie get(Long id) {
-        try {
-            return movieDao.get(id)
-                    .orElseThrow(()
-                            -> new DataProcessingException("Movie not found with id: " + id));
-        } catch (Exception e) {
-            throw new DataProcessingException("Error fetching movie with id " + id, e);
-        }
+        return movieDao.get(id)
+                .orElseThrow(()
+                        -> new DataProcessingException("Movie not found with id: " + id));
+
     }
 }
