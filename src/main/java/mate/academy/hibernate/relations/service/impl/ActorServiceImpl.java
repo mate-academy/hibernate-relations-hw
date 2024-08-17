@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.NoSuchElementException;
+import jakarta.persistence.EntityNotFoundException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
@@ -20,6 +20,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id)
-                .orElseThrow(() -> new NoSuchElementException("Actor id " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Actor id " + id + " not found"));
     }
 }
