@@ -2,7 +2,7 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
-import mate.academy.hibernate.relations.exception.DataProcessingException;
+import mate.academy.hibernate.relations.exception.EntityNotFoundException;
 import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add the actor: " + actor, e);
+            throw new EntityNotFoundException("Can't add the actor: " + actor, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -37,16 +37,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        Session session = null;
-        try {
-            session = factory.openSession();
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get the actor: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new EntityNotFoundException("Can't get the actor: " + id, e);
         }
     }
 }
