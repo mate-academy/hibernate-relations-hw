@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
@@ -19,7 +19,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> optionalCountry = countryDao.get(id);
-        return optionalCountry.get();
+        return countryDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Country with id " + id + " not found"));
     }
 }

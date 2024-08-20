@@ -11,7 +11,8 @@ public class HibernateUtil {
 
     private static SessionFactory initSessionFactory() {
         try {
-            return new Configuration().configure().buildSessionFactory();
+            Configuration configuration = new Configuration().configure();
+            return configuration.buildSessionFactory();
         } catch (Exception e) {
             throw new RuntimeException("Can't create session factory ", e);
         }
