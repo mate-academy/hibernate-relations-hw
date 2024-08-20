@@ -16,9 +16,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Movie add(Movie movie) {
         Session session = factory.openSession();
-        if (session == null) {
-            throw new DataProcessingException("Session not initialized");
-        }
         Transaction transaction = session.beginTransaction();
         try {
             session.persist(movie);
