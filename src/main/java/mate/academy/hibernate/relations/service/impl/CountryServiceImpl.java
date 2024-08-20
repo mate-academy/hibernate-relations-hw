@@ -5,6 +5,8 @@ import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
+import javax.persistence.EntityNotFoundException;
+
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
@@ -21,7 +23,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(
-                () -> new NoSuchElementException("Country with id:"
+                () -> new EntityNotFoundException("Country with id:"
                         + id + " not found"));
     }
 }
