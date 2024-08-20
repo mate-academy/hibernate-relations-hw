@@ -15,10 +15,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        if (this.factory == null) {
-            throw new DataProcessingException("Factory not initialized");
-        }
-        Session session = this.factory.openSession();
+        Session session = factory.openSession();
         if (session == null) {
             throw new DataProcessingException("Session not initialized");
         }

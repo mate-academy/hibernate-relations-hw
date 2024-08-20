@@ -1,6 +1,12 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
@@ -20,7 +26,8 @@ public class Main {
 
         Country usa = new Country("USA");
         Country austria = new Country("AUS");
-        CountryService countryService = new CountryServiceImpl(); // TODO: initialize this instance
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
         countryService.add(austria);
 
@@ -33,7 +40,8 @@ public class Main {
         Actor sly = new Actor("Sly");
         sly.setCountry(usa);
 
-        ActorService actorService = new ActorServiceImpl(); // TODO: initialize this instance
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
         actorService.add(arny);
         actorService.add(sly);
@@ -43,11 +51,12 @@ public class Main {
         Movie terminator = new Movie("Terminator");
         fastAndFurious.setActors(List.of(vinDiesel, sly, arny1));
         terminator.setActors(List.of(arny, sly));
-        MovieService movieService = new MovieServiceImpl(); // TODO: initialize this instance
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+        MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
         movieService.add(terminator);
         System.out.println(movieService.get(fastAndFurious.getId()));
         System.out.println(movieService.get(terminator.getId()));
-        
+
     }
 }

@@ -15,10 +15,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Country add(Country country) {
-        if (this.factory == null) {
-            throw new DataProcessingException("Factory not initialized");
-        }
-        Session session = this.factory.openSession();
+        Session session = factory.openSession();
         if (session == null) {
             throw new DataProcessingException("Session not initialized");
         }
