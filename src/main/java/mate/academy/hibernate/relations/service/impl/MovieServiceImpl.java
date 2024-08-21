@@ -14,8 +14,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie add(Movie movie) {
-        movieDao.add(movie);
-        return movie;
+        return movieDao.add(movie);
     }
 
     @Override

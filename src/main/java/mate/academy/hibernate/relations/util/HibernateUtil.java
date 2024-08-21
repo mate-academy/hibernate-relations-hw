@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-
     private static final SessionFactory sessionFactory = initSessionFactory();
 
     private HibernateUtil() {
@@ -13,7 +12,7 @@ public class HibernateUtil {
     private static SessionFactory initSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable e) {
+        } catch (RuntimeException e) {
             System.err.println("Initial SessionFactory creation failed." + e);
             throw new ExceptionInInitializerError(e);
         }
