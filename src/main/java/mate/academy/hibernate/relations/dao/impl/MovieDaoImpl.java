@@ -43,10 +43,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             return Optional.ofNullable(session.get(Movie.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't find a Movie by id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }

@@ -43,10 +43,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't find a Country by id: " + id, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
