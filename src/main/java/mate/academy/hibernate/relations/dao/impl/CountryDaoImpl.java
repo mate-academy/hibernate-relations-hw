@@ -22,7 +22,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             transaction = session.beginTransaction();
             session.persist(country);
             transaction.commit();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -37,12 +37,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Country country;
         try (Session session = factory.openSession()) {
-            country = session.get(Country.class, id);
+            return Optional.ofNullable(session.get(Country.class, id));
         } catch (RuntimeException e) {
             throw new DataProcessException("Error getting country by id: " + id, e);
         }
-        return Optional.ofNullable(country);
     }
 }
