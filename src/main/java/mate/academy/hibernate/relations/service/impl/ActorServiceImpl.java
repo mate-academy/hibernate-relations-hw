@@ -18,6 +18,8 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).get();
+        return actorDao.get(id)
+                .orElseThrow(() -> new IllegalArgumentException("Actor with id "
+                        + id + " is not found"));
     }
 }

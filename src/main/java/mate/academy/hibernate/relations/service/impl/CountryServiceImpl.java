@@ -18,6 +18,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).get();
+        return countryDao.get(id)
+                .orElseThrow(() -> new IllegalArgumentException("Country with id "
+                        + id + " is not found"));
     }
 }
