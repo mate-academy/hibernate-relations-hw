@@ -17,11 +17,11 @@ public class Actor implements Cloneable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn (name = "country_id")
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
