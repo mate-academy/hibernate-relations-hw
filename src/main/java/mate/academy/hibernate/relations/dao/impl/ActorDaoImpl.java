@@ -24,7 +24,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error while adding actor", e);
+            String actorDetails = (actor != null) ?
+                    String.format("Actor[id=%d, name=%s]", actor.getId(), actor.getName()) :
+                    "Unknown Actor";
+            throw new DataProcessingException("Error while adding actor: " + actorDetails, e);
         }
 
         return actor;
