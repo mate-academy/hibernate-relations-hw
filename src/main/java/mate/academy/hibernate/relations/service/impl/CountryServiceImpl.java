@@ -1,7 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
-import java.util.Optional;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;

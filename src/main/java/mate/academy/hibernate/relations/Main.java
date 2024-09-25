@@ -1,12 +1,9 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
@@ -22,26 +19,22 @@ import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
-import javax.swing.text.html.Option;
-
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
-
         Country usa = new Country("USA");
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = new MovieServiceImpl(movieDao);
