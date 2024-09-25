@@ -16,60 +16,36 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
+import javax.swing.text.html.Option;
+
 public class Main {
     public static void main(String[] args) {
-        /*// use this session factory when you will initialize service instances
+        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
+        CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
+        ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
+        MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));*/
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
-        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
-        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
-
-        Country country = new Country();
-        country.setName("USA");
-        countryDao.add(country);
-
-        Country country2 = new Country();
-        country2.setName("Brasilia");
-        countryDao.add(country2);
-
-        Actor actor = new Actor();
-        actor.setName("John");
-        actor.setCountry(country);
-        actorDao.add(actor);
-
-        Actor actor1 = new Actor();
-        actor1.setName("Lisa");
-        actor1.setCountry(country);
-        actorDao.add(actor1);
-
-        Actor actor2 = new Actor();
-        actor2.setName("Mary");
-        actor2.setCountry(country2);
-        actorDao.add(actor2);
-
-        Movie movie = new Movie();
-        movie.setTitle("Forsage");
-        movie.setActors(List.of(actor, actor1, actor2));
-        movieDao.add(movie);
+        System.out.println(movieService.get(fastAndFurious.getId()));
     }
 }
