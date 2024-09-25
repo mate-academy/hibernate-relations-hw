@@ -1,6 +1,13 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
+import java.util.Optional;
+
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.impl.AbstractDao;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
@@ -12,7 +19,7 @@ import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
+        /*// use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
@@ -28,6 +35,16 @@ public class Main {
         fastAndFurious.setActors(List.of(vinDiesel));
         MovieService movieService = null; // TODO: initialize this instance
         movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+        System.out.println(movieService.get(fastAndFurious.getId()));*/
+        ActorDao actorDao = new ActorDaoImpl(HibernateUtil.getSessionFactory());
+        CountryDao countryDao = new CountryDaoImpl(HibernateUtil.getSessionFactory());
+        Country country = new Country();
+        country.setName("USA");
+        countryDao.add(country);
+
+        Actor actor = new Actor();
+        actor.setName("Luka");
+        actor.setCountry(country);
+        actorDao.add(actor);
     }
 }
