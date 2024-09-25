@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.dao.impl.AbstractDao;
 import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
@@ -36,15 +38,38 @@ public class Main {
         MovieService movieService = null; // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));*/
-        ActorDao actorDao = new ActorDaoImpl(HibernateUtil.getSessionFactory());
-        CountryDao countryDao = new CountryDaoImpl(HibernateUtil.getSessionFactory());
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+
         Country country = new Country();
         country.setName("USA");
         countryDao.add(country);
 
+        Country country2 = new Country();
+        country2.setName("Brasilia");
+        countryDao.add(country2);
+
         Actor actor = new Actor();
-        actor.setName("Luka");
+        actor.setName("John");
         actor.setCountry(country);
         actorDao.add(actor);
+
+        Actor actor1 = new Actor();
+        actor1.setName("Lisa");
+        actor1.setCountry(country);
+        actorDao.add(actor1);
+
+        Actor actor2 = new Actor();
+        actor2.setName("Mary");
+        actor2.setCountry(country2);
+        actorDao.add(actor2);
+
+        Movie movie = new Movie();
+        movie.setTitle("Forsage");
+        movie.setActors(List.of(actor, actor1, actor2));
+        movieDao.add(movie);
     }
 }
