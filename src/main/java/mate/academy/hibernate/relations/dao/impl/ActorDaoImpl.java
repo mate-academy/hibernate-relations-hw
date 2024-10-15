@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
@@ -40,7 +41,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get actor by id: " + id, e);
+            throw new EntityNotFoundException("Can't get actor by id: " + id, e);
         }
     }
 }
