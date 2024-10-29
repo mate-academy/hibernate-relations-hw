@@ -21,10 +21,10 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> movie = abstractDao.get(id);
-        if (movie.isEmpty()) {
+        Optional<Country> country = abstractDao.get(id);
+        if (country.isEmpty()) {
             throw new DataProcessingException("Country not found with id: " + id);
         }
-        return movie.get();
+        return country.get();
     }
 }

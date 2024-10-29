@@ -21,10 +21,10 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        Optional<Actor> movie = abstractDao.get(id);
-        if (movie.isEmpty()) {
+        Optional<Actor> actor = abstractDao.get(id);
+        if (actor.isEmpty()) {
             throw new DataProcessingException("Actor not found with id: " + id);
         }
-        return movie.get();
+        return actor.get();
     }
 }
