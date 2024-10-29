@@ -5,18 +5,18 @@ import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.SessionFactory;
 
-public class CountryDaoImpl extends AbstractDao implements CountryDao {
+public class CountryDaoImpl extends AbstractDao<Country> implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
     public Country add(Country country) {
-        return null;
+        return super.add(country);
     }
 
     @Override
     public Optional<Country> get(Long id) {
-        return null;
+        return super.get(Country.class, id);
     }
 }
