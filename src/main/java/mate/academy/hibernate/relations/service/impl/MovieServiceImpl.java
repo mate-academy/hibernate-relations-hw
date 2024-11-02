@@ -13,9 +13,6 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
-    public MovieServiceImpl() {
-    }
-
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);

@@ -13,9 +13,6 @@ public class CountryServiceImpl implements CountryService {
         this.countryDao = countryDao;
     }
 
-    public CountryServiceImpl() {
-    }
-
     @Override
     public Country add(Country country) {
         return countryDao.add(country);
