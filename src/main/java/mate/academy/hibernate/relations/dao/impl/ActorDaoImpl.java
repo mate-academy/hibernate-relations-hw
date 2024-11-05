@@ -26,7 +26,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Can`t add actor "
-                    + actor.getName() + " to DB. " + e.getMessage());
+                    + actor.getName() + " to DB. " + e);
         }
         return actor;
     }
@@ -38,7 +38,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             return Optional.ofNullable(actor);
         } catch (HibernateException e) {
             throw new DataProcessingException("Can`t get actor "
-                    + id + " from DB. " + e.getMessage());
+                    + id + " from DB. " + e);
         }
     }
 }
