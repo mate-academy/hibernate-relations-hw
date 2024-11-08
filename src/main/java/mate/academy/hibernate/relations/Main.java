@@ -16,7 +16,6 @@ import org.hibernate.SessionFactory;
 public class Main {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
         CountryServiceImpl countryService = new CountryServiceImpl(
                 new CountryDaoImpl(sessionFactory));
         ActorServiceImpl actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
