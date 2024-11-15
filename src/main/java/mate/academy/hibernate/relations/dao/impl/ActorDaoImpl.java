@@ -16,12 +16,11 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
         Transaction transaction = null;
 
         try {
-            session = sessionFactory.openSession();
+            session = factory.openSession();
             transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
@@ -40,11 +39,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Optional<Actor> get(Long id) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = null;
 
         try {
-            session = sessionFactory.openSession();
+            session = factory.openSession();
             Actor actor = session.get(Actor.class, id);
             return Optional.ofNullable(actor);
         } catch (Exception e) {
