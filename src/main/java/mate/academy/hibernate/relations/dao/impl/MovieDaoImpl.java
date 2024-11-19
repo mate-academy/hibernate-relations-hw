@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.TransactionRequiredException;
+import jakarta.persistence.PersistenceException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
@@ -25,15 +24,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             transaction = session.beginTransaction();
             session.persist(movie);
             transaction.commit();
-        } catch (HibernateException e) {
-            throw new DataProcessingException("Cannot open session.", e);
-        } catch (EntityExistsException | TransactionRequiredException e) {
-            throw new DataProcessingException("Cannot save the movie: " + movie, e);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            throw new DataProcessingException("The instance of Movie is not an entity.", e);
+        } catch (IllegalStateException | PersistenceException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Commit fails.", e);
+            throw new DataProcessingException("Cannot save the movie: " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
