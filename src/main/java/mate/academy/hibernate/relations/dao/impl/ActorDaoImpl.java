@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.dao.impl;
 
-import jakarta.persistence.PersistenceException;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
@@ -24,9 +23,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             transaction = session.beginTransaction();
             session.persist(actor);
             transaction.commit();
-        } catch (IllegalArgumentException e) {
-            throw new DataProcessingException("The instance of Actor is not an entity.", e);
-        } catch (IllegalStateException | PersistenceException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
