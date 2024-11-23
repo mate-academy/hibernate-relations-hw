@@ -28,10 +28,11 @@ public class ActorServiceImpl implements ActorService {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Error adding Movie: " + actor, e);
+            throw new DataProcessingException("Error adding Actor: " + actor, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 

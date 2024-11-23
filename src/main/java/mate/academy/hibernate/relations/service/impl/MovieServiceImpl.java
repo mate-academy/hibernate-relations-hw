@@ -30,8 +30,9 @@ public class MovieServiceImpl implements MovieService {
             }
             throw new DataProcessingException("Error adding Movie: " + movie, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 

@@ -30,8 +30,9 @@ public class CountryServiceImpl implements CountryService {
             }
             throw new DataProcessingException("Error adding Country: " + country, e);
         } finally {
-            assert session != null;
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
