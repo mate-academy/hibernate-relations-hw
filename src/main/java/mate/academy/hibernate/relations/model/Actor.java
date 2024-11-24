@@ -9,10 +9,12 @@ import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @Entity
+@ToString
 @NoArgsConstructor
 public class Actor implements Cloneable {
     @Id
@@ -37,15 +39,6 @@ public class Actor implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
     }
 
     @Override

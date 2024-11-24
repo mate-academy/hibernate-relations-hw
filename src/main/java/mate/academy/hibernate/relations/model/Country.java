@@ -54,5 +54,4 @@ public class Country implements Cloneable {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
     }
-
 }
