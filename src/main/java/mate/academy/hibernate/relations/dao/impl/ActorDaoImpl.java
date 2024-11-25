@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.exeption.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
