@@ -4,7 +4,6 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -22,9 +21,8 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session = factory.openSession();
             transaction = session.beginTransaction();
             session.persist(country);
-            country.setId((Long) session.getIdentifier(country));
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -39,9 +37,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        Session session = factory.openSession();
-        Country country = session.get(Country.class, id);
-        session.close();
-        return Optional.ofNullable(country);
+        try (Session session = factory.openSession()) {
+            return Optional.ofNullable(session.get(Country.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get country from DB by id. Id: " + id, e);
+        }
     }
 }
