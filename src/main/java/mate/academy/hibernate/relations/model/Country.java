@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "country")
+@Table(name = "countries")
 public class Country implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

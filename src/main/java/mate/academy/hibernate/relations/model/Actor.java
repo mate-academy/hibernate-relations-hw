@@ -18,7 +18,7 @@ import lombok.ToString;
 @Entity
 @ToString
 @NoArgsConstructor
-@Table(name = "actor")
+@Table(name = "actors")
 public class Actor implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
