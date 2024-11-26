@@ -7,7 +7,9 @@ public class HibernateUtil {
     public static final String CAN_T_BUILD_SESSION_FACTORY_MSG = "Can't build session factory ";
     private static final SessionFactory session = getInitSessionFactory();
 
-    public HibernateUtil() {}
+    public HibernateUtil() {
+
+    }
 
     private static SessionFactory getInitSessionFactory() {
         try {
