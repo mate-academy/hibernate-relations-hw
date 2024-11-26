@@ -37,7 +37,7 @@ public class Main {
         Country usa = new Country(NAME_OF_COUNTRY);
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
-        countryService.get(5L);
+        countryService.get(1L);
 
         Actor vinDiesel = new Actor(NAME_OF_ACTOR);
         vinDiesel.setCountry(usa);

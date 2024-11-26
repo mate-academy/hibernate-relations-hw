@@ -11,13 +11,11 @@ public class HibernateUtil {
     }
 
     private static SessionFactory getInitSessionFactory() {
-
         try {
             return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
-            throw new RuntimeException(CAN_T_BUILD_SESSION_FACTORY_MSG);
+            throw new RuntimeException(CAN_T_BUILD_SESSION_FACTORY_MSG, e);
         }
-
     }
 
     public static SessionFactory getSessionFactory() {
