@@ -2,8 +2,6 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.model.Actor;
-import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.util.DataProcessingException;
 import org.hibernate.Session;
@@ -12,6 +10,7 @@ import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     private final SessionFactory sessionFactory = super.factory;
+    private final DaoUtil daoUtil = new DaoUtil();
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -24,30 +23,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            for (Actor actor : movie.getActors()) {
-                Actor attachedActor = session.get(Actor.class, actor.getId());
-                if (attachedActor == null) {
-                    Country attachedCountry
-                            = session.get(Country.class, actor.getCountry().getId());
-                    if (attachedCountry == null) {
-                        session.persist(actor.getCountry());
-                    } else {
-                        actor.setCountry(attachedCountry);
-                    }
-                    session.persist(actor);
-                } else {
-                    if (actor.getCountry() != null) {
-                        Country attachedCountry
-                                = session.get(Country.class, actor.getCountry().getId());
-                        if (attachedCountry == null) {
-                            session.persist(actor.getCountry());
-                        } else {
-                            actor.setCountry(attachedCountry);
-                        }
-                    }
-                    session.merge(actor);
-                }
-            }
+            daoUtil.processActorListByMovie(movie, session);
             movie = session.merge(movie);
             transaction.commit();
             return movie;

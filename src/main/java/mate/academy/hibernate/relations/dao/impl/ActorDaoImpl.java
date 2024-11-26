@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
-import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.util.DataProcessingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +10,7 @@ import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     private final SessionFactory sessionFactory = super.factory;
+    private final DaoUtil daoUtil = new DaoUtil();
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -23,14 +23,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            Country country = session.get(Country.class, actor.getCountry().getId());
-            if (country == null) {
-                country = actor.getCountry();
-                session.persist(country);
-            } else {
-                actor.setCountry(country);
-            }
-            session.persist(actor);
+            daoUtil.processCountryByActor(actor, session);
+            actor = session.merge(actor);
             transaction.commit();
             return actor;
         } catch (RuntimeException e) {
