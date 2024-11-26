@@ -42,7 +42,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
-            session.beginTransaction();
             Actor actor = session.get(Actor.class, id);
             if (actor != null) {
                 return Optional.of(actor);

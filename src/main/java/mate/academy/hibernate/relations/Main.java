@@ -24,6 +24,7 @@ public class Main {
     public static final String NAME_OF_COUNTRY = "USA";
     public static final String NAME_OF_ACTOR = "Vin Diesel";
     public static final String NAME_OF_MOVIE = "Fast and Furious";
+    public static final long ID = 1L;
 
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -37,7 +38,7 @@ public class Main {
         Country usa = new Country(NAME_OF_COUNTRY);
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
-        countryService.get(1L);
+        countryService.get(ID);
 
         Actor vinDiesel = new Actor(NAME_OF_ACTOR);
         vinDiesel.setCountry(usa);
