@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.service;
 
-import mate.academy.hibernate.relations.DataProcessingExeption;
+import mate.academy.hibernate.relations.DataProcessingException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 
@@ -19,6 +19,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(
-                () -> new DataProcessingExeption("there is no movie with id: " + id));
+                () -> new DataProcessingException("there is no movie with id: " + id));
     }
 }

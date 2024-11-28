@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.service;
 
-import mate.academy.hibernate.relations.DataProcessingExeption;
+import mate.academy.hibernate.relations.DataProcessingException;
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.model.Actor;
 
@@ -19,6 +19,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id).orElseThrow(
-                () -> new DataProcessingExeption("there is no actor with id: " + id));
+                () -> new DataProcessingException("there is no actor with id: " + id));
     }
 }

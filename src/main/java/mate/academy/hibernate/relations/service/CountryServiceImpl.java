@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.service;
 
-import mate.academy.hibernate.relations.DataProcessingExeption;
+import mate.academy.hibernate.relations.DataProcessingException;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 
@@ -19,6 +19,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(
-                () -> new DataProcessingExeption("there is no country with id: " + id));
+                () -> new DataProcessingException("there is no country with id: " + id));
     }
 }
