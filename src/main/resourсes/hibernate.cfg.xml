@@ -13,6 +13,5 @@
         <mapping class="mate.academy.hibernate.relations.model.Actor"/>
         <mapping class="mate.academy.hibernate.relations.model.Movie"/>
         <mapping class="mate.academy.hibernate.relations.model.Country"/>
-
     </session-factory>
 </hibernate-configuration>
