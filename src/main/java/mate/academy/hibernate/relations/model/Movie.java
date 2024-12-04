@@ -1,4 +1,4 @@
-package mate.academy.hibernate.relations1.model;
+package mate.academy.hibernate.relations.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
