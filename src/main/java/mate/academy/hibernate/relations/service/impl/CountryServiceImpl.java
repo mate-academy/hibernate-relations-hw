@@ -1,16 +1,34 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
+import org.hibernate.SessionFactory;
 
 public class CountryServiceImpl implements CountryService {
+    private final CountryDao countryDao;
+
+    public CountryServiceImpl(SessionFactory sessionFactory) {
+        countryDao = new CountryDaoImpl(sessionFactory);
+    }
+
     @Override
     public Country add(Country country) {
-        return null;
+        try {
+            return countryDao.add(country);
+        } catch (DataProcessingException e) {
+            return null;
+        }
     }
 
     @Override
     public Country get(Long id) {
-        return null;
+        try {
+            return countryDao.get(id).orElse(null);
+        } catch (DataProcessingException e) {
+            return null;
+        }
     }
 }
