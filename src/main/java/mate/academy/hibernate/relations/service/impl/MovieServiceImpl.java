@@ -8,11 +8,12 @@ import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
 public class MovieServiceImpl implements MovieService {
-    public MovieDao movieDao;
+    private MovieDao movieDao;
 
     public MovieServiceImpl(SessionFactory sessionFactory) {
         movieDao = new MovieDaoImpl(sessionFactory);
     }
+
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
@@ -21,6 +22,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie get(Long id) {
         return movieDao.get(id).orElseThrow(()
-                -> new EntityNotFoundException("Movie with id " + id + " not found")) ;
+                -> new EntityNotFoundException("Movie with id " + id + " not found"));
     }
 }
