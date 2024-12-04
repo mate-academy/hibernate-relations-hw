@@ -14,8 +14,8 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <mapping class="mate.academy.hibernate.relations.model.Actor" />
-        <mapping class="mate.academy.hibernate.relations.model.Country" />
-        <mapping class="mate.academy.hibernate.relations.model.Movie" />
+        <mapping class="mate.academy.hibernate.relations.model.Actor"/>
+        <mapping class="mate.academy.hibernate.relations.model.Country"/>
+        <mapping class="mate.academy.hibernate.relations.model.Movie"/>
     </session-factory>
 </hibernate-configuration>
