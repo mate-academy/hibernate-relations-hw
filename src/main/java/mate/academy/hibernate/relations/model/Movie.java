@@ -1,11 +1,31 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Movie implements Cloneable {
+    private static final String TABLE_NAME = "movie_actor";
+    private static final String MOVIE_COLUMN_ID = "movie_id";
+    private static final String ACTOR_COLUMN_ID = "actor_id";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @ManyToMany
+    @JoinTable(
+            name = TABLE_NAME,
+            joinColumns = @JoinColumn(name = MOVIE_COLUMN_ID),
+            inverseJoinColumns = @JoinColumn(name = ACTOR_COLUMN_ID)
+    )
     private List<Actor> actors;
 
     public Movie() {
