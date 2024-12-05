@@ -21,8 +21,8 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        Optional<Actor> movieOptional = actorDao.get(id);
-        return movieOptional.orElseThrow(
+        Optional<Actor> actorOptional = actorDao.get(id);
+        return actorOptional.orElseThrow(
                 () -> new RuntimeException("Actor with id " + id + " not found")
         );
     }

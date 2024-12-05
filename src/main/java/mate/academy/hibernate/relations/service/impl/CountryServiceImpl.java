@@ -21,8 +21,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        Optional<Country> movieOptional = countryDao.get(id);
-        return movieOptional.orElseThrow(
+        Optional<Country> countryOptional = countryDao.get(id);
+        return countryOptional.orElseThrow(
                 () -> new RuntimeException("Country with id " + id + " not found")
         );
     }
