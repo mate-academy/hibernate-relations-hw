@@ -34,3 +34,7 @@ Your task is to implement the following steps:
 - make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
 
 #### [Try to avoid these common mistakes, while solving task](./checklist.md)
+
+- ensure the project follows a consistent code style, and format the code to improve readability.
+- validate inputs in service and DAO methods to ensure data integrity.
+- use `Optional` in service layer methods to handle `null` values gracefully.
