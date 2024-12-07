@@ -21,7 +21,6 @@ public Entity add(Entity entity) {
         session = factory.openSession();
         transaction = ...
 ```
-
 ### Requirements
 
 Your task is to implement the following steps:
