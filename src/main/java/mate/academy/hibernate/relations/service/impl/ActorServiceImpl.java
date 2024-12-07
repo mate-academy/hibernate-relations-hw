@@ -16,19 +16,15 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor add(Actor actor) {
-        try {
-            return actorDao.add(actor);
-        } catch (DataProcessingException e) {
-            return null;
-        }
+        return actorDao.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        try {
-            return actorDao.get(id).orElse(null);
-        } catch (DataProcessingException e) {
-            return null;
-        }
+        return actorDao.get(id)
+                .orElseThrow(() -> new DataProcessingException(
+                        "Actor with id=%d was not found".formatted(id)
+                )
+        );
     }
 }

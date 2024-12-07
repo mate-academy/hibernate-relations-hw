@@ -6,6 +6,7 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
@@ -15,15 +16,20 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public Country add(Country country) {
         Session session = null;
+        Transaction transaction = null;
 
         try {
             session = factory.openSession();
-            session.beginTransaction();
+            transaction = session.beginTransaction();
 
             session.persist(country);
 
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
             throw new DataProcessingException("Cannot create country", e);
         } finally {
             if (session != null) {
@@ -39,7 +45,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Cannot get country", e);
+            throw new DataProcessingException(
+                    "Cannot get country with id: " + id,
+                    e
+            );
         }
     }
 }

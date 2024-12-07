@@ -6,6 +6,7 @@ import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
@@ -15,15 +16,20 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     @Override
     public Actor add(Actor actor) {
         Session session = null;
+        Transaction transaction = null;
 
         try {
             session = factory.openSession();
-            session.beginTransaction();
+            transaction = session.beginTransaction();
 
             session.persist(actor);
 
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
             throw new DataProcessingException("Cannot create actor", e);
         } finally {
             if (session != null) {
@@ -39,7 +45,10 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Cannot get actor", e);
+            throw new DataProcessingException(
+                    "Cannot get actor with id: " + id,
+                    e
+            );
         }
     }
 }
