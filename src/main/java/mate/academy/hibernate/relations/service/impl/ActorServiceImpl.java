@@ -12,7 +12,6 @@ public class ActorServiceImpl implements ActorService {
         this.actorDao = actorDao;
     }
 
-
     @Override
     public Actor add(Actor actor) {
         return actorDao.add(actor);

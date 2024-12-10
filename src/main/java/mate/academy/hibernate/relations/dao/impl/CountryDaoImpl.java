@@ -4,9 +4,9 @@ import java.util.Optional;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.Session;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public CountryDaoImpl(SessionFactory sessionFactory) {
