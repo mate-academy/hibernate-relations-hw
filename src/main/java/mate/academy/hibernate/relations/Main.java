@@ -25,24 +25,23 @@ public class Main {
 
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         CountryService countryService = new CountryServiceImpl(countryDao);
-        Country usa = new Country("USA");
-        countryService.add(usa);
+        Country uk = new Country("UK");
+        countryService.add(uk);
 
-        Actor vin = new Actor("Vin");
-        Movie fast = new Movie("Fast");
-        vin.setCountry(usa);
-        vin.setMovie(fast);
-        fast.setActors(List.of(vin));
-
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
-        MovieService movieService = new MovieServiceImpl(movieDao);
-        movieService.add(fast);
+        Actor red = new Actor("RED");
+        Movie lastOfUs = new Movie("LAST OF US");
+        red.setCountry(uk);
+        lastOfUs.setActors(List.of(red));
 
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         ActorService actorService = new ActorServiceImpl(actorDao);
-        actorService.add(vin);
+        actorService.add(red);
 
-        System.out.println(actorService.get(vin.getId()));
-        System.out.println(movieService.get(fast.getId()));
+        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+        MovieService movieService = new MovieServiceImpl(movieDao);
+        movieService.add(lastOfUs);
+
+        System.out.println(actorService.get(red.getId()));
+        System.out.println(movieService.get(lastOfUs.getId()));
     }
 }

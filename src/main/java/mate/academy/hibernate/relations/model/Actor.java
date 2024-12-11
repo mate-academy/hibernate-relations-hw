@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,26 +15,15 @@ public class Actor implements Cloneable {
     private Long id;
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "country_id")
     private Country country;
-
-    @ManyToOne
-    private Movie movie;
 
     public Actor() {
     }
 
     public Actor(String name) {
         this.name = name;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
     }
 
     public Long getId() {

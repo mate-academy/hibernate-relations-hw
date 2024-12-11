@@ -15,9 +15,9 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
     @Override
     public Actor add(Actor actor) {
-        Session session = factory.openSession();
-        Transaction transaction = session.beginTransaction();
-        try {
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
             session.save(actor);
             transaction.commit();
             return actor;
@@ -26,8 +26,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Error adding actor", e);
-        } finally {
-            session.close();
         }
     }
 
