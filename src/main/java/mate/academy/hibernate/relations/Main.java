@@ -28,18 +28,21 @@ public class Main {
         Country usa = new Country("USA");
         countryService.add(usa);
 
-        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
-        ActorService actorService = new ActorServiceImpl(actorDao);
         Actor vin = new Actor("Vin");
+        Movie fast = new Movie("Fast");
         vin.setCountry(usa);
-        actorService.add(vin);
-        System.out.println(actorService.get(vin.getId()));
+        vin.setMovie(fast);
+        fast.setActors(List.of(vin));
 
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(movieDao);
-        Movie fast = new Movie("Fast");
-        fast.setActors(List.of(vin));
         movieService.add(fast);
+
+        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorService actorService = new ActorServiceImpl(actorDao);
+        actorService.add(vin);
+
+        System.out.println(actorService.get(vin.getId()));
         System.out.println(movieService.get(fast.getId()));
     }
 }

@@ -18,11 +18,22 @@ public class Actor implements Cloneable {
     @JoinColumn(name = "country_id")
     private Country country;
 
+    @ManyToOne
+    private Movie movie;
+
     public Actor() {
     }
 
     public Actor(String name) {
         this.name = name;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public Long getId() {
