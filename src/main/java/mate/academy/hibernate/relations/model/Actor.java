@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +15,7 @@ public class Actor implements Cloneable {
     private Long id;
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Country country;
 
     public Actor() {
