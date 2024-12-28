@@ -44,7 +44,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             Country country = session.get(Country.class, id);
             return Optional.ofNullable(country);
         } catch (Exception e) {
-            throw new DataProcessingException("Cannot get actor " + id + "from DB.", e);
+            throw new DataProcessingException("Cannot get actor " + id + " from DB.", e);
         }
     }
 }
