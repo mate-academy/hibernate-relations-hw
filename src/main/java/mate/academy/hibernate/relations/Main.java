@@ -17,9 +17,9 @@ public class Main {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-        ActorService actorService = new ActorServiceImpl(sessionFactory);
-        CountryService countryService = new CountryServiceImpl(sessionFactory);
-        MovieService movieService = new MovieServiceImpl(sessionFactory);
+        final ActorService actorService = new ActorServiceImpl(sessionFactory);
+        final CountryService countryService = new CountryServiceImpl(sessionFactory);
+        final MovieService movieService = new MovieServiceImpl(sessionFactory);
 
         Country usa = new Country("USA");
         countryService.add(usa);
@@ -36,7 +36,9 @@ public class Main {
         if (retrievedMovie != null) {
             System.out.println("Retrieved Movie: " + retrievedMovie);
             for (Actor actor : retrievedMovie.getActors()) {
-                System.out.println("Actor in movie: " + actor.getName() + ", Country: " + actor.getCountry().getName());
+                String actorDetails = "Actor in movie: " + actor.getName() +
+                        ", Country: " + actor.getCountry().getName();
+                System.out.println(actorDetails);
             }
         } else {
             System.out.println("Movie with ID " + fastAndFurious.getId() + " not found!");
@@ -44,4 +46,3 @@ public class Main {
         HibernateUtil.shutdown();
     }
 }
-
