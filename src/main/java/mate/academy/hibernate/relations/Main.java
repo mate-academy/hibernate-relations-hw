@@ -36,8 +36,8 @@ public class Main {
         if (retrievedMovie != null) {
             System.out.println("Retrieved Movie: " + retrievedMovie);
             for (Actor actor : retrievedMovie.getActors()) {
-                String actorDetails = "Actor in movie: " + actor.getName() +
-                        ", Country: " + actor.getCountry().getName();
+                String actorDetails = "Actor in movie: " + actor.getName()
+                        + ", Country: " + actor.getCountry().getName();
                 System.out.println(actorDetails);
             }
         } else {
