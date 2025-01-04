@@ -7,3 +7,4 @@ public interface MovieService {
 
     Movie get(Long id);
 }
+
