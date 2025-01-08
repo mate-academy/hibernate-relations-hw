@@ -24,7 +24,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.persist(movie);
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction != null) {
@@ -44,7 +44,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
             Movie movie = session.get(Movie.class, id);
-            session.close();
             return Optional.ofNullable(movie);
         } catch (RuntimeException e) {
             throw new DataProcessingException(GET_EXCEPTION_MESSAGE + id, e);

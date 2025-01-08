@@ -31,10 +31,6 @@ public class Country implements Cloneable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public Country clone() {
         try {
