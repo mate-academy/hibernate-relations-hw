@@ -1,15 +1,20 @@
 package mate.academy.hibernate.relations.dao;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import javax.sql.DataSource;
+
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
+import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
+import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Interceptor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hsqldb.jdbc.JDBCDataSource;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractTest {
     protected interface DataSourceProvider {
@@ -35,10 +40,22 @@ public abstract class AbstractTest {
 
         Database database();
     }
+    protected ActorDaoImpl actorDao;
+    protected CountryDaoImpl countryDao;
+    protected MovieDaoImpl movieDao;
+
+    @BeforeEach
+    public void setUp() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        actorDao = new ActorDaoImpl(sessionFactory);
+        countryDao = new CountryDaoImpl(sessionFactory);
+        movieDao = new MovieDaoImpl(sessionFactory);
+    }
+
 
     private SessionFactory factory;
 
-    @Before
+    @BeforeEach
     public void init() {
         factory = newSessionFactory();
     }
@@ -72,7 +89,6 @@ public abstract class AbstractTest {
         properties.put("hibernate.dialect", getDataSourceProvider().hibernateDialect());
         properties.put("hibernate.hbm2ddl.auto", "create-drop");
 
-        //data source settings
         properties.put("hibernate.connection.datasource", newDataSource());
         return properties;
     }
