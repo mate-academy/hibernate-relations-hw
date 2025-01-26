@@ -1,8 +1,19 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
@@ -39,22 +50,18 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor actor = (Actor) super.clone();
-            if (country != null) {
-                actor.setCountry(country.clone());
-            }
-            return actor;
+            return (Actor) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new RuntimeException("Cloning failed for Actor", e);
         }
     }
 
     @Override
     public String toString() {
-        return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+        return "Actor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country=" + country +
+                '}';
     }
 }
