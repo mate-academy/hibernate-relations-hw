@@ -4,13 +4,15 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 
 public class ActorServiceImpl implements ActorService {
+    private ActorService actorService = new ActorServiceImpl();
+
     @Override
     public Actor add(Actor actor) {
-        return null;
+        return actorService.add(actor);
     }
 
     @Override
     public Actor get(Long id) {
-        return null;
+        return actorService.get(id);
     }
 }
