@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.dao.impl;
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.exception.DataProcessingException;
-import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.Session;
@@ -41,7 +40,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     @Override
     public Optional<Movie> get(Long id) {
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-             Session session = sessionFactory.openSession();) {
+                Session session = sessionFactory.openSession();) {
             return Optional.ofNullable(session.get(Movie.class, id));
         }
     }
