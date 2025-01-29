@@ -1,18 +1,24 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.Optional;
+import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
 public class CountryServiceImpl implements CountryService {
-    private CountryService countryService = new CountryServiceImpl();
+    private CountryDao countryDao;
 
-    @Override
-    public Country add(Country country) {
-        return countryService.add(country);
+    public CountryServiceImpl(CountryDao countryDao) {
+        this.countryDao = countryDao;
     }
 
     @Override
-    public Country get(Long id) {
-        return countryService.get(id);
+    public Country add(Country country) {
+        return countryDao.add(country);
+    }
+
+    @Override
+    public Optional<Country> get(Long id) {
+        return countryDao.get(id);
     }
 }
