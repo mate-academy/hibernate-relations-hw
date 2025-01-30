@@ -26,7 +26,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can`t save country to DB", ex);
+            throw new DataProcessingException("Can`t save movie to DB", ex);
         } finally {
             if (session != null) {
                 session.close();
@@ -41,7 +41,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             Movie result = session.get(Movie.class, id);
             return result == null ? Optional.empty() : Optional.of(result);
         } catch (Exception ex) {
-            throw new DataProcessingException("Can`t get country from DB", ex);
+            throw new DataProcessingException("Can`t get movie from DB", ex);
         }
     }
 }
