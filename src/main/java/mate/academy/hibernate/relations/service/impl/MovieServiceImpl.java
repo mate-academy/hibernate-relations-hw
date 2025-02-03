@@ -21,6 +21,6 @@ public class MovieServiceImpl implements MovieService {
     public Movie get(Long id) {
         Optional<Movie> movieOptional = movieDao.get(id);
         return movieOptional.orElseThrow(()
-                -> new RuntimeException("Movie not found with id" + id));
+                -> new RuntimeException("Movie not found with id " + id));
     }
 }

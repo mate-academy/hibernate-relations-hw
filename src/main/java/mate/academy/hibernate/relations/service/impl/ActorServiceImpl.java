@@ -21,6 +21,6 @@ public class ActorServiceImpl implements ActorService {
     public Actor get(Long id) {
         Optional<Actor> actorOptional = actorDao.get(id);
         return actorOptional.orElseThrow(()
-                -> new RuntimeException("Actor not found with id" + id));
+                -> new RuntimeException("Actor not found with id " + id));
     }
 }

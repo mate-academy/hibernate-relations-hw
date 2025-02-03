@@ -21,6 +21,6 @@ public class CountryServiceImpl implements CountryService {
     public Country get(Long id) {
         Optional<Country> countryOptional = countryDao.get(id);
         return countryOptional.orElseThrow(()
-                -> new RuntimeException("Country not found with id" + id));
+                -> new RuntimeException("Country not found with id " + id));
     }
 }
