@@ -56,7 +56,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can`t get actor with id: " + id);
+            throw new DataProcessingException("Can`t get actor with id: " + id);
         } finally {
             if (session != null) {
                 session.close();

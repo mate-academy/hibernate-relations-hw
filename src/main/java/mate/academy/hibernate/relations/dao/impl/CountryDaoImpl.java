@@ -54,7 +54,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can`t get country with id: " + id);
+            throw new DataProcessingException("Can`t get country with id: " + id);
         } finally {
             if (session != null) {
                 session.close();
