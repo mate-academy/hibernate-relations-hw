@@ -16,19 +16,19 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Movie fastAndFurious = getMovie(sessionFactory);
-        MovieService movieService = (MovieService) sessionFactory; // TODO: initialize this instance
+        MovieService movieService = (MovieService) sessionFactory;
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
     }
 
     private static Movie getMovie(SessionFactory sessionFactory) {
         Country usa = new Country("USA");
-        CountryService countryService = (CountryService) sessionFactory; // TODO: initialize this instance
+        CountryService countryService = (CountryService) sessionFactory;
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = (ActorService) sessionFactory; // TODO: initialize this instance
+        ActorService actorService = (ActorService) sessionFactory;
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
