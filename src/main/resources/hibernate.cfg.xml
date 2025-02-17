@@ -13,3 +13,4 @@
         <mapping class="mate.academy.hibernate.relations.model.Movie"/>
     </session-factory>
 </hibernate-configuration>
+
