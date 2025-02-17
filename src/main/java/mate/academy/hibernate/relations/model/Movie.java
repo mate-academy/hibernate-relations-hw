@@ -17,7 +17,7 @@ public class Movie implements Cloneable {
     private Long id;
     private String title;
     @OneToMany
-    private List<Actor> actors; //why OneToMany?
+    private List<Actor> actors;
 
     public Movie() {
     }
