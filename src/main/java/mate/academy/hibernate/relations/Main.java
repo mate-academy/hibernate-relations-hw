@@ -15,19 +15,24 @@ public class Main {
         // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        Movie fastAndFurious = getMovie(sessionFactory);
+        MovieService movieService = (MovieService) sessionFactory; // TODO: initialize this instance
+        movieService.add(fastAndFurious);
+        System.out.println(movieService.get(fastAndFurious.getId()));
+    }
+
+    private static Movie getMovie(SessionFactory sessionFactory) {
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
+        CountryService countryService = (CountryService) sessionFactory; // TODO: initialize this instance
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
+        ActorService actorService = (ActorService) sessionFactory; // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
-        movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+        return fastAndFurious;
     }
 }
