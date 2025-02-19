@@ -12,7 +12,7 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "movies_actors",
             joinColumns = @JoinColumn(name = "movie_id"),
