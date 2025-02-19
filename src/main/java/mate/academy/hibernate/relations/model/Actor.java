@@ -1,9 +1,21 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
     private Country country;
+    @ManyToMany(mappedBy = "actors", fetch = FetchType.LAZY)
+    private List<Movie> movies;
 
     public Actor() {
     }
@@ -36,6 +48,14 @@ public class Actor implements Cloneable {
         this.country = country;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     @Override
     public Actor clone() {
         try {
@@ -55,6 +75,7 @@ public class Actor implements Cloneable {
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
+                + ", movies='" + movies + '\''
                 + '}';
     }
 }
