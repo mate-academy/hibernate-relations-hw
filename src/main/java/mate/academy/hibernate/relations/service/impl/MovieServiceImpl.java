@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.MovieDao;
-import mate.academy.hibernate.relations.dao.impl.MovieDaoImpl;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
@@ -11,6 +10,7 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
+
     @Override
     public Movie add(Movie movie) {
         return movieDao.add(movie);
