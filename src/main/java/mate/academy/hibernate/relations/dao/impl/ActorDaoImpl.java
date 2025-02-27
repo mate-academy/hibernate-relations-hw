@@ -30,7 +30,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Saving actor to Database Error");
+            throw new DataProcessingException("Saving actor to Database Error, cause: "
+                    + e.getMessage(), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -44,7 +45,8 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Loading actor from Database Error");
+            throw new DataProcessingException("Loading actor from Database Error, cause: "
+                    + e.getMessage(), e);
         }
     }
 }
