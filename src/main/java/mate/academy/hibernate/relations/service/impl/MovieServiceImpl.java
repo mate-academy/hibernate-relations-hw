@@ -1,10 +1,12 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
 public class MovieServiceImpl implements MovieService {
+    public static final String NO_MOVIE_WITH_SUCH_ID = "No movie with such id -> %d";
     private final MovieDao movieDao;
 
     public MovieServiceImpl(MovieDao movieDao) {
@@ -18,6 +20,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow();
+        return movieDao.get(id).orElseThrow(
+                () -> new DataProcessingException(NO_MOVIE_WITH_SUCH_ID.formatted(id)));
     }
 }

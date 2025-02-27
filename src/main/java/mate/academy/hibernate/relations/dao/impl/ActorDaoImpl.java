@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public static final String ERROR_DURING_ADDING_ACTOR_TO_DB =
             "Error during adding to db actor -> %s";
+    public static final String ERROR_DURING_RETRIEVING_ACTOR_WITH_ID = "Error during retrieving actor with id -> %d";
 
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -42,6 +43,9 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Actor.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(
+                    ERROR_DURING_RETRIEVING_ACTOR_WITH_ID.formatted(id), e);
         }
     }
 }

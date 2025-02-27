@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
+
+    public static final String ERROR_DURING_RETRIEVING_COUNTRY_WITH_ID = "Error during retrieving country with id -> %d";
+
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -40,6 +43,9 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(
+                    ERROR_DURING_RETRIEVING_COUNTRY_WITH_ID.formatted(id), e);
         }
     }
 }

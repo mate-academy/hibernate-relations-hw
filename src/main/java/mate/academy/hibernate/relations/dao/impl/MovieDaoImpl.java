@@ -9,6 +9,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
+
+    public static final String ERROR_DURING_RETRIEVING_MOVIE_WITH_ID = "Error during retrieving movie with id -> %d";
+
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -40,6 +43,9 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Optional<Movie> get(Long id) {
         try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException(
+                    ERROR_DURING_RETRIEVING_MOVIE_WITH_ID.formatted(id), e);
         }
     }
 }
