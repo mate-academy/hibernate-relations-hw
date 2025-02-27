@@ -10,7 +10,8 @@ import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
-    public static final String ERROR_DURING_RETRIEVING_MOVIE_WITH_ID = "Error during retrieving movie with id -> %d";
+    public static final String ERROR_DURING_RETRIEVING_MOVIE_WITH_ID =
+            "Error during retrieving movie with id -> %d";
 
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);

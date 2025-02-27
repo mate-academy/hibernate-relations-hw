@@ -10,7 +10,8 @@ import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
-    public static final String ERROR_DURING_RETRIEVING_COUNTRY_WITH_ID = "Error during retrieving country with id -> %d";
+    public static final String ERROR_DURING_RETRIEVING_COUNTRY_WITH_ID =
+            "Error during retrieving country with id -> %d";
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
