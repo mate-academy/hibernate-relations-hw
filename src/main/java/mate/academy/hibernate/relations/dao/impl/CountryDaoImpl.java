@@ -23,8 +23,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             session.save(country);
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
-            throw new DataProcessingException("Can't save an actor");
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't save an country");
         } finally {
             session.close();
         }
@@ -35,10 +37,10 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     @Override
     public Optional<Country> get(Long id) {
         Session session = null;
-        Optional<Country> country = null;
+        Optional<Country> country = Optional.empty();
         try {
             session = super.factory.openSession();
-            country = Optional.of(session.get(Country.class, id));
+            country = Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             return Optional.empty();
         } finally {

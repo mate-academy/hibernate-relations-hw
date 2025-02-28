@@ -18,10 +18,12 @@ public class Movie implements Cloneable {
     private List<Actor> actors;
 
     public Movie() {
+        this.actors = new ArrayList<>();
     }
 
     public Movie(String title) {
         this.title = title;
+        this.actors = new ArrayList<>();
     }
 
     public Long getId() {
