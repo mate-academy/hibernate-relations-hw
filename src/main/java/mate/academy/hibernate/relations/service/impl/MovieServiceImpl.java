@@ -7,7 +7,6 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
-
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
