@@ -6,6 +6,8 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
 import org.hibernate.SessionFactory;
 
+import java.util.Optional;
+
 public class ActorServiceImpl implements ActorService {
     private ActorDao actordao;
 
@@ -20,6 +22,10 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actordao.get(id).orElseThrow(null);
+        Optional<Actor> actor = actordao.get(id);
+        if (actor.isEmpty()) {
+            throw new RuntimeException("Actor with id " + id + " not found");
+        }
+        return actor.get();
     }
 }

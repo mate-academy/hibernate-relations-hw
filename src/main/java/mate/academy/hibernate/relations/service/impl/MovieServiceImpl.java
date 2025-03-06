@@ -6,6 +6,8 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 import org.hibernate.SessionFactory;
 
+import java.util.Optional;
+
 public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
@@ -20,6 +22,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie get(Long id) {
-        return movieDao.get(id).orElseThrow(null);
+        Optional<Movie> movie = movieDao.get(id);
+        if (movie.isEmpty()) {
+            throw new RuntimeException("Movie with id " + id + " not found");
+        }
+        return movie.get();
     }
 }
