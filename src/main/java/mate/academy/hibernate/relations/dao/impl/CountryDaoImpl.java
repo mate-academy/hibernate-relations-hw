@@ -9,18 +9,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDao {
-    private SessionFactory instance = null;
 
     public CountryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        instance = sessionFactory;
     }
 
     @Override
     public Country add(Country country) {
-        SessionFactory sessionFactory = instance;
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = factory.openSession()) {
             transaction = session.beginTransaction();
             session.save(country);
             transaction.commit();
@@ -35,8 +32,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
 
     @Override
     public Optional<Country> get(Long id) {
-        SessionFactory sessionFactory = instance;
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = factory.openSession()) {
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Error getting country", e);
