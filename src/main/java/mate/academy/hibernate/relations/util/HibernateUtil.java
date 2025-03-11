@@ -17,7 +17,7 @@ public class HibernateUtil {
 
     public static SessionFactory initSessionFactory() {
         try {
-            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
             throw new DataProcessingException("Can not create SessionFactory instance");
         }
