@@ -4,11 +4,13 @@ import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.impl.CountryDaoImpl;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
-import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class CountryServiceImpl implements CountryService {
-    private static final CountryDao countryDao =
-            new CountryDaoImpl(HibernateUtil.getSessionFactory());
+    private CountryDao countryDao;
+
+    public CountryServiceImpl(CountryDaoImpl countryDao) {
+        this.countryDao = countryDao;
+    }
 
     @Override
     public Country add(Country country) {
