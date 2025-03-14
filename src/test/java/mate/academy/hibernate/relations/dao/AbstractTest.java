@@ -125,7 +125,7 @@ public abstract class AbstractTest {
             Properties properties = new Properties();
             properties.setProperty("url", "jdbc:hsqldb:mem:test");
             properties.setProperty("user", "sa");
-            properties.setProperty("password", "");
+            properties.setProperty("password", "41456514aA");
             return properties;
         }
 
