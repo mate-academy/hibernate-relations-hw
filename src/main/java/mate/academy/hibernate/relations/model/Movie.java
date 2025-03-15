@@ -3,7 +3,6 @@ package mate.academy.hibernate.relations.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import java.util.ArrayList;
 import java.util.List;
 

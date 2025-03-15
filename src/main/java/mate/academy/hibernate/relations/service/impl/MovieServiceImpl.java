@@ -1,14 +1,12 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import java.util.NoSuchElementException;
 import mate.academy.hibernate.relations.dao.MovieDao;
 import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.MovieService;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
-
 public class MovieServiceImpl implements MovieService {
-    MovieDao movieDao;
+    private MovieDao movieDao;
 
     @Override
     public Movie add(Movie movie) {
