@@ -19,7 +19,7 @@ public class Movie implements Cloneable {
     private String title;
     @ManyToMany
     @JoinTable(
-            name = ""
+            name = "movies_actors"
     )
     private List<Actor> actors;
 
