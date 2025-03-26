@@ -14,6 +14,8 @@ public class Actor implements Cloneable {
     private String name;
     @ManyToOne
     private Country country;
+    @ManyToOne
+    private Movie movie;
 
     public Actor() {
     }
@@ -44,6 +46,14 @@ public class Actor implements Cloneable {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     @Override

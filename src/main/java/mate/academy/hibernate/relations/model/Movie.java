@@ -14,7 +14,7 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToMany
+    @OneToMany (mappedBy = "movie")
     private List<Actor> actors;
 
     public Movie() {
