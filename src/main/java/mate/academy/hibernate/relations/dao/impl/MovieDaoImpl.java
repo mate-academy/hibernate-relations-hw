@@ -53,6 +53,6 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 session.close();
             }
         }
-        return Optional.of(result);
+        return Optional.ofNullable(result);
     }
 }

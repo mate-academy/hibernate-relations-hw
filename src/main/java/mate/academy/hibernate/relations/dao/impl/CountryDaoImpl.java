@@ -53,6 +53,6 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
                 session.close();
             }
         }
-        return Optional.of(result);
+        return Optional.ofNullable(result);
     }
 }

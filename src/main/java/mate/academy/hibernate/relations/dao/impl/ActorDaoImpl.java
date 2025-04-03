@@ -53,6 +53,6 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
                 session.close();
             }
         }
-        return Optional.of(actor);
+        return Optional.ofNullable(actor);
     }
 }
