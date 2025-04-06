@@ -22,6 +22,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor get(Long id) {
         return actorDao.get(id)
-                .orElseThrow(() -> new RuntimeException("Error getting movie" + id));
+                .orElseThrow(() -> new RuntimeException("Can not get a movie..." + id));
     }
 }
