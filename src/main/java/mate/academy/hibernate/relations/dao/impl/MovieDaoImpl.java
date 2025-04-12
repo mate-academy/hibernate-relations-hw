@@ -29,7 +29,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             }
             throw new DataProcessingException("Can`t add movie", e);
         } finally {
-                session.close();
+            session.close();
         }
     }
 
