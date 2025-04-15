@@ -30,7 +30,7 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(new ActorDaoImpl(sessionFactory));
         actorService.add(mainActor);
 
-        Movie movie = new Movie("Inception");
+        Movie movie = new Movie("Inceptions");
         movie.setActors(List.of(mainActor));
         MovieService movieService = new MovieServiceImpl(new MovieDaoImpl(sessionFactory));
         movieService.add(movie);
