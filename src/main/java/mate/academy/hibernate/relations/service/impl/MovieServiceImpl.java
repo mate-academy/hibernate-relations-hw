@@ -16,7 +16,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie add(Movie movie) {
         if (movie == null) {
-            throw new IllegalArgumentException("Actor can not be null!");
+            throw new IllegalArgumentException("Movie can not be null!");
         }
         movieDao.add(movie);
         return movie;

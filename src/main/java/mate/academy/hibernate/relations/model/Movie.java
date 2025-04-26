@@ -1,10 +1,7 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,7 @@ public class Movie implements Cloneable {
     private Long id;
     private String title;
 
-    @OneToMany
+    @ManyToMany
     private List<Actor> actors;
 
     public Movie() {
