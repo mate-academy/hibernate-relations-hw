@@ -1,12 +1,23 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
     private Country country;
 
-    public Actor() {
-    }
+    public Actor() {}
 
     public Actor(String name) {
         this.name = name;
@@ -39,22 +50,28 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor actor = (Actor) super.clone();
-            if (country != null) {
-                actor.setCountry(country.clone());
-            }
-            return actor;
+            return (Actor) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new RuntimeException("Can't clone Actor", e);
         }
     }
 
     @Override
     public String toString() {
-        return "Actor{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", country='" + country + '\''
-                + '}';
+        return "Actor{id=" + id + ", name='" + name + "', country="
+                + country + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Actor)) return false;
+        Actor actor = (Actor) o;
+        return Objects.equals(id, actor.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
