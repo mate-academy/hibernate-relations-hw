@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,35 +13,54 @@ public class Actor implements Cloneable {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {}
-    public Actor(String name) { this.name = name; }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public Country getCountry() { return country; }
-    public void setCountry(Country country) { this.country = country; }
+    public Actor(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     @Override
     public Actor clone() {
         try {
-            Actor clone = (Actor) super.clone();
-            if (country != null) {
-                clone.country = country.clone();
-            }
-            return clone;
+            return (Actor) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't clone Actor", e);
         }
     }
 
     @Override
-    public String toString() { return "Actor{id=" + id + ", name='" + name + "', country=" + country + "}"; }
+    public String toString() {
+        return "Actor{id=" + id + ", name='" + name + "', country="
+                + country + "}";
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,5 +71,7 @@ public class Actor implements Cloneable {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(id);}
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

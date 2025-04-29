@@ -1,6 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,12 +14,26 @@ public class Country implements Cloneable {
     private String name;
 
     public Country() {}
-    public Country(String name) { this.name = name; }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public Country(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public Country clone() {
@@ -32,7 +46,8 @@ public class Country implements Cloneable {
 
     @Override
     public String toString() {
-        return "Country{id=" + id + ", name='" + name + "'}";
+        return "Country{id=" + id + ", name='"
+                + name + "'}";
     }
 
     @Override

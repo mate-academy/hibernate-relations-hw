@@ -1,6 +1,7 @@
 package mate.academy.hibernate.relations.service.impl;
 
 import mate.academy.hibernate.relations.dao.CountryDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.service.CountryService;
 
@@ -13,13 +14,17 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country add(Country country) {
-        return countryDao.add(country);
+        try {
+            return countryDao.add(country);
+        } catch (DataProcessingException e) {
+            throw new RuntimeException("Service error adding Country", e);
+        }
     }
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).orElseThrow(
-                () -> new RuntimeException("Country not found, id=" + id)
-        );
+        return countryDao.get(id)
+                .orElseThrow(() -> new RuntimeException("Country not found, id="
+                        + id));
     }
 }

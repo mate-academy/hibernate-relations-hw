@@ -11,13 +11,12 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            // Ładuje domyślny hibernate.cfg.xml z classpath
-            Configuration configuration = new Configuration().configure()
-                    // Rejestracja encji:
+            return new Configuration()
+                    .configure()
                     .addAnnotatedClass(Country.class)
                     .addAnnotatedClass(Actor.class)
-                    .addAnnotatedClass(Movie.class);
-            return configuration.buildSessionFactory();
+                    .addAnnotatedClass(Movie.class)
+                    .buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(
                     "Initial SessionFactory creation failed: " + ex);
