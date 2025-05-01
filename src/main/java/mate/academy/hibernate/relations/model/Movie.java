@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "movies")
-public class Movie {
+public class Movie implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,6 +61,9 @@ public class Movie {
 
     @Override
     public Movie clone() {
+        if (this.id == null) {
+            throw new IllegalStateException("Can't clone an unsaved entity (id is null): " + this);
+        }
         try {
             Movie movie = (Movie) super.clone();
             if (movie.getActors() != null) {
@@ -78,6 +81,10 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{id=" + id + ", title='" + title + "', actors=" + actors + '}';
+        return "Movie{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", actors=" + actors
+                + '}';
     }
 }

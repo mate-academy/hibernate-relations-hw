@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "countries")
-public class Country {
+public class Country implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +40,9 @@ public class Country {
 
     @Override
     public Country clone() {
+        if (this.id == null) {
+            throw new IllegalStateException("Can't clone an unsaved entity (id is null): " + this);
+        }
         try {
             return (Country) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -49,6 +52,9 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country{id=" + id + ", name='" + name + "'}";
+        return "Country{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 }
