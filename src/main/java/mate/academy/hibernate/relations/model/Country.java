@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "countries")
-public class Country implements Cloneable {
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,9 +49,6 @@ public class Country implements Cloneable {
 
     @Override
     public String toString() {
-        return "Country{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + '}';
+        return "Country{id=" + id + ", name='" + name + "'}";
     }
 }

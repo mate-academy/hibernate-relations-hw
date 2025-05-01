@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.hibernate.Hibernate;
 
 @Entity
 @Table(name = "actors")
@@ -57,9 +58,11 @@ public class Actor implements Cloneable {
     public Actor clone() {
         try {
             Actor actor = (Actor) super.clone();
-            if (country != null) {
+
+            if (country != null && Hibernate.isInitialized(country)) {
                 actor.setCountry(country.clone());
             }
+
             return actor;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);

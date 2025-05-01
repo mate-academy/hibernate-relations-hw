@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "movies")
-public class Movie implements Cloneable {
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -78,10 +78,6 @@ public class Movie implements Cloneable {
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + ", actors=" + actors
-                + '}';
+        return "Movie{id=" + id + ", title='" + title + "', actors=" + actors + '}';
     }
 }
