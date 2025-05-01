@@ -19,7 +19,7 @@ public class Country implements Cloneable {
     @Column(name = "country")
     private String name;
 
-    @OneToMany (mappedBy = "name")
+    @OneToMany (mappedBy = "country", targetEntity = Actor.class)
     private List<Actor> actors;
 
     public Country() {
