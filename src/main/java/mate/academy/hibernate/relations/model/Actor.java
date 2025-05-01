@@ -7,10 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "actors")
@@ -26,8 +24,8 @@ public class Actor implements Cloneable {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @ManyToMany(mappedBy = "actors", targetEntity = Movie.class)
-    private List<Movie> movies;
+    //    @ManyToMany(mappedBy = "actors", targetEntity = Movie.class)
+    //    private List<Movie> movies;
 
     public Actor() {
     }
@@ -60,14 +58,6 @@ public class Actor implements Cloneable {
         this.country = country;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
-
     @Override
     public Actor clone() {
         try {
@@ -87,7 +77,6 @@ public class Actor implements Cloneable {
                 + "id=" + id
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
-                + ", movies=" + movies + '\''
                 + '}';
     }
 }
