@@ -1,5 +1,6 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,15 +19,16 @@ public class Movie implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title")
     private String title;
 
     @ManyToMany
     @JoinTable(
-            name = "movies_actors",
+            name = "movie_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    private List<Actor> actors = new ArrayList<>();
+    private List<Actor> actors;
 
     public Movie() {
     }
@@ -61,17 +63,14 @@ public class Movie implements Cloneable {
 
     @Override
     public Movie clone() {
-        if (this.id == null) {
-            throw new IllegalStateException("Can't clone an unsaved entity (id is null): " + this);
-        }
         try {
             Movie movie = (Movie) super.clone();
             if (movie.getActors() != null) {
-                List<Actor> actorsCopy = new ArrayList<>();
+                List<Actor> actors = new ArrayList<>();
                 for (Actor actor : movie.getActors()) {
-                    actorsCopy.add(actor.clone());
+                    actors.add(actor.clone());
                 }
-                movie.setActors(actorsCopy);
+                movie.setActors(actors);
             }
             return movie;
         } catch (CloneNotSupportedException e) {
@@ -84,7 +83,6 @@ public class Movie implements Cloneable {
         return "Movie{"
                 + "id=" + id
                 + ", title='" + title + '\''
-                + ", actors=" + actors
                 + '}';
     }
 }
