@@ -2,8 +2,6 @@ package mate.academy.hibernate.relations.service;
 
 import mate.academy.hibernate.relations.model.Country;
 
-public interface CountryService {
-    Country add(Country country);
+public interface CountryService extends GenericService<Country> {
 
-    Country get(Long id);
 }

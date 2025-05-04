@@ -7,27 +7,62 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        CountryService countryService = new CountryServiceImpl(sessionFactory);
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
         countryService.add(usa);
+        Country australia = new Country("Australia");
+        countryService.add(australia);
+        Country britain = new Country("Great Britain");
+        countryService.add(britain);
+        countryService.getAll().forEach(System.out::println);
+        System.out.println(countryService.get(britain.getId()));
+        countryService.delete(britain);
+        countryService.getAll().forEach(System.out::println);
 
+        ActorService actorService = new ActorServiceImpl(sessionFactory);
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
         actorService.add(vinDiesel);
+        Actor robertDowney = new Actor("Robert Downey Jr.");
+        robertDowney.setCountry(usa);
+        actorService.add(robertDowney);
+        Actor chrisHemsworth = new Actor("Chris Hemsworth");
+        chrisHemsworth.setCountry(australia);
+        actorService.add(chrisHemsworth);
+        Actor liamHemsworth = new Actor("Liam Hemsworth");
+        liamHemsworth.setCountry(australia);
+        actorService.add(liamHemsworth);
+        actorService.getAll().forEach(System.out::println);
+        System.out.println(actorService.get(liamHemsworth.getId()));
+        actorService.delete(liamHemsworth);
+        actorService.getAll().forEach(System.out::println);
 
+        MovieService movieService = new MovieServiceImpl(sessionFactory);
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
         movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+        Movie avengers = new Movie("Avengers");
+        avengers.setActors(List.of(robertDowney, chrisHemsworth));
+        movieService.add(avengers);
+        Movie ironMan = new Movie("IronMan");
+        ironMan.setActors(List.of(robertDowney));
+        movieService.add(ironMan);
+        movieService.getAll().forEach(System.out::println);
+        avengers.setTitle("Avengers Endgame");
+        movieService.update(avengers);
+        movieService.getAll().forEach(System.out::println);
+        System.out.println(movieService.get(ironMan.getId()));
+        movieService.delete(ironMan);
+        movieService.getAll().forEach(System.out::println);
     }
 }
