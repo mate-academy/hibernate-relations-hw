@@ -2,13 +2,30 @@ package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
+    @ManyToMany
     private List<Actor> actors;
 
     public Movie() {
+    }
+
+    private Movie(Builder builder) {
+        this.title = builder.title;
+        this.actors = builder.actors;
     }
 
     public Movie(String title) {
@@ -62,5 +79,24 @@ public class Movie implements Cloneable {
                 + "id=" + id
                 + ", title='" + title + '\''
                 + '}';
+    }
+
+    public static class Builder {
+        private String title;
+        private List<Actor> actors;
+
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder setActors(List<Actor> actors) {
+            this.actors = new ArrayList<>(actors);
+            return this;
+        }
+
+        public Movie build() {
+            return new Movie(this);
+        }
     }
 }

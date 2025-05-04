@@ -1,11 +1,28 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
     private Country country;
 
     public Actor() {
+    }
+
+    public Actor(Builder builder) {
+        this.name = builder.name;
+        this.country = builder.country;
     }
 
     public Actor(String name) {
@@ -56,5 +73,24 @@ public class Actor implements Cloneable {
                 + ", name='" + name + '\''
                 + ", country='" + country + '\''
                 + '}';
+    }
+
+    public static class Builder {
+        private String name;
+        private Country country;
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setCountry(Country country) {
+            this.country = country;
+            return this;
+        }
+
+        public Actor build() {
+            return new Actor(this);
+        }
     }
 }
