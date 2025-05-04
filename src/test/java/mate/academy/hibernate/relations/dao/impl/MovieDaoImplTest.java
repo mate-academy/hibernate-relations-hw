@@ -10,7 +10,9 @@ import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class MovieDaoImplTest extends AbstractTest {
