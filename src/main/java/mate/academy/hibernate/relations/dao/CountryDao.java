@@ -1,10 +1,6 @@
 package mate.academy.hibernate.relations.dao;
 
-import java.util.Optional;
+import mate.academy.hibernate.relations.dao.impl.GenericDao;
 import mate.academy.hibernate.relations.model.Country;
 
-public interface CountryDao {
-    Country add(Country country);
-
-    Optional<Country> get(Long id);
-}
+public interface CountryDao extends GenericDao<Country> {}
