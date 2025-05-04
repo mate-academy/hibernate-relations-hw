@@ -1,12 +1,24 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
-    private List<Actor> actors;
+
+    @ManyToMany
+    @JoinTable(name = "movie_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    private List<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
@@ -42,25 +54,20 @@ public class Movie implements Cloneable {
     @Override
     public Movie clone() {
         try {
-            Movie movie = (Movie) super.clone();
-            if (movie.getActors() != null) {
-                List<Actor> actors = new ArrayList<>();
-                for (Actor actor : movie.getActors()) {
-                    actors.add(actor.clone());
-                }
-                movie.setActors(actors);
-            }
-            return movie;
+            Movie clone = (Movie) super.clone();
+            clone.actors = new ArrayList<>(actors);
+            return clone;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new RuntimeException("Cloning failed for Movie", e);
         }
     }
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
-                + '}';
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", actors=" + actors +
+                '}';
     }
 }
