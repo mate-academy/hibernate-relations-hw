@@ -12,131 +12,127 @@ import org.hsqldb.jdbc.JDBCDataSource;
 import org.junit.Before;
 
 public abstract class AbstractTest {
-    protected interface DataSourceProvider {
+  protected interface DataSourceProvider {
 
-        enum IdentifierStrategy {
-            IDENTITY,
-            SEQUENCE
-        }
-
-        enum Database {
-            HSQLDB,
-        }
-
-        String hibernateDialect();
-
-        DataSource dataSource();
-
-        Class<? extends DataSource> dataSourceClassName();
-
-        Properties dataSourceProperties();
-
-        List<IdentifierStrategy> identifierStrategies();
-
-        Database database();
+    enum IdentifierStrategy {
+      IDENTITY,
+      SEQUENCE
     }
 
-    private SessionFactory factory;
-
-    @Before
-    public void init() {
-        factory = newSessionFactory();
+    enum Database {
+      HSQLDB,
     }
 
+    String hibernateDialect();
 
-    private SessionFactory newSessionFactory() {
-        Properties properties = getProperties();
-        Configuration configuration = new Configuration().addProperties(properties);
-        for(Class<?> entityClass : entities()) {
-            configuration.addAnnotatedClass(entityClass);
-        }
-        String[] packages = packages();
-        if(packages != null) {
-            for(String scannedPackage : packages) {
-                configuration.addPackage(scannedPackage);
-            }
-        }
-        Interceptor interceptor = interceptor();
-        if(interceptor != null) {
-            configuration.setInterceptor(interceptor);
-        }
-        return configuration.buildSessionFactory(
-                new StandardServiceRegistryBuilder()
-                        .applySettings(properties)
-                        .build()
-        );
+    DataSource dataSource();
+
+    Class<? extends DataSource> dataSourceClassName();
+
+    Properties dataSourceProperties();
+
+    List<IdentifierStrategy> identifierStrategies();
+
+    Database database();
+  }
+
+  private SessionFactory factory;
+
+  @Before
+  public void init() {
+    factory = newSessionFactory();
+  }
+
+  private SessionFactory newSessionFactory() {
+    Properties properties = getProperties();
+    Configuration configuration = new Configuration().addProperties(properties);
+    for (Class<?> entityClass : entities()) {
+      configuration.addAnnotatedClass(entityClass);
+    }
+    String[] packages = packages();
+    if (packages != null) {
+      for (String scannedPackage : packages) {
+        configuration.addPackage(scannedPackage);
+      }
+    }
+    Interceptor interceptor = interceptor();
+    if (interceptor != null) {
+      configuration.setInterceptor(interceptor);
+    }
+    return configuration.buildSessionFactory(
+        new StandardServiceRegistryBuilder().applySettings(properties).build());
+  }
+
+  protected Properties getProperties() {
+    Properties properties = new Properties();
+    properties.put("hibernate.dialect", getDataSourceProvider().hibernateDialect());
+    properties.put("hibernate.hbm2ddl.auto", "create-drop");
+
+    // data source settings
+    properties.put("hibernate.connection.datasource", newDataSource());
+    return properties;
+  }
+
+  protected DataSource newDataSource() {
+    return getDataSourceProvider().dataSource();
+  }
+
+  protected abstract Class<?>[] entities();
+
+  protected String[] packages() {
+    return null;
+  }
+
+  protected Interceptor interceptor() {
+    return null;
+  }
+
+  protected DataSourceProvider getDataSourceProvider() {
+    return new HsqldbDataSourceProvider();
+  }
+
+  public SessionFactory getSessionFactory() {
+    return factory;
+  }
+
+  public static class HsqldbDataSourceProvider implements DataSourceProvider {
+
+    @Override
+    public String hibernateDialect() {
+      return "org.hibernate.dialect.HSQLDialect";
     }
 
-    protected Properties getProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", getDataSourceProvider().hibernateDialect());
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
-
-        //data source settings
-        properties.put("hibernate.connection.datasource", newDataSource());
-        return properties;
+    @Override
+    public DataSource dataSource() {
+      JDBCDataSource dataSource = new JDBCDataSource();
+      dataSource.setUrl("jdbc:hsqldb:mem:test");
+      dataSource.setUser("sa");
+      dataSource.setPassword("");
+      return dataSource;
     }
 
-    protected DataSource newDataSource() {
-        return getDataSourceProvider().dataSource();
+    @Override
+    public Class<? extends DataSource> dataSourceClassName() {
+      return JDBCDataSource.class;
     }
 
-    protected abstract Class<?>[] entities();
-
-    protected String[] packages() {
-        return null;
+    @Override
+    public Properties dataSourceProperties() {
+      Properties properties = new Properties();
+      properties.setProperty("url", "jdbc:hsqldb:mem:test");
+      properties.setProperty("user", "sa");
+      properties.setProperty("password", "");
+      return properties;
     }
 
-    protected Interceptor interceptor() {
-        return null;
+    @Override
+    public List<IdentifierStrategy> identifierStrategies() {
+      return Arrays.asList(IdentifierStrategy.IDENTITY, IdentifierStrategy.SEQUENCE);
     }
 
-    protected DataSourceProvider getDataSourceProvider() {
-        return new HsqldbDataSourceProvider();
+    @Override
+    public Database database() {
+      return Database.HSQLDB;
     }
-
-    public SessionFactory getSessionFactory() {
-        return factory;
-    }
-
-    public static class HsqldbDataSourceProvider implements DataSourceProvider {
-
-        @Override
-        public String hibernateDialect() {
-            return "org.hibernate.dialect.HSQLDialect";
-        }
-
-        @Override
-        public DataSource dataSource() {
-            JDBCDataSource dataSource = new JDBCDataSource();
-            dataSource.setUrl("jdbc:hsqldb:mem:test");
-            dataSource.setUser("sa");
-            dataSource.setPassword("");
-            return dataSource;
-        }
-
-        @Override
-        public Class<? extends DataSource> dataSourceClassName() {
-            return JDBCDataSource.class;
-        }
-
-        @Override
-        public Properties dataSourceProperties() {
-            Properties properties = new Properties();
-            properties.setProperty("url", "jdbc:hsqldb:mem:test");
-            properties.setProperty("user", "sa");
-            properties.setProperty("password", "");
-            return properties;
-        }
-
-        @Override
-        public List<IdentifierStrategy> identifierStrategies() {
-            return Arrays.asList(IdentifierStrategy.IDENTITY, IdentifierStrategy.SEQUENCE);
-        }
-
-        @Override
-        public Database database() {
-            return Database.HSQLDB;
-        }
-    }
+  }
 }
