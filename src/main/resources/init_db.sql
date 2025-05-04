@@ -1,0 +1,1 @@
+CREATE DATABASE `actor_country_movie_db` DEFAULT CHARACTER SET utf8;
