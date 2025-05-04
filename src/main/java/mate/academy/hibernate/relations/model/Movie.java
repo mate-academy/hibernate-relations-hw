@@ -1,12 +1,34 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
-    private List<Actor> actors;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    private List<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
@@ -44,11 +66,11 @@ public class Movie implements Cloneable {
         try {
             Movie movie = (Movie) super.clone();
             if (movie.getActors() != null) {
-                List<Actor> actors = new ArrayList<>();
+                List<Actor> clonedActors = new ArrayList<>();
                 for (Actor actor : movie.getActors()) {
-                    actors.add(actor.clone());
+                    clonedActors.add(actor.clone());
                 }
-                movie.setActors(actors);
+                movie.setActors(clonedActors);
             }
             return movie;
         } catch (CloneNotSupportedException e) {
@@ -57,10 +79,28 @@ public class Movie implements Cloneable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Movie movie = (Movie) o;
+        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title);
+    }
+
+    @Override
     public String toString() {
         return "Movie{"
                 + "id=" + id
                 + ", title='" + title + '\''
+                + ", actors=" + actors
                 + '}';
     }
 }
