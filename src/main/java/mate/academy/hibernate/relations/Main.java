@@ -43,7 +43,7 @@ public class Main {
             movieService.add(fastAndFurious);
             System.out.println(movieService.get(fastAndFurious.getId()));
         } catch (DataProcessingException e) {
-            System.err.printf("Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         } finally {
             sessionFactory.close();
         }
