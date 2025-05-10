@@ -41,7 +41,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             Country country = session.get(Country.class, id);
             return Optional.ofNullable(country);
         } catch (Exception e) {
-            throw new DataProcessingException("Error processing data for movie ID: " + id, e);
+            throw new DataProcessingException("Error processing data for country ID: " + id, e);
         }
     }
 }
