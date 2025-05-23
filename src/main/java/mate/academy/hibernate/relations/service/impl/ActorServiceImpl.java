@@ -1,16 +1,31 @@
 package mate.academy.hibernate.relations.service.impl;
 
+import mate.academy.hibernate.relations.dao.ActorDao;
+import mate.academy.hibernate.relations.dao.impl.ActorDaoImpl;
+import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.service.ActorService;
+import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
+    private final ActorDao actorDao;
+
+    public ActorServiceImpl(SessionFactory sessionFactory) {
+        this.actorDao = new ActorDaoImpl(sessionFactory);
+    }
+
     @Override
     public Actor add(Actor actor) {
-        return null;
+        try {
+            return actorDao.add(actor);
+        } catch (RuntimeException e) {
+            throw new DataProcessingException("Error adding actor: " + actor, e);
+        }
     }
 
     @Override
     public Actor get(Long id) {
-        return null;
+        return actorDao.get(id).orElseThrow(
+                () -> new DataProcessingException("Cannot get a actor by id: " + id, null));
     }
 }
