@@ -8,10 +8,15 @@ import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class CountryServiceImpl implements CountryService {
-    private final CountryDao countryDao = new CountryDaoImpl(HibernateUtil.getSessionFactory());
+    private final CountryDao countryDao;
+
+    public CountryServiceImpl(CountryDao countryDao) {
+        this.countryDao = countryDao;
+    }
 
     @Override
     public Country add(Country country) {
+
         try {
             return countryDao.add(country);
         } catch (RuntimeException e) {
