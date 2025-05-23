@@ -23,21 +23,21 @@ public class Main {
 
         var countryDao = new CountryDaoImpl(sessionFactory);
         Country usa = new Country("USA");
-        CountryService countryService = new CountryServiceImpl(countryDao);
+        CountryService countryService = new CountryServiceImpl(sessionFactory);
         // TODO: initialize this instance
         countryService.add(usa);
 
         var actorDao = new ActorDaoImpl(sessionFactory);
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorService actorService = new ActorServiceImpl(actorDao);
+        ActorService actorService = new ActorServiceImpl(sessionFactory);
         // TODO: initialize this instance
         actorService.add(vinDiesel);
 
         var movieDao = new MovieDaoImpl(sessionFactory);
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = new MovieServiceImpl(movieDao);
+        MovieService movieService = new MovieServiceImpl(sessionFactory);
         // TODO: initialize this instance
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
