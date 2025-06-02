@@ -31,6 +31,7 @@
             <version>2.7.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- Added MySQL and Hibernate dependencies for database connection -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
