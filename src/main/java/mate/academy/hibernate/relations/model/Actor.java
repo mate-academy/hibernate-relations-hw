@@ -36,6 +36,14 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     public Long getId() {
         return id;
     }
