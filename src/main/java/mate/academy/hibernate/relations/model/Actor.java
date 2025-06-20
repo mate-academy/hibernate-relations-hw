@@ -1,8 +1,18 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Actor() {
