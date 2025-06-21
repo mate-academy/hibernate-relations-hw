@@ -1,8 +1,16 @@
 package mate.academy.hibernate.relations.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "movies")
@@ -14,8 +22,8 @@ public class Movie implements Cloneable {
     private String title;
     @ManyToMany
     @JoinTable(
-     name = "movies_actors",
-     joinColumns = @JoinColumn(name = "movie_id"),
+            name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
     private List<Actor> actors = new ArrayList<>();
