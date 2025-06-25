@@ -1,18 +1,53 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
-    private List<Actor> actors;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actors = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_country_id")
+    private Country country;
 
     public Movie() {
     }
 
     public Movie(String title) {
         this.title = title;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Country getCountry() {
+        return country;
     }
 
     public Long getId() {
@@ -59,8 +94,11 @@ public class Movie implements Cloneable {
     @Override
     public String toString() {
         return "Movie{"
-                + "id=" + id
-                + ", title='" + title + '\''
+                + "id=" + id + ", title='" + title + '\''
+                + ", actors=" + actors.stream()
+                .map(Actor::getName)
+                .toList()
+                + ", country=" + (country != null ? country.getName() : null)
                 + '}';
     }
 }
