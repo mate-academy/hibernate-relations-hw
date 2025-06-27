@@ -28,7 +28,7 @@ public class Movie implements Cloneable {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    private List<Actor> actors;
+    private List<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
