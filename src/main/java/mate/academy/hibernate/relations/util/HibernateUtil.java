@@ -21,7 +21,7 @@ public class HibernateUtil {
             configuration.configure("hibernate.cfg.xml");
             return configuration.buildSessionFactory();
         } catch (Exception e) {
-            throw new RuntimeException("Can't create SessionFactory", e);
+            throw new RuntimeException("Can't create SessionFactory.", e);
         }
     }
 }
