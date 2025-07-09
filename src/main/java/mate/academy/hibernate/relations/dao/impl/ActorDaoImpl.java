@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class ActorDaoImpl extends AbstractDao implements ActorDao {
+public class ActorDaoImpl extends AbstractDao<Actor> implements ActorDao {
     public ActorDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
