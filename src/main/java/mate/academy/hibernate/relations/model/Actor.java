@@ -49,7 +49,6 @@ public class Actor implements Cloneable {
         this.country = country;
     }
 
-
     @Override
     public Actor clone() {
         try {

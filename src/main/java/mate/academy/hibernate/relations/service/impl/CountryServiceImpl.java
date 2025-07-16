@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class CountryServiceImpl implements CountryService {
-    CountryDao countryDao = new CountryDaoImpl(HibernateUtil.getSessionFactory());
+    private final CountryDao countryDao = new CountryDaoImpl(HibernateUtil.getSessionFactory());
 
     @Override
     public Country add(Country country) {
@@ -17,7 +17,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country get(Long id) {
-        return countryDao.get(id).orElseThrow(()->
+        return countryDao.get(id).orElseThrow(() ->
                 new EntityNotFoundException("Country not found with id: " + id));
     }
 }

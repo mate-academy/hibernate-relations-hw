@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 
 public class ActorServiceImpl implements ActorService {
-    ActorDao actorDao = new ActorDaoImpl(HibernateUtil.getSessionFactory());
+    private final ActorDao actorDao = new ActorDaoImpl(HibernateUtil.getSessionFactory());
 
     @Override
     public Actor add(Actor actor) {
@@ -17,7 +17,7 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElseThrow(()->
+        return actorDao.get(id).orElseThrow(() ->
                 new EntityNotFoundException("Actor not found with id: " + id));
     }
 }
