@@ -40,10 +40,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         Session session = null;
         try {
             session = factory.openSession();
-            session.beginTransaction();
-            Optional<Country> country = Optional.ofNullable(session.find(Country.class, id));
-            session.getTransaction().commit();
-            return country;
+            return Optional.ofNullable(session.get(Country.class, id));
         } catch (RuntimeException e) {
             throw new DataProcessingException("Помилка зчитування індифікатора країни: " + id, e);
         } finally {

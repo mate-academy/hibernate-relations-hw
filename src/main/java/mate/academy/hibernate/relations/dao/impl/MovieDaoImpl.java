@@ -40,10 +40,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         Session session = null;
         try {
             session = factory.openSession();
-            session.beginTransaction();
-            Optional<Movie> movie = Optional.ofNullable(session.find(Movie.class, id));
-            session.getTransaction().commit();
-            return movie;
+            return Optional.ofNullable(session.get(Movie.class, id));
         } catch (RuntimeException e) {
             throw new DataProcessingException("Помилка зчитування індифікатора фільму: " + id, e);
         } finally {
