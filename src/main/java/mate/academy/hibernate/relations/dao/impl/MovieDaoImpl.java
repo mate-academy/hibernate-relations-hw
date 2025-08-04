@@ -15,7 +15,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        Session session;
+        Session session = null;
         Transaction transaction = null;
 
         try {
@@ -28,6 +28,10 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 transaction.rollback();
             }
             throw new DataProcessingException("Unable to add movie", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return movie;
     }
