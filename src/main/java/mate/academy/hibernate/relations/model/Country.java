@@ -46,6 +46,14 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
     @Override
     public Country clone() {
         try {
