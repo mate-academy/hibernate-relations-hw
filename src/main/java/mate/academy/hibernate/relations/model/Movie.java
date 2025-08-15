@@ -4,10 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "movies")
 @Entity
 public class Movie implements Cloneable {
     @Id
@@ -15,7 +18,7 @@ public class Movie implements Cloneable {
     private Long id;
     private String title;
 
-    @OneToMany
+    @ManyToMany
     private List<Actor> actors;
 
     public Movie() {
