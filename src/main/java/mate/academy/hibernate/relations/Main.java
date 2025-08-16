@@ -7,27 +7,29 @@ import mate.academy.hibernate.relations.model.Movie;
 import mate.academy.hibernate.relations.service.ActorService;
 import mate.academy.hibernate.relations.service.CountryService;
 import mate.academy.hibernate.relations.service.MovieService;
+import mate.academy.hibernate.relations.service.impl.ActorServiceImpl;
+import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
+import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        // use this session factory when you will initialize service instances
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryService countryService = null; // TODO: initialize this instance
+        CountryService countryService = new CountryServiceImpl(sessionFactory);
         countryService.add(usa);
 
-        Actor vinDiesel = new Actor("Vin Diesel");
-        vinDiesel.setCountry(usa);
-        ActorService actorService = null; // TODO: initialize this instance
-        actorService.add(vinDiesel);
+        Actor guillermoDelToro = new Actor("Guillermo del Toro");
+        guillermoDelToro.setCountry(usa);
+        ActorService actorService = new ActorServiceImpl(sessionFactory);
+        actorService.add(guillermoDelToro);
 
-        Movie fastAndFurious = new Movie("Fast and Furious");
-        fastAndFurious.setActors(List.of(vinDiesel));
-        MovieService movieService = null; // TODO: initialize this instance
-        movieService.add(fastAndFurious);
-        System.out.println(movieService.get(fastAndFurious.getId()));
+        Movie pansLabyrinth = new Movie("Pan's Labyrinth");
+        pansLabyrinth.setActors(List.of(guillermoDelToro));
+        MovieService movieService = new MovieServiceImpl(sessionFactory);
+        movieService.add(pansLabyrinth);
+        System.out.println(movieService.get(pansLabyrinth.getId()));
     }
 }
