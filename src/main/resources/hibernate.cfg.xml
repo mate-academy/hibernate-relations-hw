@@ -1,0 +1,16 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/testtest?serverTimeZone=UTC</property>
+        <property name="hibernate.connection.username">test1</property>
+        <property name="hibernate.connection.password">test2!</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="mate.academy.hibernate.relations.model.Actor"/>
+        <mapping class="mate.academy.hibernate.relations.model.Country"/>
+        <mapping class="mate.academy.hibernate.relations.model.Movie"/>
+    </session-factory>
+</hibernate-configuration>
