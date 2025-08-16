@@ -14,12 +14,12 @@ Such a structure is a good example of Dependency Injection implementation. Pleas
 Thus in methods `add(Entity entity)` and `get(Long id)` of the DAO layer you need just to refer to the SessionFactory instance of the parent AbstractDao class:
 
 ```java
-public Entity add(Entity entity) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-        session = factory.openSession();
-        transaction = ...
+    public Entity add(Entity entity) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = factory.openSession();
+            transaction = ...
 ```
 
 ### Requirements
