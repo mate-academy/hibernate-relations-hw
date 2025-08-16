@@ -1,0 +1,15 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name = "connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name = "connection.url">jdbc:mysql://localhost/hibernate_relations_hw</property>
+        <property name = "connection.username">yana</property>
+        <property name = "connection.password">111-Syna</property>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <mapping class = "mate.academy.hibernate.relations.model.Movie"/>
+        <mapping class = "mate.academy.hibernate.relations.model.Country"/>
+        <mapping class = "mate.academy.hibernate.relations.model.Actor"/>
+    </session-factory>
+</hibernate-configuration>
