@@ -63,7 +63,7 @@ public class MovieDaoImplTest extends AbstractTest {
         Assert.assertEquals(morganFreeman.getName(), actual.getActors().get(0).getName());
     }
 
-    @Test
+   @Test
     public void saveWithActorAndCountry_ok() {
         Country usaClone = usa.clone();
         CountryDao countryDao = new CountryDaoImpl(getSessionFactory());
