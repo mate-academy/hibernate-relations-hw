@@ -2,8 +2,6 @@ package mate.academy.hibernate.relations.service;
 
 import mate.academy.hibernate.relations.model.Actor;
 
-public interface ActorService {
-    Actor add(Actor actor);
+public interface ActorService extends GenericService<Actor> {
 
-    Actor get(Long id);
 }
