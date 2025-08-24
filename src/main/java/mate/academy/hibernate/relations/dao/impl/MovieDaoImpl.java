@@ -17,13 +17,13 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
-        Movie mergedMovie = null; // Змінна для результату merge
+        Movie mergedMovie;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            mergedMovie = (Movie) session.merge(movie); // Зберігаємо результат merge
+            mergedMovie = (Movie) session.merge(movie);
             transaction.commit();
-            return mergedMovie; // Повертаємо об'єкт з оновленим id
+            return mergedMovie;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -36,13 +36,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
         }
     }
 
-
-
     @Override
     public Optional<Movie> get(Long id) {
-        // ДОДАЙТЕ ЦЕЙ РЯДОК ДЛЯ ПЕРЕВІРКИ
-        System.out.println("!!! EXECUTING NEW GET METHOD !!!");
-
         String hql = "FROM Movie m "
                 + "LEFT JOIN FETCH m.actors a "
                 + "LEFT JOIN FETCH a.country "

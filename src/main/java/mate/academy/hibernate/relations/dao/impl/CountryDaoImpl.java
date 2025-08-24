@@ -17,13 +17,13 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Country add(Country country) {
         Session session = null;
         Transaction transaction = null;
-        Country mergedCountry = null;
+        Country mergedCountry;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            mergedCountry = (Country) session.merge(country); // Зберігаємо результат merge
+            mergedCountry = (Country) session.merge(country);
             transaction.commit();
-            return mergedCountry; // Повертаємо об'єкт з оновленим id
+            return mergedCountry;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -36,14 +36,23 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
         }
     }
 
-
     @Override
     public Optional<Country> get(Long id) {
         try (Session session = factory.openSession()) {
-            // Метод get() повертає або об'єкт, або null, якщо його не знайдено
             return Optional.ofNullable(session.get(Country.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get country by id: " + id, e);
+        }
+    }
+
+    @Override
+    public Optional<Country> findByName(String name) {
+        try (Session session = factory.openSession()) {
+            return session.createQuery("FROM Country WHERE name = :name", Country.class)
+                    .setParameter("name", name)
+                    .uniqueResultOptional();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get country by name: " + name, e);
         }
     }
 }

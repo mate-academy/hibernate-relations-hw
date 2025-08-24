@@ -17,13 +17,13 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Actor add(Actor actor) {
         Session session = null;
         Transaction transaction = null;
-        Actor mergedActor = null;
+        Actor mergedActor;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            mergedActor = (Actor) session.merge(actor); // Зберігаємо результат merge
+            mergedActor = (Actor) session.merge(actor);
             transaction.commit();
-            return mergedActor; // Повертаємо об'єкт з оновленим id
+            return mergedActor;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -36,14 +36,23 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
         }
     }
 
-
     @Override
     public Optional<Actor> get(Long id) {
         try (Session session = factory.openSession()) {
-            // Метод get() повертає або об'єкт, або null, якщо його не знайдено
             return Optional.ofNullable(session.get(Actor.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't get actor by id: " + id, e);
+        }
+    }
+
+    @Override
+    public Optional<Actor> findByName(String name) {
+        try (Session session = factory.openSession()) {
+            return session.createQuery("FROM Actor WHERE name = :name", Actor.class)
+                    .setParameter("name", name)
+                    .uniqueResultOptional();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get actor by name: " + name, e);
         }
     }
 }
