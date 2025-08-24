@@ -7,4 +7,6 @@ public interface ActorDao {
     Actor add(Actor actor);
 
     Optional<Actor> get(Long id);
+
+    Optional<Actor> findByName(String name);
 }
