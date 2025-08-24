@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
+
 
 @Entity
 @Table(name = "actors")
@@ -16,7 +18,7 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id")
     private Country country;
 
@@ -64,11 +66,17 @@ public class Actor implements Cloneable {
         }
     }
 
+    // ... (інший код класу)
+
     @Override
     public String toString() {
+        // Додаємо перевірку, щоб уникнути NullPointerException, якщо країна не встановлена
+        String countryName = (country != null) ? country.getName() : "N/A";
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", country='" + countryName + '\'' // Тепер ми бачимо країну!
                 + '}';
     }
+
 }

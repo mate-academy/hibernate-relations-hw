@@ -17,23 +17,26 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Movie add(Movie movie) {
         Session session = null;
         Transaction transaction = null;
+        Movie mergedMovie = null; // Змінна для результату merge
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.persist(movie);
+            mergedMovie = (Movie) session.merge(movie); // Зберігаємо результат merge
             transaction.commit();
-            return movie;
+            return mergedMovie; // Повертаємо об'єкт з оновленим id
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert movie " + movie, e);
+            throw new DataProcessingException("Can't insert or update movie " + movie, e);
         } finally {
             if (session != null) {
                 session.close();
             }
         }
     }
+
+
 
     @Override
     public Optional<Movie> get(Long id) {
