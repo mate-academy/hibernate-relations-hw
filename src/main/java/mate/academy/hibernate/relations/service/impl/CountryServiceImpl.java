@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
 
-    // A constructor that creates the DAO internally
     public CountryServiceImpl(SessionFactory sessionFactory) {
         this.countryDao = new CountryDaoImpl(sessionFactory);
     }

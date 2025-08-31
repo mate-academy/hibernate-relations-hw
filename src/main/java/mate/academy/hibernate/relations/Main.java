@@ -22,7 +22,6 @@ public class Main {
         ActorService actorService = new ActorServiceImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(sessionFactory);
 
-        // --- СТВОРЕННЯ ПОЧАТКОВИХ ДАНИХ ---
         System.out.println("--- Етап 1: Створення початкових даних ---");
         Country usa = new Country("USA");
         countryService.add(usa);
@@ -31,7 +30,6 @@ public class Main {
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
-        // Важливо: List.of() створює незмінний список, тому обгортаємо його в ArrayList
         fastAndFurious.setActors(new ArrayList<>(List.of(vinDiesel)));
         movieService.add(fastAndFurious);
 
@@ -40,7 +38,7 @@ public class Main {
         System.out.println("Актори у фільмі: " + retrievedMovie.getActors());
         System.out.println("-------------------------------------------\n");
 
-        // --- ОНОВЛЕННЯ ФІЛЬМУ: ДОДАВАННЯ НОВОГО АКТОРА ---
+
         System.out.println("--- Етап 2: Додавання нового актора до існуючого фільму ---");
         Country uk = new Country("UK");
         countryService.add(uk);
@@ -48,16 +46,14 @@ public class Main {
         jasonStatham.setCountry(uk);
         actorService.add(jasonStatham);
 
-        // Отримуємо фільм з бази, щоб оновити його
         Movie movieToUpdate = movieService.get(fastAndFurious.getId());
-        movieToUpdate.getActors().add(jasonStatham); // Додаємо нового актора
-        movieService.add(movieToUpdate); // Зберігаємо оновлений фільм
+        movieToUpdate.getActors().add(jasonStatham);
+        movieService.add(movieToUpdate);
 
         System.out.println("Додано нового актора: " + jasonStatham);
         System.out.println("-------------------------------------------\n");
 
 
-        // --- ФІНАЛЬНА ПЕРЕВІРКА ---
         System.out.println("--- Етап 3: Фінальна перевірка ---");
         Movie finalMovie = movieService.get(fastAndFurious.getId());
         System.out.println("Остаточний стан фільму: " + finalMovie);
