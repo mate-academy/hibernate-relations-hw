@@ -37,10 +37,10 @@ public class Main {
             movieService.add(fastAndFurious);
             System.out.println(movieService.get(fastAndFurious.getId()));
         } catch (Exception e) {
-            throw new RuntimeException("Cannot initialize the sessionFactory");
+            throw new RuntimeException("An error occured during program execution", e);
         } finally {
             if (sessionFactory != null) {
-                sessionFactory.close();
+                HibernateUtil.shutdown();
             }
         }
     }

@@ -26,8 +26,8 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie with id = "
-                    + movie.getId() + " to the database", e);
+            throw new DataProcessingException("Can't add movie with title = "
+                    + movie.getTitle() + " to the database", e);
         } finally {
             if (session != null) {
                 session.close();
