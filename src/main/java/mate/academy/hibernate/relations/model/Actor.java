@@ -1,9 +1,20 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
+import java.util.List;
+
 public class Actor implements Cloneable {
     private Long id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
+
+    @ManyToMany(mappedBy = "actors")
+    private List<Movie> movies;
 
     public Actor() {
     }
