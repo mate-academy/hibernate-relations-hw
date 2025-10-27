@@ -1,12 +1,13 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToOne
