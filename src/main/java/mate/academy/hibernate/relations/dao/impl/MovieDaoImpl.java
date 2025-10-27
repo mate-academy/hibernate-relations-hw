@@ -17,7 +17,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public Movie add(Movie movie) {
         Session session = null;
         Transaction tx = null;
-        try{
+        try {
             session = factory.openSession();
             tx = session.beginTransaction();
 
@@ -25,7 +25,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
             tx.commit();
             return movie;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }

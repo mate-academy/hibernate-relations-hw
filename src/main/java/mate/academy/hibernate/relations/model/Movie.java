@@ -1,11 +1,14 @@
 package mate.academy.hibernate.relations.model;
 
-import jakarta.persistence.*;
-import jdk.jfr.Name;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 public class Movie implements Cloneable {

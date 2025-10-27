@@ -1,8 +1,6 @@
 package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
-import java.util.zip.DataFormatException;
-
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.exceptions.DataProcessingException;
 import mate.academy.hibernate.relations.model.Country;
@@ -19,7 +17,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Country add(Country country) {
         Session session = null;
         Transaction tx = null;
-        try{
+        try {
             session = factory.openSession();
             tx = session.beginTransaction();
 
@@ -27,7 +25,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             tx.commit();
             return country;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
@@ -38,6 +36,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             }
         }
     }
+
     @Override
     public Optional<Country> get(Long id) {
         Session session = null;

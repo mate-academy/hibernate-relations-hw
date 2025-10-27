@@ -1,7 +1,6 @@
 package mate.academy.hibernate.relations;
 
 import java.util.List;
-
 import mate.academy.hibernate.relations.dao.ActorDao;
 import mate.academy.hibernate.relations.dao.CountryDao;
 import mate.academy.hibernate.relations.dao.MovieDao;
@@ -36,7 +35,6 @@ public class Main {
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
         actorService.add(vinDiesel);
-
 
         MovieDao movieDao = new MovieDaoImpl(sessionFactory);
         MovieService movieService = new MovieServiceImpl(movieDao);
