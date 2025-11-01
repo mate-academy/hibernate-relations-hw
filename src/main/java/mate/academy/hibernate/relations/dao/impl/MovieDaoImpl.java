@@ -2,8 +2,11 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -12,11 +15,24 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        return null;
+        return super.add(movie);
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return null;
+        // ✅
+        try (Session session = factory.openSession()) {
+            Query<Movie> query = session.createQuery(
+                    "SELECT DISTINCT m FROM Movie m "
+                            + "LEFT JOIN FETCH m.country c "
+                            + "LEFT JOIN FETCH m.actors a "
+                            + "LEFT JOIN FETCH a.country ac "
+                            + "WHERE m.id = :id", Movie.class
+            );
+            query.setParameter("id", id);
+            return query.uniqueResultOptional();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get Movie by id: " + id, e);
+        }
     }
 }
