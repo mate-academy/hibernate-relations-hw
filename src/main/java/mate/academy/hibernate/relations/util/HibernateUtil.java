@@ -11,6 +11,10 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
+    private HibernateUtil() {
+
+    }
+
     private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration().configure();

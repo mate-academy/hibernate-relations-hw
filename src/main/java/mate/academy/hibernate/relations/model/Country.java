@@ -6,7 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Country implements Cloneable {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Actor> actor = new ArrayList<>();
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
+    private List<Actor> actors = new ArrayList<>();
 
     public Country() {
     }
@@ -48,12 +48,12 @@ public class Country implements Cloneable {
         this.name = name;
     }
 
-    public List<Actor> getActor() {
-        return actor;
+    public List<Actor> getActors() {
+        return actors;
     }
 
-    public void setActor(List<Actor> actor) {
-        this.actor = actor;
+    public void setActors(List<Actor> actor) {
+        this.actors = actor;
     }
 
     @Override
