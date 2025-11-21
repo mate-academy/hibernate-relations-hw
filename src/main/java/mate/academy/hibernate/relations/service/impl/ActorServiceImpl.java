@@ -19,6 +19,8 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor get(Long id) {
-        return actorDao.get(id).orElseThrow(() -> new DataProcessingException("Movie not found by id " + id));
+        return actorDao
+                .get(id)
+                .orElseThrow(() -> new DataProcessingException("Actor not found by id " + id));
     }
 }
