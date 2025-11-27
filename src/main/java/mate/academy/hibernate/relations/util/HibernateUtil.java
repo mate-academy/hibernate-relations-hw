@@ -30,8 +30,8 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public Session openSession() {
-        return sessionFactory.openSession();
+    public static Session openSession() {
+        return getSessionFactory().openSession();
     }
 
     public static void shutdown() {
