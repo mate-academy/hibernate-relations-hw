@@ -1,5 +1,12 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Actor implements Cloneable {
     private Long id;
     private String name;
@@ -12,6 +19,8 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -28,6 +37,7 @@ public class Actor implements Cloneable {
         this.name = name;
     }
 
+    @ManyToOne
     public Country getCountry() {
         return country;
     }
