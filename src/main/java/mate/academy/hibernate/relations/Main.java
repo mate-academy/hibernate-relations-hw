@@ -12,7 +12,6 @@ import mate.academy.hibernate.relations.service.impl.CountryServiceImpl;
 import mate.academy.hibernate.relations.service.impl.MovieServiceImpl;
 import mate.academy.hibernate.relations.util.HibernateUtil;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class Main {
     public static void main(String[] args) {

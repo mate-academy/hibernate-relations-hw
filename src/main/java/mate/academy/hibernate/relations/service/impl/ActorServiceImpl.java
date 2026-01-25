@@ -8,7 +8,7 @@ import mate.academy.hibernate.relations.service.ActorService;
 import org.hibernate.SessionFactory;
 
 public class ActorServiceImpl implements ActorService {
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public ActorServiceImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
