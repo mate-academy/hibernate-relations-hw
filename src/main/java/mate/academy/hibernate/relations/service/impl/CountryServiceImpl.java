@@ -33,6 +33,6 @@ public class CountryServiceImpl implements CountryService {
         CountryDao countryDao = new CountryDaoImpl(sessionFactory);
         return countryDao.get(id)
                 .orElseThrow(() -> new DataProcessingException(
-                        "Can not find actor with id: " + id));
+                        "Can not find country with id: " + id));
     }
 }

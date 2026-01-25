@@ -17,7 +17,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor add(Actor actor) {
         if (actor.getName() == null || actor.getName().isEmpty()) {
-            throw new IllegalArgumentException("Title cannot be empty");
+            throw new IllegalArgumentException("Name cannot be empty");
         }
         ActorDao actorDao = new ActorDaoImpl(sessionFactory);
         return actorDao.add(actor);
