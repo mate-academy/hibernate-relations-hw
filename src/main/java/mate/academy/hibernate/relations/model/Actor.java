@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "actors")
@@ -17,8 +19,10 @@ public class Actor implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
+    @Fetch(FetchMode.JOIN)
     private Country country;
 
     public Actor() {

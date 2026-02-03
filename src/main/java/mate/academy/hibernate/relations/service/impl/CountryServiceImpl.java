@@ -7,16 +7,23 @@ import mate.academy.hibernate.relations.service.CountryService;
 public class CountryServiceImpl implements CountryService {
     private CountryDao countryDao;
 
-    private CountryServiceImpl(CountryDao countryDao) {
+    public CountryServiceImpl(CountryDao countryDao) {
         this.countryDao = countryDao;
     }
+
     @Override
     public Country add(Country country) {
+        if (country.getName() == null || country.getName().isEmpty()) {
+            throw new IllegalArgumentException("Country name cannot be empty");
+        }
         return countryDao.add(country);
     }
 
     @Override
     public Country get(Long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("Id cannot be negative");
+        }
         return countryDao.get(id).orElseThrow(
                 () -> new RuntimeException("Country Not Found, id = " + id)
         );

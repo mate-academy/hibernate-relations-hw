@@ -11,7 +11,7 @@ public class HibernateUtil {
 
     private static SessionFactory initSessionFactory() {
         try {
-            return new Configuration().buildSessionFactory();
+            return new Configuration().configure().buildSessionFactory();
         } catch (Exception e) {
             throw new RuntimeException("Can't create a session", e);
         }
