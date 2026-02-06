@@ -36,7 +36,7 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
             Country getCountryId = session.get(Country.class, id);
             return Optional.ofNullable(getCountryId);
         } catch (Exception e) {
-            throw new RuntimeException("Can not found country with id = " + id, e);
+            throw new DataProcessingException("Can not found country with id = " + id, e);
         }
     }
 }
