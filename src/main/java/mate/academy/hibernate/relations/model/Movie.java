@@ -2,10 +2,27 @@ package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
     public Movie() {
@@ -44,11 +61,11 @@ public class Movie implements Cloneable {
         try {
             Movie movie = (Movie) super.clone();
             if (movie.getActors() != null) {
-                List<Actor> actors = new ArrayList<>();
+                List<Actor> copiedActors = new ArrayList<>();
                 for (Actor actor : movie.getActors()) {
-                    actors.add(actor.clone());
+                    copiedActors.add(actor.clone());
                 }
-                movie.setActors(actors);
+                movie.setActors(copiedActors);
             }
             return movie;
         } catch (CloneNotSupportedException e) {
