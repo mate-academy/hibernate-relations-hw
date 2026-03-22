@@ -25,15 +25,13 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
 
             session.save(actor);
             transaction.commit();
-            session.close();
 
             return actor;
-
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save to db actor by name" + actor.getName(),
+            throw new DataProcessingException("Can't save to db actor by name " + actor.getName(),
                     e);
         } finally {
             if (session != null) {
@@ -49,7 +47,7 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
             Actor actor = session.get(Actor.class, id);
             return Optional.ofNullable(actor);
         } catch (HibernateException e) {
-            throw new DataProcessingException("Cant find actor by id:" + id, e);
+            throw new DataProcessingException("Can't find actor by id: " + id, e);
 
         }
     }
