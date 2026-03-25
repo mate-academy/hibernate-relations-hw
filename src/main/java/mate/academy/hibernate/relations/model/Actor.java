@@ -1,9 +1,32 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "actors")
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
+
+    @ManyToMany(mappedBy = "actors")
+    private List<Movie> movies = new ArrayList<>();
 
     public Actor() {
     }
@@ -36,6 +59,24 @@ public class Actor implements Cloneable {
         this.country = country;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+        movie.getActors().add(this);
+    }
+
+    public void removeMovie(Movie movie) {
+        movies.remove(movie);
+        movie.getActors().remove(this);
+    }
+
     @Override
     public Actor clone() {
         try {
@@ -43,6 +84,7 @@ public class Actor implements Cloneable {
             if (country != null) {
                 actor.setCountry(country.clone());
             }
+            actor.setMovies(new ArrayList<>(movies));
             return actor;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
@@ -54,7 +96,7 @@ public class Actor implements Cloneable {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country + '\''
+                + ", country=" + country
                 + '}';
     }
 }
