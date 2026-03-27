@@ -21,6 +21,6 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country get(Long id) {
         return countryDao.get(id).orElseThrow(() -> new RuntimeException("Can't "
-                + "add country with id " + id));
+                + "get country with id " + id));
     }
 }

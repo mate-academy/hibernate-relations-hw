@@ -7,6 +7,10 @@ public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
+    private HibernateUtil() {
+
+    }
+
     private static SessionFactory buildSessionFactory() {
         try {
             return new Configuration()
