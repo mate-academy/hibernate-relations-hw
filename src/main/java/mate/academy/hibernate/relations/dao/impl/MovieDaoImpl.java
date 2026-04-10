@@ -29,7 +29,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 transaction.rollback();
             }
 
-            throw new DataProcessingException("Can`t save movie to Db! ", e);
+            throw new DataProcessingException("Can`t save movie to DB! ", e);
         } finally {
             if (session != null) {
                 session.close();
