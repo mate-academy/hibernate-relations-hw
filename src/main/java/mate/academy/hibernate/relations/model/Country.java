@@ -1,6 +1,9 @@
 package mate.academy.hibernate.relations.model;
 
+@jakarta.persistence.Entity
 public class Country implements Cloneable {
+    @jakarta.persistence.Id
+    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long id;
     private String name;
 

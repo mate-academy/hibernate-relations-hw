@@ -1,12 +1,22 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Movie implements Cloneable {
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private List<Actor> actors;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
