@@ -2,10 +2,28 @@ package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import mate.academy.hibernate.relations.exception.EntityNotFoundException;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
+    @ManyToMany
+    @JoinTable(name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
     public Movie() {
@@ -52,7 +70,7 @@ public class Movie implements Cloneable {
             }
             return movie;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new EntityNotFoundException("Can't make clone of " + this, e);
         }
     }
 

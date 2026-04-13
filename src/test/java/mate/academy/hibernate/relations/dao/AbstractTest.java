@@ -123,7 +123,7 @@ public abstract class AbstractTest {
         @Override
         public Properties dataSourceProperties() {
             Properties properties = new Properties();
-            properties.setProperty("url", "jdbc:hsqldb:mem:test");
+            properties.setProperty("url", "JDBC:hsqldb:mem:test");
             properties.setProperty("user", "sa");
             properties.setProperty("password", "");
             return properties;
