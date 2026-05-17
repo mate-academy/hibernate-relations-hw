@@ -1,6 +1,15 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table (name = "countries")
 public class Country implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
