@@ -17,13 +17,12 @@ public class CountryDaoImpl extends AbstractDao implements CountryDao {
     public Country add(Country country) {
         Session session = null;
         Transaction transaction = null;
-        Country mergedCountry;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            mergedCountry = (Country) session.merge(country);
+            session.persist(country);
             transaction.commit();
-            return mergedCountry;
+            return country;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

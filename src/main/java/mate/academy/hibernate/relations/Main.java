@@ -23,13 +23,17 @@ public class Main {
         MovieService movieService = new MovieServiceImpl(sessionFactory);
 
         System.out.println("--- Stage 1: Initial Data Creation ---");
-        Country usa = new Country("USA");
-        countryService.add(usa);
 
+        // 1. Create and save country
+        Country usa = new Country("USA");
+        usa = countryService.add(usa); // make sure USA is persisted
+
+        // 2. Create actor, set persisted country, then save actor
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        actorService.add(vinDiesel);
+        vinDiesel = actorService.add(vinDiesel);
 
+        // 3. Create movie and link existing actor
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(new ArrayList<>(List.of(vinDiesel)));
 
@@ -41,15 +45,21 @@ public class Main {
         System.out.println("-------------------------------------------\n");
 
         System.out.println("--- Stage 2: Adding a new Actor to the existing movie ---");
-        Country uk = new Country("UK");
-        countryService.add(uk);
 
+        // 4. Create and save another country
+        Country uk = new Country("UK");
+        uk = countryService.add(uk); // ensure UK is persisted
+
+        // 5. Create actor, set persisted country, then save actor
         Actor jasonStatham = new Actor("Jason Statham");
         jasonStatham.setCountry(uk);
-        actorService.add(jasonStatham);
+        jasonStatham = actorService.add(jasonStatham);
 
+        // 6. Reload movie, add actor, and update movie
         Movie movieToUpdate = movieService.get(savedMovie.getId());
         movieToUpdate.getActors().add(jasonStatham);
+
+        // If you have movieService.update(movieToUpdate) use it here instead of add
         movieService.add(movieToUpdate);
 
         System.out.println("Added a new actor: " + jasonStatham);

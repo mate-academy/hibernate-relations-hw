@@ -19,10 +19,9 @@ public class Actor implements Cloneable {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-
     public Actor() {
     }
 

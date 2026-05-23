@@ -17,13 +17,12 @@ public class ActorDaoImpl extends AbstractDao implements ActorDao {
     public Actor add(Actor actor) {
         Session session = null;
         Transaction transaction = null;
-        Actor mergedActor;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            mergedActor = (Actor) session.merge(actor);
+            session.persist(actor);
             transaction.commit();
-            return mergedActor;
+            return actor;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
