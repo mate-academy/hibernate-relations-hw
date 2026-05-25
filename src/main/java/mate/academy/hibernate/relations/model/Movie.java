@@ -2,11 +2,33 @@ package mate.academy.hibernate.relations.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "movies")
 public class Movie implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
-    private List<Actor> actors;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
@@ -42,17 +64,17 @@ public class Movie implements Cloneable {
     @Override
     public Movie clone() {
         try {
-            Movie movie = (Movie) super.clone();
-            if (movie.getActors() != null) {
-                List<Actor> actors = new ArrayList<>();
-                for (Actor actor : movie.getActors()) {
-                    actors.add(actor.clone());
+            Movie clonedMovie = (Movie) super.clone();
+            if (actors != null) {
+                List<Actor> clonedActors = new ArrayList<>();
+                for (Actor actor : actors) {
+                    clonedActors.add(actor.clone());
                 }
-                movie.setActors(actors);
+                clonedMovie.setActors(clonedActors);
             }
-            return movie;
+            return clonedMovie;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new RuntimeException("Can't clone movie: " + this, e);
         }
     }
 

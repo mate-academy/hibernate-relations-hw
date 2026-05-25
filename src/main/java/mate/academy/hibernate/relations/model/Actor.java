@@ -1,10 +1,27 @@
 package mate.academy.hibernate.relations.model;
 
-public class Actor implements Cloneable {
-    private Long id;
-    private String name;
-    private Country country;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "actors")
+public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
     public Actor() {
     }
 
@@ -39,22 +56,23 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor actor = (Actor) super.clone();
+            Actor clonedActor = (Actor) super.clone();
             if (country != null) {
-                actor.setCountry(country.clone());
+                clonedActor.setCountry(country.clone());
             }
-            return actor;
+            return clonedActor;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new RuntimeException("Can't clone actor: " + this, e);
         }
     }
 
     @Override
     public String toString() {
+        String countryName = (country != null) ? country.getName() : "N/A";
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country + '\''
+                + ", country='" + countryName + '\''
                 + '}';
     }
 }
