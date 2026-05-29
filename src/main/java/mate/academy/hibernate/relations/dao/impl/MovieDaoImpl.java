@@ -16,14 +16,20 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
+        Transaction transaction = null;
+
         try (Session session = this.factory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
 
             session.persist(movie);
             transaction.commit();
 
             return movie;
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
             throw new DataProcessingException("Can't add movie", e);
         }
     }
