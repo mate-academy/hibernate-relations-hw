@@ -34,3 +34,5 @@ Your task is to implement the following steps:
 - make `mate/academy/Main.java` work (you should be able to run `main()` method without any errors)
 
 #### [Try to avoid these common mistakes, while solving task](./checklist.md)
+
+`mvn -DskipTests=false clean package`.
