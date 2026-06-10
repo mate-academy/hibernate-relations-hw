@@ -9,7 +9,7 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/hibernate_relations?serverTimezone=UTC</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">ТВІЙ_ПАРОЛЬ</property>
+        <property name="connection.password">12345678</property>
 
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="show_sql">true</property>
