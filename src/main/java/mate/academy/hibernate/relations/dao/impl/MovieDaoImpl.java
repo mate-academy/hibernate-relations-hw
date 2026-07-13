@@ -33,7 +33,7 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
                 transaction.rollback();
             }
 
-            throw new DataProcessingException("Can't save movie with id" + movie, e);
+            throw new DataProcessingException("Can't save movie" + movie, e);
 
         } finally {
             if (session != null) {
