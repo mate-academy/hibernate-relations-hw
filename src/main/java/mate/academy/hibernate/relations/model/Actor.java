@@ -1,8 +1,19 @@
 package mate.academy.hibernate.relations.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Actor implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @ManyToOne
     private Country country;
 
     public Actor() {
@@ -14,10 +25,6 @@ public class Actor implements Cloneable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -39,13 +46,9 @@ public class Actor implements Cloneable {
     @Override
     public Actor clone() {
         try {
-            Actor actor = (Actor) super.clone();
-            if (country != null) {
-                actor.setCountry(country.clone());
-            }
-            return actor;
+            return (Actor) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't make clone of " + this, e);
+            throw new AssertionError(e);
         }
     }
 
@@ -54,7 +57,7 @@ public class Actor implements Cloneable {
         return "Actor{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", country='" + country + '\''
+                + ", country=" + country
                 + '}';
     }
 }
