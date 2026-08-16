@@ -21,22 +21,22 @@ import org.hibernate.SessionFactory;
 
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory factory = HibernateUtil.getSessionFactory();
 
         Country usa = new Country("USA");
-        CountryDao countryDao = new CountryDaoImpl(sessionFactory);
+        CountryDao countryDao = new CountryDaoImpl(factory);
         CountryService countryService = new CountryServiceImpl(countryDao);
         countryService.add(usa);
 
         Actor vinDiesel = new Actor("Vin Diesel");
         vinDiesel.setCountry(usa);
-        ActorDao actorDao = new ActorDaoImpl(sessionFactory);
+        ActorDao actorDao = new ActorDaoImpl(factory);
         ActorService actorService = new ActorServiceImpl(actorDao);
         actorService.add(vinDiesel);
 
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setActors(List.of(vinDiesel));
-        MovieDao movieDao = new MovieDaoImpl(sessionFactory);
+        MovieDao movieDao = new MovieDaoImpl(factory);
         MovieService movieService = new MovieServiceImpl(movieDao);
         movieService.add(fastAndFurious);
         System.out.println(movieService.get(fastAndFurious.getId()));
