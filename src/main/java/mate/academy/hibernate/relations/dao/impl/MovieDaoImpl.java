@@ -2,8 +2,12 @@ package mate.academy.hibernate.relations.dao.impl;
 
 import java.util.Optional;
 import mate.academy.hibernate.relations.dao.MovieDao;
+import mate.academy.hibernate.relations.exception.DataProcessingException;
 import mate.academy.hibernate.relations.model.Movie;
+import mate.academy.hibernate.relations.util.HibernateUtil;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class MovieDaoImpl extends AbstractDao implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
@@ -12,11 +16,34 @@ public class MovieDaoImpl extends AbstractDao implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        return null;
+        Transaction transaction = null;
+        Session session = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.persist(movie);
+            transaction.commit();
+            return movie;
+        } catch (DataProcessingException e) {
+            if (transaction != null || !transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Can't save movie: " + movie, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public Optional<Movie> get(Long id) {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return Optional.ofNullable(session.get(Movie.class, id));
+        } catch (DataProcessingException e) {
+            throw new RuntimeException("Can't find movie: " + id, e);
+        }
     }
 }
