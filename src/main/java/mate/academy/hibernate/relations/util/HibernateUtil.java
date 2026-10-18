@@ -1,6 +1,5 @@
 package mate.academy.hibernate.relations.util;
 
-import java.util.List;
 import mate.academy.hibernate.relations.model.Actor;
 import mate.academy.hibernate.relations.model.Country;
 import mate.academy.hibernate.relations.model.Movie;
