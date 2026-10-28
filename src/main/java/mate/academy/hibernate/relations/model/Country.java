@@ -1,6 +1,16 @@
 package mate.academy.hibernate.relations.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "countries")
 public class Country implements Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
@@ -30,7 +40,10 @@ public class Country implements Cloneable {
     @Override
     public Country clone() {
         try {
-            return (Country) super.clone();
+            Country clone = (Country) super.clone();
+            clone.id = id;
+            clone.name = name;
+            return clone;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't make clone of " + this, e);
         }
