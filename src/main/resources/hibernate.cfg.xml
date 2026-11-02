@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Настройки подключения к БД (HSQLDB в памяти) -->
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="connection.url">jdbc:hsqldb:mem:testdb</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"></property>
+
+        <!-- Диалект Hibernate для HSQLDB -->
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+
+        <!-- Автоматическое создание/обновление таблиц в базе -->
+        <property name="hbm2ddl.auto">create-drop</property>
+
+        <!-- Вывод SQL-запросов в консоль (удобно для дебага) -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Регистрация твоих сущностей (моделей) -->
+        <!-- Сюда позже добавим классы, например: -->
+        <!-- <mapping class="mate.academy.hibernate.relations.model.Actor"/> -->
+        <mapping class="mate.academy.hibernate.relations.model.Actor"/>
+        <mapping class="mate.academy.hibernate.relations.model.Country"/>
+        <mapping class="mate.academy.hibernate.relations.model.Movie"/>
+    </session-factory>
+</hibernate-configuration>
